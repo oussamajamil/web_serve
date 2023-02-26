@@ -10,7 +10,7 @@ std::vector<std::string> split(std::string content,std::string sparator){
 
     int seplength = sparator.length();
     pos = content.find(sparator);
-    while (pos < content.length())
+    while (pos != std::string::npos)
     {
         res = content.substr(0,pos);
         if(res.length() > 0)
