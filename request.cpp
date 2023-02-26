@@ -1,14 +1,20 @@
 #include "./request.hpp"
 
-
-Request::Request(){
+Request::Request()
+{
     std::cout << "i am here" << std::endl;
-
 }
-Request::Request(std::string req){
-this->vec = split(req,"\r\n");
-    for (size_t i = 0; i < vec.size(); i++)
+Request::Request(std::string req)
+{
+    this->vec = split(req, "\r\n");
+    std::vector<std::string> first_line = split(this->vec[0], " ");
+    this->method = first_line[0];
+    this->path = first_line[1];
+    this->version = first_line[2];
+    for (int i = 1; i < this->vec.size(); i++)
     {
-        std::cout << "*********************"<< vec[i]<< "**************************" << std::endl;
+        std::vector<std::string> header = split(this->vec[i], ":");
+        if (header.size() == 2)
+            this->headers[header[0]] = trim(header[1], " ");
     }
 }
