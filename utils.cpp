@@ -22,3 +22,22 @@ std::vector<std::string> split(std::string content,std::string sparator){
         splt.push_back(content);
     return splt;
 }
+
+std::string trim(std::string content,std::string sparator){
+    bool first = true;
+    int pos = content.find(sparator);
+    while (pos == 0)
+    {
+        content.erase(0,sparator.length());
+        pos = content.find(sparator);;
+    }
+
+    pos = content.rfind(sparator);
+    while (content[pos+sparator.length()] == '\0')
+    {
+         content.erase(pos,pos+ sparator.length());
+        pos = content.rfind(sparator);
+    }
+    
+    return content;
+}
