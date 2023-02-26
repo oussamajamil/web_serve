@@ -3,6 +3,8 @@
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <unistd.h>
+#include "./request.hpp"
+
 int main()
 {
 
@@ -47,7 +49,7 @@ int main()
 			std::cout << "Error reading from socket" << std::endl;
 			return -1;
 		}
-		std::cout << "Received: " << buffer << std::endl;
+		Request *req =new Request(buffer);
 		close(client_socket);
 	}
 	return 0;
