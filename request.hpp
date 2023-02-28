@@ -14,13 +14,15 @@ private:
     std::string request;
 
 public:
-    std::vector<std::string> vec;
-    std::map<std::string, std::string> headers;
-    std::map<std::string, std::string> body;
     std::string method;
     std::string path;
     std::string version;
-
+    std::map<std::string, std::string> headers;
+    std::map<std::string, std::string> query_params;
+    std::string body;
+    std::string port;
+    std::string host;
+    
 public:
     Request();
     Request(std::string req);

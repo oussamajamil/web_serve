@@ -2,7 +2,6 @@
 
 std::vector<std::string> split(std::string content, std::string sparator)
 {
-    size_t i = 0;
     std::vector<std::string> splt;
     std::string res;
     size_t pos;
@@ -24,7 +23,6 @@ std::vector<std::string> split(std::string content, std::string sparator)
 
 std::string trim(std::string content, std::string sparator)
 {
-    bool first = true;
     int pos = content.find(sparator);
     while (pos == 0)
     {
