@@ -1,0 +1,60 @@
+GET /index.htxml HTTP/1.1
+User-Agent: PostmanRuntime/7.31.0
+Accept: */*
+Postman-Token: 0a0fb331-9e8b-4e94-8139-10afbc91fa3b
+Host: 127.0.0.1:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+
+POST /index.htxml HTTP/1.1
+User-Agent: PostmanRuntime/7.31.0
+Accept: */*
+Postman-Token: 024a1f47-0ffc-4f26-850d-18fb6b3a4da3
+Host: 127.0.0.1:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 0
+
+POST /index.htxml HTTP/1.1
+User-Agent: PostmanRuntime/7.31.0
+Accept: */*
+Postman-Token: 0130e836-a2f1-4cc8-b365-8dc0203f4e6e
+Host: 127.0.0.1:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=--------------------------667469845138972085258456
+Content-Length: 725218
+
+----------------------------667469845138972085258456
+Content-Disposition: form-data; name=""; filename="file"
+Content-Type: application/octet-stream
+
+Hello World!!
+total 20
+drwxr-xr-x   38 root  wheel          1216 Feb 21 22:49 .
+drwxr-xr-x   38 root  wheel          1216 Feb 21 22:49 ..
+-rw-rw-r--    1 root  admin             0 Feb 26  2019 .DS_Store
+d--x--x--x    8 root  wheel           256 Feb 23 13:00 .DocumentRevisions-V100
+dr-xr-xr-t@   2 root  wheel            64 Nov  4  2021 .HFS+ Private Directory Data
+-rw-r--r--    1 root  wheel           591 Feb 21 22:49 .OSInstallerMessages
+drwxr-xr-x@   2 root  wheel            64 Feb 23 02:05 .PKInstallSandboxManager-SystemSoftware
+
+
+
+POST /index.htxml HTTP/1.1
+User-Agent: PostmanRuntime/7.31.0
+Accept: */*
+Postman-Token: c80e6789-41dc-4958-af95-ed2b09e8cccc
+Host: 127.0.0.1:8080
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=--------------------------429007847093863646108924
+Content-Length: 217
+
+----------------------------429007847093863646108924
+Content-Disposition: form-data; name=""; filename="file"
+Content-Type: application/octet-stream
+
+Hello
+----------------------------429007847093863646108924--
