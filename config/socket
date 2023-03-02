@@ -1,0 +1,88 @@
+#include <iostream>
+#include <cstring>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
+
+int main() {
+    // create a TCP socket
+    int server_socket = socket(AF_INET, SOCK_STREAM, 0);
+    if (server_socket == -1) {
+        std::cerr << "Failed to create socket" << std::endl;
+        return -1;
+    }
+
+	int	opt = 1;
+	setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+    
+    // set up the server address and port
+    struct sockaddr_in server_address;
+    server_address.sin_family = AF_INET;
+    server_address.sin_addr.s_addr = INADDR_ANY;  // use any available network interface
+    server_address.sin_port = htons(8080);  // listen on port 8080
+    
+    // bind the socket to the server address and port
+    int bind_result = bind(server_socket, (struct sockaddr*)&server_address, sizeof(server_address));
+    if (bind_result == -1) {
+        std::cerr << "Failed to bind socket to address and port" << std::endl;
+        close(server_socket);
+        return -1;
+    }
+    
+    // listen for incoming connections
+    int listen_result = listen(server_socket, 5);  // allow up to 5 connections to queue
+    if (listen_result == -1) {
+        std::cerr << "Failed to start listening for connections" << std::endl;
+        close(server_socket);
+        return -1;
+    }
+    
+    std::cout << "Server started listening on port 8080" << std::endl;
+    
+    while (true) {
+        // accept incoming connection
+		std::cout << "Before accept" << std::endl;
+		
+        int client_socket = accept(server_socket, NULL, NULL);
+		std::cout << "after accept" << std::endl;
+        if (client_socket == -1) {
+            std::cerr << "Failed to accept incoming connection" << std::endl;
+            close(server_socket);
+            return -1;
+        }
+        
+        // read incoming data from the client
+        char buffer[1024];
+		std::string request;
+		sleep(5);
+        int read_result = read(client_socket, buffer, 1024);
+		request.append(buffer);
+		
+		std::cout << "*******" << std::endl <<"READED bytes : " << read_result << std::endl;
+		std::cout << request << std::endl;
+	
+        if (read_result == -1) {
+            std::cerr << "Failed to read data from client" << std::endl;
+            close(client_socket);
+            continue;
+        }
+        
+        // // parse the incoming HTTP request
+        // std::string request(buffer, read_result);
+        // // TODO: parse the request to extract the requested resource
+        
+        // // TODO: prepare the response for the requested resource
+        
+        // // send the response back to the client
+        // int write_result = write(client_socket, response.c_str(), response.size());
+        // if (write_result == -1) {
+        //     std::cerr << "Failed to send response to client" << std::endl;
+        // }
+        
+        // close the connection with the client
+        close(client_socket);
+    }
+    
+    // close the server socket
+    close(server_socket);
+    
