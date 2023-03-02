@@ -18,7 +18,7 @@ int main()
 
 	struct sockaddr_in server_addr;
 	server_addr.sin_family = AF_INET;
-	server_addr.sin_port = htons(1);
+	server_addr.sin_port = htons(4000);
 	server_addr.sin_addr.s_addr = INADDR_ANY;
 
 	if (bind(server_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1)
@@ -43,14 +43,15 @@ int main()
 		}
 
 		char buffer[BUFF_SIZE];
-		int read_size = read(client_fd, buffer, BUFF_SIZE);
+
+		int read_size = recv(client_fd, buffer, BUFF_SIZE, 0);
 		if (read_size == -1)
 		{
 			std::cout << "Error reading from socket" << std::endl;
 			return 1;
 		}
 		std::string request(buffer);
-		// send(client_fd, "HTTP/1.1 200 OK\r");
+
 		Request req(request);
 		close(client_fd);
 	}

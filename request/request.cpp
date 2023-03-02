@@ -14,7 +14,7 @@ Request::Request(std::string req)
     this->path = first_line[1];
     this->version = first_line[2];
 
-    for (int i = 1; i < header_lines.size(); i++)
+    for (unsigned long i = 1; i < header_lines.size(); i++)
     {
         std::vector<std::string> header_line = split(header_lines[i], ": ");
         if (header_line[0] == "Host")
@@ -30,7 +30,7 @@ Request::Request(std::string req)
     {
         this->path = url_params[0];
         std::vector<std::string> params = split(url_params[1], "&");
-        for (int i = 0; i < params.size(); i++)
+        for (unsigned long i = 0; i < params.size(); i++)
         {
             std::vector<std::string> param = split(params[i], "=");
             this->query_params[param[0]] = param[1];
