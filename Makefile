@@ -6,16 +6,19 @@
 #    By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 16:38:20 by obelkhad          #+#    #+#              #
-#    Updated: 2023/02/28 12:19:14 by obelkhad         ###   ########.fr        #
+#    Updated: 2023/03/02 20:36:25 by obelkhad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 SRC	=  main.cpp src/server.cpp\
+				\
 				utils/utl_string.cpp\
+				utils/utl_helper.cpp\
+				\
 				cerr/errors.cpp
 
 OBJ = $(SRC:.cpp=.o)

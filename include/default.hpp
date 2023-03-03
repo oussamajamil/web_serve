@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:06:33 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/01 16:29:36 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:37:08 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,6 @@
 #define AUTOINDEX "off"
 #define ROOT "."
 #define INDEX "index.html"
-#define CLIENT_BODY_MAX_SIZE "100M"
+#define CLIENT_BODY_MAX_SIZE "2G"
+#define SEVER_NAME "webserv.com"
+#define METHODS "GET"
