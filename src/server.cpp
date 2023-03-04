@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:26:56 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/03 19:16:34 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:02:03 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,9 +166,6 @@ std::vector<std::string> Web::__parse_args()
 	return __holder;
 }
 
-std::vector<Server> Web::__get_servers()
-{ return __servers; }
-
 
 /* ---------------------------------- PARSE --------------------------------- */
 /* ---------------------------------- PARSE --------------------------------- */
@@ -243,18 +240,22 @@ void Web::__location(Server &__server, Location &__location)
 
 	if (__line_splited.size() == 2)
 	{
+		__location.__path = __line_splited[1];
+		__line_splited.clear();
 		getline(__file, __line);
 		__line = __extract_parameters(__line);
-		__line_splited.clear();
 		__line_splited = __split_attrubites(__line, "{}; \t\r\v\f");
 		__curly_right_check(__line_splited[0]);
 		__line_splited.erase(__line_splited.begin(), __line_splited.begin() + 1);
 	}
 	else if (__line_splited.size() > 2)
 	{
+		__location.__path = __line_splited[1];
 		__curly_right_check(__line_splited[2]);
 		__line_splited.erase(__line_splited.begin(), __line_splited.begin() + 3);
 	}
+	else
+		__attributes_missing();
 	__server.__curly_location = true;
 }
 
