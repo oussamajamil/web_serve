@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:49:57 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/03 19:15:23 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:03:48 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void __server_display(Server server)
 
 	for (; __vec_loc != server.__locations.end(); ++__vec_loc)
 	{	
-		std::cout << ">>> LOCATION : " << '\n';
+		std::cout << ">>> LOCATION : " << __vec_loc->__path << '\n';
 		__map_display(__vec_loc->__attributes);
 	}
 	std::cout << "-------------------------------------------------  SERVER END  ----------------------------------------------------" << std::endl;

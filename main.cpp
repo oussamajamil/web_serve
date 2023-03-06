@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:47:12 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/03 19:15:49 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:03:00 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int main(int ac, char **av)
 		std::string __config = __config_file(ac, av);
 
 		servers.__parse(__config);
+		
+		// servers.__server_up();
 		
 		__servers_display(servers);
 	}

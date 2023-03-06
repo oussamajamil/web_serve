@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:29:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/03 18:53:35 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:03:08 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class Location
 {
 private:
 public:
+	std::string												__path;
 	std::map<std::string, std::vector<std::string> >		__attributes;
 	Location();
 	~Location();
@@ -83,14 +84,16 @@ private:
 	
 public:
 	Web();
-	std::vector<Server>	 		__servers;					//array of servers
-	std::vector<Server>			__get_servers();
+	~Web();
+
+	std::vector<Server>	 		__servers;										//array of servers
 	void						__parse(std::string &__config_path);
+	// void						__server_up();
+
 	std::vector<std::string>	__parse_listen_args();
 	std::vector<std::string>	__parse_args();
 	void						__initial_action(Server &__server);
 	bool 						__closed_bracket(Server &__server, Location &__location);
-	~Web();
 };
 
  
