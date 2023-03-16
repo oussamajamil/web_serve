@@ -1,4 +1,4 @@
-#include "./request.hpp"
+#include "../include/request.hpp"
 #include "../include/server.hpp"
 
 Request::Request() {}
@@ -83,6 +83,6 @@ void Request::checkServer(Web *web)
 {
     for (unsigned long i = 0; i < web->__servers.size(); i++)
     {
-        
+        std::cout << "i am here" << std::endl;
     }
 }

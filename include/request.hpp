@@ -31,7 +31,7 @@ enum {
     BAD_GATEWAY = 502,
     SERVICE_UNAVAILABLE = 503,
     GATEWAY_TIMEOUT = 504
-}
+};
 
 class Request
 {
@@ -47,7 +47,7 @@ public:
     std::string body;
     std::string port;
     std::string host;
-    const Location _location
+    const Location _location;
     
     std::string index;
     bool is_autoindex;
@@ -57,5 +57,6 @@ public:
     Request();
     Request(std::string req);
     void checkServer(Web *web);
+    bool is_valid();
 };
 #endif

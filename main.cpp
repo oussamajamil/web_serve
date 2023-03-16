@@ -13,12 +13,12 @@
 #include "include/server.hpp"
 #include "include/utils.hpp"
 #include "include/errors.hpp"
+#include "include/request.hpp"
 #define BUFF_SIZE 1048576
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netinet/ip.h>
-#include "request/request.hpp"
 
 int main(int ac, char **av)
 {

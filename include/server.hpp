@@ -32,7 +32,6 @@ class Server
 public:
 	std::vector<Location> __locations;
 	std::map<std::string, std::vector<std::string> > __attributes;
-
 	/*Curly bracket flags*/
 	bool __curly_location;
 	bool __curly_server;
