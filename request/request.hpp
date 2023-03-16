@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include "../utils.hpp"
+#include "../include/server.hpp"
 
 class Request
 {
@@ -26,5 +27,7 @@ public:
 public:
     Request();
     Request(std::string req);
+    bool is_valid();
+    void checkServer(Web *web);
 };
 #endif

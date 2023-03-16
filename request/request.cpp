@@ -1,4 +1,5 @@
 #include "./request.hpp"
+#include "../include/server.hpp"
 
 Request::Request() {}
 Request::Request(std::string req)
@@ -64,4 +65,24 @@ Request::Request(std::string req)
 
     std::cout << "\n\n****************** body ******************" << std::endl;
     std::cout << this->body << std::endl;
+}
+
+bool Request::is_valid()
+{
+    if (method == "GET" || method == "POST" || method == "DELETE")
+    {
+        if (version == "HTTP/1.1" || version == "HTTP/1.0")
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Request::checkServer(Web *web)
+{
+    for (unsigned long i = 0; i < web->__servers.size(); i++)
+    {
+        
+    }
 }
