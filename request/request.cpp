@@ -1,8 +1,10 @@
-#include "../include/request.hpp"
+ #include "../include/request.hpp"
 #include "../include/server.hpp"
 
 Request::Request() {}
-Request::Request(std::string req)
+
+
+ void Request::parseRequest(std::string req)
 {
     this->request = req;
     std::vector<std::string> lines = split(req, "\r\n\r\n");
@@ -67,22 +69,74 @@ Request::Request(std::string req)
     std::cout << this->body << std::endl;
 }
 
-bool Request::is_valid()
-{
-    if (method == "GET" || method == "POST" || method == "DELETE")
+Request::Request(std::string req,Web *server){
+    this->parseRequest(req);
+    if (this->method != "GET" &&this->method!= "POST" && this->method != "DELETE")
     {
-        if (version == "HTTP/1.1" || version == "HTTP/1.0")
-        {
-            return true;
-        }
+        this->status_code = METHOD_NOT_ALLOWED;
     }
-    return false;
+    else if (this->version != "HTTP/1.1")
+    {
+        this->status_code = HTTP_VERSION_NOT_SUPPORTED;
+    }
+    if (this->method == "POST" && this->body.empty())
+    {
+        this->status_code = BAD_REQUEST;
+    }
+    this->checkServer(server);
+    this->checkLocation();
 }
 
 void Request::checkServer(Web *web)
 {
     for (unsigned long i = 0; i < web->__servers.size(); i++)
     {
-        std::cout << "i am here" << std::endl;
+        std::map<std::string, std::vector<std::string> >::iterator it;
+        for (it = web->__servers[i].__attributes.begin(); it != web->__servers[i].__attributes.end(); it++)
+        {
+            if (it->first == "listen")
+            {
+                std::vector<std::string> listen = it->second;
+                for (unsigned long j = 0; j < listen.size(); j++)
+                {
+                    std::vector<std::string> host_port = split(listen[j], ":");
+                    if (host_port[0] == this->host && host_port[1] == this->port)
+                    {
+                        std::cout << "server found server: " << host_port[0] << "port" << host_port[1] << std::endl;
+                        this->_server = web->__servers[i];
+                    }
+                }
+            }
+        }
     }
 }
+
+
+void Request::checkLocation()
+{
+    unsigned long match = 0;
+    int indexLocation = -1;
+    std::vector<Location> locations = this->_server.__locations;
+    for (unsigned long i = 0; i < locations.size(); i++)
+    {
+        if (locations[i].__path == this->path)
+        {
+            this->_location = locations[i];
+            return; 
+        }
+        else if(locations[i].__path.find(this->path) ==0)
+        {
+            if(match < locations[i].__path.size())
+            {
+                match = locations[i].__path.size();
+                indexLocation = i;
+            }
+        }
+    }
+    if(indexLocation != -1)
+    {
+        this->_location = locations[indexLocation];
+    }
+}
+
+Request::~Request() {}

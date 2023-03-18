@@ -69,13 +69,7 @@ int main(int ac, char **av)
 				return 1;
 			}
 			std::string request = buffer;
-			Request req(request);
-			if (req.is_valid() == false)
-			{
-				std::cout << "Error: Invalid request" << std::endl;
-				return 1;
-			}
-			req.checkServer(&servers);
+			Request req(request,&servers);
 			close(client_fd);
 		}
 	}

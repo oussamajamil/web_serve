@@ -30,7 +30,8 @@ enum {
     NOT_IMPLEMENTED = 501,
     BAD_GATEWAY = 502,
     SERVICE_UNAVAILABLE = 503,
-    GATEWAY_TIMEOUT = 504
+    GATEWAY_TIMEOUT = 504,
+    HTTP_VERSION_NOT_SUPPORTED = 505
 };
 
 class Request
@@ -47,16 +48,18 @@ public:
     std::string body;
     std::string port;
     std::string host;
-    const Location _location;
-    
+    Location _location;
+    Server _server;
     std::string index;
     bool is_autoindex;
     int status_code;
 
 public:
     Request();
-    Request(std::string req);
+    void parseRequest(std::string req);
+    Request(std::string req, Web *web);
     void checkServer(Web *web);
-    bool is_valid();
+    void checkLocation();
+    ~Request();
 };
 #endif
