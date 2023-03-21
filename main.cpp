@@ -6,13 +6,15 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:47:12 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/04 16:03:00 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:19:11 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/server.hpp"
 #include "include/utils.hpp"
 #include "include/errors.hpp"
+#include "include/launch.hpp"
+
 
 int main(int ac, char **av)
 {
@@ -24,13 +26,15 @@ int main(int ac, char **av)
 
 		servers.__parse(__config);
 		
-		// servers.__server_up();
-		
-		__servers_display(servers);
+		Server_launch	__launcher(&servers.__servers);
+
+		__launcher.__launch();
+		__launcher.__run();
 	}
+	
 	catch(const std::exception& e)
 	{
-		std::cerr << "\033[1;31m" << "error: bad synatx" << "\033[0m" << '\n';
+		std::cerr << "\033[1;31m" << "error: bad synatx" << "\033[0m" << std::endl;
 	}
 
 	

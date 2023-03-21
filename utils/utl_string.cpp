@@ -6,13 +6,12 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:49:57 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/04 16:03:48 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:54:43 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/utils.hpp"
-#include "../include/errors.hpp"
-
+#include "../include/server.hpp"
 
 std::string __config_file(int ac, char **av)
 {
@@ -77,9 +76,9 @@ void __vector_display(std::vector<std::string> &vec)
 	std::vector<std::string>::iterator it = vec.begin();
 	for (; it != vec.end(); ++it)
 		std::cout << "[ " << *it << " ], ";
-	std::cout << '\n';
+	std::cout << std::endl;
 	std::cout << "........................................." << std::endl;
-	std::cout << '\n';
+	std::cout << std::endl;
 }
 
 void __map_display(std::map<std::string, std::vector<std::string> > &mp)
@@ -95,28 +94,28 @@ void __map_display(std::map<std::string, std::vector<std::string> > &mp)
 void __server_display(Server server)
 {
 	std::cout << std::endl << "-------------------------------------  SERVER START  --------------------------------------------" << std::endl;
-	std::cout << "ATTRIBUTES : " << server.__attributes.size() << '\n';
-	std::cout << "LOCATIONS : " << server.__locations.size() << '\n' << '\n';
+	std::cout << "ATTRIBUTES : " << server.__attributes.size() << std::endl;
+	std::cout << "LOCATIONS : " << server.__locations.size() << std::endl << std::endl;
 
-	std::cout << "ATTRIBUTES : " << '\n';
+	std::cout << "ATTRIBUTES : " << std::endl;
 	
 	std::map<std::string, std::vector<std::string> >::iterator it = server.__attributes.begin();
 	for (; it != server.__attributes.end(); ++it)
 	{	
-		std::cout << "----> " << it->first << "	";
+		std::cout << "----> " << it->first << " : ";
 		__vector_display(it->second);
 	}
-	std::cout << '\n';
-	std::cout << '\n';
+	std::cout << std::endl;
+	std::cout << std::endl;
 
-	std::cout << "LOCATIONS : " << '\n';
+	std::cout << "LOCATIONS : " << std::endl;
 
 
 	std::vector<Location>::iterator					__vec_loc = server.__locations.begin();
 
 	for (; __vec_loc != server.__locations.end(); ++__vec_loc)
 	{	
-		std::cout << ">>> LOCATION : " << __vec_loc->__path << '\n';
+		std::cout << ">>> LOCATION : " << __vec_loc->__path << std::endl;
 		__map_display(__vec_loc->__attributes);
 	}
 	std::cout << "-------------------------------------------------  SERVER END  ----------------------------------------------------" << std::endl;
@@ -131,6 +130,6 @@ void __servers_display(Web &web)
 	{
 		__server_display(*it);
 	}
-	std::cout << '\n';
-	std::cout << '\n';
+	std::cout << std::endl;
+	std::cout << std::endl;
 }

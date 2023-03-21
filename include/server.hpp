@@ -6,16 +6,21 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:29:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/04 16:03:08 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:18:35 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include <cstring>
+#include <string>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <map>
+#include <algorithm>
+#include "../include/errors.hpp"
+#include "../include/define.hpp"
 
 class Location
 {
@@ -86,9 +91,8 @@ public:
 	Web();
 	~Web();
 
-	std::vector<Server>	 		__servers;										//array of servers
+	std::vector<Server>	 		__servers;
 	void						__parse(std::string &__config_path);
-	// void						__server_up();
 
 	std::vector<std::string>	__parse_listen_args();
 	std::vector<std::string>	__parse_args();
