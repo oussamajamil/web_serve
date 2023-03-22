@@ -6,14 +6,14 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:17:04 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/21 19:34:24 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/22 22:02:17 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
 #include <map>
 #include "../include/server.hpp"
-#include "../include/request.hpp"
+#include "../include/receive.hpp"
 
 typedef struct socket_info
 {
@@ -31,7 +31,7 @@ private:
 	std::vector<struct kevent>									__in_events;
 	std::vector<struct kevent>									__out_events;
 	std::vector<Server>											*__server_list;
-	std::map<int, Request>										__read_handler;
+	std::map<int, Receive>										__read_handler;
 	typedef std::map<int, socket_info>::iterator				__itr_globle_sockets;
 public:
 
@@ -53,7 +53,7 @@ public:
 	void						__accept(int);
 	void						__kernel_event_queue();
 	void						__extraction(std::string &, socket_info &);
-	void						__input_handler(int __ident, int __data, Request *__r);
+	void						__input_handler(int __ident, int __data, Receive *__r);
 };
 
 

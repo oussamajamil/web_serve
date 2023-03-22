@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   request.hpp                                        :+:      :+:    :+:   */
+/*   receive.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 11:50:19 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/21 18:40:11 by obelkhad         ###   ########.fr       */
+/*   Created: 2023/03/22 22:00:57 by obelkhad          #+#    #+#             */
+/*   Updated: 2023/03/22 22:01:01 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "../include/server.hpp"
 #include "../include/utils.hpp"
 
-class Request
+class Receive
 {
 public:
 	bool							__request_read_done;
@@ -40,8 +40,8 @@ public:
 
 	Server							*__server;
 
-	Request();
-	~Request();
+	Receive();
+	~Receive();
 
 	void							__init_requst();
 	void							__request_read(int __ident, int __data);

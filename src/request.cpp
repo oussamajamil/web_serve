@@ -6,13 +6,13 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/21 18:17:54 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/22 22:01:07 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/request.hpp"
+#include "../include/receive.hpp"
 
-Request::Request() : 
+Receive::Receive() : 
 __request_read_done(false),
 __close(true),
 __chunks(false),
@@ -26,10 +26,10 @@ __length(0)
 	__body.resize(BUFFER);
 }
 
-Request::~Request()
+Receive::~Receive()
 {}
 
-void Request::__init_requst()
+void Receive::__init_requst()
 {
 	__request_read_done = false;
 	__close = false;
@@ -44,7 +44,7 @@ void Request::__init_requst()
 	__body.resize(BUFFER);
 }
 
-void Request::__request_read(int __ident, int __data)
+void Receive::__request_read(int __ident, int __data)
 {
 	if (!__head_read_done)
 		__read_head(__ident, __data);
@@ -52,7 +52,7 @@ void Request::__request_read(int __ident, int __data)
 		__read_body(__ident, __data);
 }
 
-void Request::__read_head(int __ident, int &__data)
+void Receive::__read_head(int __ident, int &__data)
 {
 	int				__r = 0;
 	size_t  		crlf;
@@ -86,7 +86,7 @@ void Request::__read_head(int __ident, int &__data)
 	}
 }
 
-void Request::__read_body(int __ident, int &__data)
+void Receive::__read_body(int __ident, int &__data)
 {
 	int     __r = 0;
     
@@ -117,7 +117,7 @@ void Request::__read_body(int __ident, int &__data)
     } while (__data > 0);
 }
 
-std::string Request::__search_str(std::string __str)
+std::string Receive::__search_str(std::string __str)
 {
 	size_t		pos;
 
@@ -130,7 +130,7 @@ std::string Request::__search_str(std::string __str)
 	return (NPOS);
 }
 
-void Request::__parse_info()
+void Receive::__parse_info()
 {
 	std::string	__holder;
 	
