@@ -1,10 +1,9 @@
- #include "../include/request.hpp"
+#include "../include/request.hpp"
 #include "../include/server.hpp"
 
 Request::Request() {}
 
-
- void Request::parseRequest(std::string req)
+void Request::parseRequest(std::string req)
 {
     this->request = req;
     std::vector<std::string> lines = split(req, "\r\n\r\n");
@@ -69,22 +68,45 @@ Request::Request() {}
     std::cout << this->body << std::endl;
 }
 
-Request::Request(std::string req,Web *server){
+Request::Request(std::string req, Web *server)
+{
+    this->status_code = 0;
     this->parseRequest(req);
-    if (this->method != "GET" &&this->method!= "POST" && this->method != "DELETE")
+    if (this->method != "GET" && this->method != "POST" && this->method != "DELETE")
     {
-        this->status_code = METHOD_NOT_ALLOWED;
+        std::cout << "NOT_IMPLEMENTED" << std::endl;
+        this->status_code = NOT_IMPLEMENTED;
     }
-    else if (this->version != "HTTP/1.1")
+    if (this->version != "HTTP/1.1" && this->version != "HTTP/1.0")
     {
+        std::cout << "HTTP_VERSION_NOT_SUPPORTED" << std::endl;
         this->status_code = HTTP_VERSION_NOT_SUPPORTED;
     }
-    if (this->method == "POST" && this->body.empty())
+
+    if (this->method == "POST")
     {
-        this->status_code = BAD_REQUEST;
+        if (this->headers["Content-Length"] != std::to_string(this->body.size()))
+        {
+            std::cout << "different size body" << std::endl;
+            this->status_code = BAD_REQUEST;
+        }
     }
     this->checkServer(server);
+    // if (this->_server.__attributes['autoindex'][0] == "on")
+    //     this->is_autoindex = true;
+    // else
+    //     this->is_autoindex = false;
     this->checkLocation();
+    if (this->_location.__attributes["methods"].size() > 0)
+    {
+        for (unsigned long i = 0; i < this->_location.__attributes["methods"].size(); i++)
+        {
+            if (this->_location.__attributes["methods"][i] == this->method)
+                break;
+            else
+                this->status_code = METHOD_NOT_ALLOWED;
+        }
+    }
 }
 
 void Request::checkServer(Web *web)
@@ -111,7 +133,6 @@ void Request::checkServer(Web *web)
     }
 }
 
-
 void Request::checkLocation()
 {
     unsigned long match = 0;
@@ -122,18 +143,18 @@ void Request::checkLocation()
         if (locations[i].__path == this->path)
         {
             this->_location = locations[i];
-            return; 
+            return;
         }
-        else if(locations[i].__path.find(this->path) ==0)
+        else if (this->path.find(locations[i].__path) == 0)
         {
-            if(match < locations[i].__path.size())
+            if (match < locations[i].__path.size())
             {
                 match = locations[i].__path.size();
                 indexLocation = i;
             }
         }
     }
-    if(indexLocation != -1)
+    if (indexLocation != -1)
     {
         this->_location = locations[indexLocation];
     }

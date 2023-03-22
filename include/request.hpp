@@ -9,8 +9,8 @@
 #include "../utils.hpp"
 #include "../include/server.hpp"
 
-
-enum {
+enum
+{
     OK = 200,
     CREATED = 201,
     ACCEPTED = 202,
