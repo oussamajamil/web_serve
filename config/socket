@@ -14,6 +14,7 @@ int main() {
 
 	int	opt = 1;
 	setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+	setsockopt(server_socket, SOL_SOCKET, SO_NOSIGPIPE, &opt, sizeof(opt));
     
     // set up the server address and port
     struct sockaddr_in server_address;

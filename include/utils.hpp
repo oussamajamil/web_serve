@@ -6,19 +6,20 @@
 /*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:50:00 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/14 15:46:30 by oussama          ###   ########.fr       */
+/*   Updated: 2023/03/20 10:42:49 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+
 
 #include <cstring>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <map>
-
 #include "../include/server.hpp"
+
 /* utl_string.cpp */
 std::string __config_file(int ac, char **av);
 std::vector<std::string> __split_attrubites(std::string str, const std::string delims);
@@ -31,4 +32,5 @@ void __map_display(std::map<std::string, std::vector<std::string> > &mp);
 void __servers_display(Web &web);
 
 /* utl_helper.cpp  */
-void __address_prot_form(std::string &address);
+void 	__address_prot_form(std::string &address);
+size_t __crlf(std::string &str, size_t pos);
