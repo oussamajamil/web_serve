@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/22 22:02:32 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/22 22:46:09 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void Server_launch::__bind_socket(socket_info &socket_add)
 	server_address.sin_family = AF_INET;
 	server_address.sin_addr.s_addr = inet_addr(socket_add.__address.c_str());
 	server_address.sin_port = htons(socket_add.__port);
+
+	std::cout << socket_add.__host << std::endl;
 
 	if (bind(socket_add.__socket_fd, (struct sockaddr*)&server_address, sizeof(server_address)) < 0)
 	{

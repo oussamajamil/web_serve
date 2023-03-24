@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:17:04 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/22 22:02:17 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:48:07 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,3 @@ public:
 	void						__extraction(std::string &, socket_info &);
 	void						__input_handler(int __ident, int __data, Receive *__r);
 };
-
-
-
-/*
-function test()
-{
-	const myPage = document.getElementById("subs-content");
-	if (myPage.childElementCount > 5)
-	{
-		sound = new Audio ("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
- 		Notification.requestPermission().then(perm => 
-		{
-        	if (perm === "granted")
-			{
-				sound.play();
-				new Notification("check in !!");
-			}
-   		});
-	clearInterval(refreshIntervalId);
-	}
-}
-var refreshIntervalId = setInterval(test, 100);
-
-
-*/
-// Khadijaahmada148@gmail.com
-// Hakrabi45@&€html#(/*25%tik
