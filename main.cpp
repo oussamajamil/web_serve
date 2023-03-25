@@ -25,9 +25,6 @@
 // 	Web servers;
 // 	try
 // 	{
-// 		std::string __config = __config_file(ac, av);
-// 		servers.__parse(__config);
-// 		__servers_display(servers);
 // 		int server_fd = socket(AF_INET, SOCK_STREAM, 0);
 // 		if (server_fd == -1)
 // 		{
@@ -94,7 +91,7 @@ int main(int ac, char **av)
 		std::string __config = __config_file(ac, av);
 
 		servers.__parse(__config);
-
+		__servers_display(servers);
 		Server_launch __launcher(&servers.__servers);
 
 		__launcher.__launch();

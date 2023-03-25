@@ -72,7 +72,7 @@ Request::Request() {}
 Request::Request(std::string req,Server *server){
     this->parseRequest(req);
     this->_server = *server;
-    if (this->method != "GET" &&this->method!= "POST" && this->method != "DELETE")
+    if (this->method != "GET" && this->method!= "POST" && this->method != "DELETE")
     {
         this->status_code = METHOD_NOT_ALLOWED;
     }
@@ -85,7 +85,7 @@ Request::Request(std::string req,Server *server){
         this->status_code = BAD_REQUEST;
     }
     this->checkLocation();
-    // if(this->_location.__attributes['method'].find(this->method) == std::string::npos)
+    // if(this->_location.__attributes['methods'].find(this->method) != 0)
     // {
     //     this->status_code = METHOD_NOT_ALLOWED;
     // }
