@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 22:00:57 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/22 22:01:01 by obelkhad         ###   ########.fr       */
+/*   Created: 2023/03/16 11:50:19 by obelkhad          #+#    #+#             */
+/*   Updated: 2023/03/25 12:46:10 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ public:
 	void							__request_read(int __ident, int __data);
 	void							__read_head(int __iden, int &__data);
 	void							__read_body(int __ident, int &__data);
+	void							__read_chunkes_body(int __ident, int &__data);
 	void							__parse_info();
 	
 	std::string						__search_str(std::string);

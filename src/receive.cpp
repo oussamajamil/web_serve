@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   request.cpp                                        :+:      :+:    :+:   */
+/*   receive.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/22 22:01:07 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/25 12:44:27 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,46 @@ void Receive::__init_requst()
 void Receive::__request_read(int __ident, int __data)
 {
 	if (!__head_read_done)
+	{
 		__read_head(__ident, __data);
-	if (!__body_read_done)
+	}
+	if (!__body_read_done && !__chunks)
+	{
 		__read_body(__ident, __data);
+	}
+	if (__chunks)
+	{
+		__read_chunkes_body(__ident, __data);
+	}
+}
+
+void Receive::__read_chunkes_body(int __ident, int &__data)
+{
+	(void)__ident;
+	(void)__data;
+	// length := 0
+	// read chunk-size, chunk-ext (if any), and CRLF
+	// while (chunk-size > 0) {
+	// 	read chunk-data and CRLF
+	// 	append chunk-data to content
+	// 	length := length + chunk-size
+	// 	read chunk-size, chunk-ext (if any), and CRLF
+	// }
+	// read trailer field
+	// while (trailer field is not empty) {
+	// 	if (trailer fields are stored/forwarded separately) {
+	// 		append trailer field to existing trailer fields
+	// 	}
+	// 	else if (trailer field is understood and defined as mergeable) {
+	// 		merge trailer field with existing header fields
+	// 	}
+	// 	else {
+	// 		discard trailer field
+	// 	}
+	// 	read trailer field
+	// }
+	// Content-Length := length
+	// Remove "chunked" from Transfer-Encoding
 }
 
 void Receive::__read_head(int __ident, int &__data)
@@ -89,7 +126,7 @@ void Receive::__read_head(int __ident, int &__data)
 void Receive::__read_body(int __ident, int &__data)
 {
 	int     __r = 0;
-    
+
     do
     {
         if (__data > 0 && __content_length)
@@ -108,8 +145,10 @@ void Receive::__read_body(int __ident, int &__data)
 				std::cout << "Connection closed by client." << std::endl;
 			}
 			__data -= __r;
-			if (__content_length == __length)
+			std::cout << "__content_length > " << __content_length <<std::endl;
+			if (__content_length <= __length)
 			{
+				std::cout << "__body_read_done = TRUE > " << __length <<std::endl;
 				__body_read_done = true;
 				return;
 			}
@@ -133,33 +172,36 @@ std::string Receive::__search_str(std::string __str)
 void Receive::__parse_info()
 {
 	std::string	__holder;
-	
-	/* ----------------------------- Content-Length ----------------------------- */
-	__holder = __search_str("Content-Length: ");
-	if (__holder != NPOS)
-		__content_length = stoi(__holder);
-	else
+	/* ---------------------------- Transfer Encoding --------------------------- */
+	__holder = __search_str("Transfer-Encoding: ");
+	if (__holder != NPOS && __holder == "chunked")
 	{
-		__content_length = 0;
-		// __requet_read_done = true;
+		__chunks = true;
+	}
+	else
+	{	
+		/* ----------------------------- Content-Length ----------------------------- */
+		__holder = __search_str("Content-Length: ");
+		if (__holder != NPOS)
+			__content_length = stoi(__holder);
+		else
+			__content_length = 0;	
 	}
 	
 	/* ------------------------------- keep-alive ------------------------------- */
 	__holder = __search_str("Connection: ");
-	
 	if (__holder != NPOS && __holder == "keep-alive")
 		__close = false;
 
 	/* --------------------------------- Server --------------------------------- */
 	__holder = __search_str("Host: ");
 	
+	std::cout << "host = " << __holder << std::endl;
 	if (__holder == NPOS)
 	{
 		std::cout << "error: bad requset HOST missing!" << std::endl;
-		exit(1);
+		// exit(1);
 	}
 	else
-	{
 		__host = __holder;
-	}
 }
