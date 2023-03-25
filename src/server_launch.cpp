@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/event.h>
+#include "../include/request.hpp"
 
 
 /* ------------------------------ Constructors ------------------------------ */
@@ -294,6 +295,8 @@ void Server_launch::__input_handler(int __ident, int __data, Receive *__r)
 	__r->__request_read(__ident, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
 	std::cout << __r->__server->__attributes["root"].front() << std::endl;
+	std::cout << "." << __r->__body_read_done << std::endl;
+	std::cout << "." << __r->__content_length << std::endl;
 	if (__r->__body_read_done || __r->__content_length == 0)
 	{
 		struct kevent event;
@@ -305,13 +308,9 @@ void Server_launch::__input_handler(int __ident, int __data, Receive *__r)
 		// add write event
 		EV_SET(&event, __ident, EVFILT_WRITE,  EV_ADD | EV_CLEAR, 0, 0, NULL);
 		kevent(__kq, &event, 1, NULL, 0, 0);
-
-		std::cout << __read_handler[__ident].__head << std::endl;
-		std::cout << __read_handler[__ident].__body << std::endl;
-
 		/* --------------------------- parse requset ---------------------------- */
 		//TODO:
-
+		Request		__request((__r->__head+__r->__body), __r->__server);
 		/* ------------------------------ execute ------------------------------- */
 		//TODO:
 

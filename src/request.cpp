@@ -80,7 +80,7 @@ void Request::parseRequest(std::string req)
 	std::cout << this->body << std::endl;
 }
 
-Request::Request(std::string req, Web *server)
+Request::Request(std::string req, Server *server)
 {
 	this->status_code = 0;
 	this->parseRequest(req);
@@ -103,11 +103,7 @@ Request::Request(std::string req, Web *server)
 			this->status_code = BAD_REQUEST;
 		}
 	}
-	this->checkServer(server);
-	// if (this->_server.__attributes['autoindex'][0] == "on")
-	//     this->is_autoindex = true;
-	// else
-	//     this->is_autoindex = false;
+	this->_server = server;
 	this->checkLocation();
 	if (this->_location.__attributes["methods"].size() > 0)
 	{
@@ -121,29 +117,29 @@ Request::Request(std::string req, Web *server)
 	}
 }
 
-void Request::checkServer(Web *web)
-{
-	for (unsigned long i = 0; i < web->__servers.size(); i++)
-	{
-		std::map<std::string, std::vector<std::string> >::iterator it;
-		for (it = web->__servers[i].__attributes.begin(); it != web->__servers[i].__attributes.end(); it++)
-		{
-			if (it->first == "listen")
-			{
-				std::vector<std::string> listen = it->second;
-				for (unsigned long j = 0; j < listen.size(); j++)
-				{
-					std::vector<std::string> host_port = split(listen[j], ":");
-					if (host_port[0] == this->host && host_port[1] == this->port)
-					{
-						std::cout << "server found server: " << host_port[0] << "port" << host_port[1] << std::endl;
-						this->_server = web->__servers[i];
-					}
-				}
-			}
-		}
-	}
-}
+// void Request::checkServer(Web *web)
+// {
+// 	for (unsigned long i = 0; i < web->__servers.size(); i++)
+// 	{
+// 		std::map<std::string, std::vector<std::string> >::iterator it;
+// 		for (it = web->__servers[i].__attributes.begin(); it != web->__servers[i].__attributes.end(); it++)
+// 		{
+// 			if (it->first == "listen")
+// 			{
+// 				std::vector<std::string> listen = it->second;
+// 				for (unsigned long j = 0; j < listen.size(); j++)
+// 				{
+// 					std::vector<std::string> host_port = split(listen[j], ":");
+// 					if (host_port[0] == this->host && host_port[1] == this->port)
+// 					{
+// 						std::cout << "server found server: " << host_port[0] << "port" << host_port[1] << std::endl;
+// 						this->_server = web->__servers[i];
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
 
 void Request::checkLocation()
 {

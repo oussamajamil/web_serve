@@ -57,8 +57,7 @@ public:
 public:
     Request();
     void parseRequest(std::string req);
-    Request(std::string req, Web *web);
-    void checkServer(Web *web);
+    Request(std::string req, Server *web);
     void checkLocation();
     ~Request();
 };

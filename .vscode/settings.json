@@ -72,7 +72,8 @@
     "bit": "cpp",
     "functional": "cpp",
     "iterator": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "__memory": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
