@@ -1,3 +1,4 @@
+
 // /* ************************************************************************** */
 // /*                                                                            */
 // /*                                                        :::      ::::::::   */
@@ -91,18 +92,22 @@ int main(int ac, char **av)
 		std::string __config = __config_file(ac, av);
 
 		servers.__parse(__config);
-		__servers_display(servers);
-		Server_launch __launcher(&servers.__servers);
+
+		servers.__set_locations();
+		
+		Server_launch	__launcher(&servers.__servers);
 
 		__launcher.__launch();
-		__launcher.__run();
+		// __launcher.__run();
+		__servers_display(servers);
+		
 	}
 
 	catch (const std::exception &e)
 	{
-		std::cerr << "\033[1;31m"
-							<< "error: bad synatx"
-							<< "\033[0m" << std::endl;
+		// std::cerr << "\033[1;31m" << e.what() << "\033[0m" << std::endl;
+		std::cerr << "\033[1;31m" << "error: bad synatx" << "\033[0m" << std::endl;
+
 	}
 
 	return 0;

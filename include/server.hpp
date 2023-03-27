@@ -6,7 +6,7 @@
 /*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:29:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/21 16:18:35 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:01:55 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ public:
 class Web
 {
 private:
-	typedef void (Web::*handler)(Server &, Location &);
-	std::map<std::string, handler> __handlers;
-	typedef std::vector<std::string>::iterator __v_iterator;
-	typedef std::map<std::string, std::vector<std::string> >::iterator __m_iterator;
-	std::vector<std::string> __line_splited;
-	std::ifstream __file;
+	typedef void (Web::*handler)(Server&, Location&);
+	std::map<std::string, handler>												__handlers;
+	typedef std::map<std::string, std::vector<std::string> >					__m_p;
+	typedef std::vector<std::string>::iterator									__v_iterator;
+	typedef std::map<std::string, std::vector<std::string> >::iterator			__m_iterator;
+	std::vector<std::string> 													__line_splited;
+	std::ifstream																__file;
 
 	void __server(Server &__server, Location &__location);
 	void __listen(Server &__server, Location &__location);
@@ -88,8 +89,11 @@ public:
 
 	std::vector<Server>	 		__servers;
 	void						__parse(std::string &__config_path);
-	std::vector<std::string> __parse_listen_args();
-	std::vector<std::string> __parse_args();
-	void __initial_action(Server &__server);
-	bool __closed_bracket(Server &__server, Location &__location);
+	void						__set_locations();
+
+	std::vector<std::string>	__parse_listen_args();
+	std::vector<std::string>	__parse_args();
+	void						__initial_action(Server &__server);
+	bool 						__closed_bracket(Server &__server, Location &__location);
+
 };
