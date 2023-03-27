@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/22 22:46:09 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:20:04 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,6 @@ void Server_launch::__bind_socket(socket_info &socket_add)
 	server_address.sin_addr.s_addr = inet_addr(socket_add.__address.c_str());
 	server_address.sin_port = htons(socket_add.__port);
 
-	std::cout << socket_add.__host << std::endl;
-
 	if (bind(socket_add.__socket_fd, (struct sockaddr*)&server_address, sizeof(server_address)) < 0)
 	{
 		std::cerr << "Error: bind" << std::endl;
@@ -144,11 +142,9 @@ void Server_launch::__accept(int __ident)
 		std::cerr << "Error: accept" << std::endl;
 		exit (1);
 	}
-
     EV_SET(&event, __client, EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, &__read_handler[__client]);
 	__read_handler[__client].__ident = __ident;
 	__read_handler[__client].__scoket = __client;
-	// __read_handler[__client].__server = __globle_sockets[__ident].__server;
     kevent(__kq, &event, 1, NULL, 0, 0);
 }
 
@@ -293,7 +289,6 @@ void Server_launch::__input_handler(int __ident, int __data, Receive *__r)
 {
 	__r->__request_read(__ident, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
-	std::cout << __r->__server->__attributes["root"].front() << std::endl;
 	if (__r->__body_read_done || __r->__content_length == 0)
 	{
 		struct kevent event;

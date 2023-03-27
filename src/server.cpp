@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:26:56 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/05 15:15:09 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:37:08 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,6 @@ __redirect_default(false)
 	__default.push_back(std::string(METHODS));
 	__attributes["methods"] = __default;
 	__default.clear();
-
-	__attributes["upload_dir"];
-	__attributes["error_page"];
-	__attributes["cgi"];
-	__attributes["redirect"];
 }
 
 Server::~Server()
@@ -146,6 +141,7 @@ void Web::__parse(std::string &__config_path)
 		}
 	}
 	__file.close();
+	__set_locations();
 }
 
 
@@ -204,3 +200,43 @@ void Web::__location(Server &__server, Location &__location)
 	__server.__curly_location = true;
 }
 
+
+void Web::__set_locations()
+{
+	std::vector<Server>::iterator							__it = __servers.begin();
+	std::string												__h;
+	std::pair<std::string, std::vector<std::string> >		__val;
+	while (__it != __servers.end())
+	{
+		__m_p													*__m;		
+		__m_iterator											__att;
+		// __m_iterator											__att_l;
+		std::vector<Location>::iterator							__loc;
+
+		__loc = __it->__locations.begin();
+		while (__loc != __it->__locations.end())
+		{
+			__att = __it->__attributes.begin();
+			// __att_l = __loc->__attributes.begin();
+			__m = &(__loc->__attributes);
+			while (__att != __it->__attributes.end())
+			{
+				__h = __att->first;
+
+				if(__h != "listen" && __h != "server_name" && __m->find(__h) == __m->end())
+				{
+					__val.first = __h;
+					__val.second = __att->second;
+					__m->insert(__val);
+					// __m[__h] = __att->second;
+				}
+
+				++__att;	
+			}
+			++__loc;
+		}
+		
+
+		++__it;
+	}
+}

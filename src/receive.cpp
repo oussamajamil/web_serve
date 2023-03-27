@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/25 12:44:27 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:17:21 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ void Receive::__request_read(int __ident, int __data)
 	{
 		__read_head(__ident, __data);
 	}
-	if (!__body_read_done && !__chunks)
+	if (__head_read_done && !__body_read_done && !__chunks)
 	{
+		// std::cout << __head << std::endl;
 		__read_body(__ident, __data);
 	}
 	if (__chunks)
@@ -126,7 +127,6 @@ void Receive::__read_head(int __ident, int &__data)
 void Receive::__read_body(int __ident, int &__data)
 {
 	int     __r = 0;
-
     do
     {
         if (__data > 0 && __content_length)
@@ -142,17 +142,20 @@ void Receive::__read_body(int __ident, int &__data)
 			}
 			if (__r == 0)
 			{
-				std::cout << "Connection closed by client." << std::endl;
+				std::cout << "Connection closed by client." << std::endl; 
 			}
 			__data -= __r;
-			std::cout << "__content_length > " << __content_length <<std::endl;
 			if (__content_length <= __length)
 			{
-				std::cout << "__body_read_done = TRUE > " << __length <<std::endl;
 				__body_read_done = true;
 				return;
 			}
         }
+		if (__data == 0 && __content_length > 0)
+		{
+			__body_read_done = true;
+			return;
+		}
     } while (__data > 0);
 }
 
@@ -196,11 +199,10 @@ void Receive::__parse_info()
 	/* --------------------------------- Server --------------------------------- */
 	__holder = __search_str("Host: ");
 	
-	std::cout << "host = " << __holder << std::endl;
 	if (__holder == NPOS)
 	{
 		std::cout << "error: bad requset HOST missing!" << std::endl;
-		// exit(1);
+		exit(1);
 	}
 	else
 		__host = __holder;

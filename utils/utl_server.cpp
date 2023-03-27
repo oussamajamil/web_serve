@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:12:30 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/04 16:26:04 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:35:31 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,20 +151,20 @@ void Web::__methods(Server &__server, Location &__location)
 	__m_iterator				methods;
 	std::vector<std::string>	__values;
 
+	methods = __server.__attributes.find("methods");
 	/*initial action*/
 	__initial_action(__server);
 	
 	/*extract values*/
 	__values = __parse_args();
-
+	
 	/*CHECK LOCATION*/
 	if (__server.__curly_location)
-	{		
+	{
 		__location.__attributes["methods"].insert(__location.__attributes["methods"].end(), __values.begin(), __values.end());
 	}
 	else
 	{
-		methods = __server.__attributes.find("methods");
 
 		/*remove default configuration*/
 		if (__server.__methods_default)
@@ -197,10 +197,9 @@ void Web::__cgi(Server &__server, Location &__location)
 		__location.__attributes["cgi"].insert(__location.__attributes["cgi"].end(), __values.begin(), __values.end());
 	else
 	{
+		if (__server.__attributes.find("cgi") == __server.__attributes.end())
+			__server.__attributes["cgi"];
 		cgi = __server.__attributes.find("cgi");
-
-
-		/*add valuses*/
 		cgi->second.insert(cgi->second.end(), __values.begin(), __values.end());
 	}
 }
@@ -293,7 +292,6 @@ void Web::__redirect(Server &__server, Location &__location)
 	if (!__server.__curly_location)
 		__bad_syntax();
 
-
 	/*add valuses*/
 	__location.__attributes["redirect"].insert(__location.__attributes["redirect"].end(), __values.begin(), __values.end());
 }
@@ -340,7 +338,6 @@ void Web::__error_page(Server &__server, Location &__location)
 {
 	__m_iterator				error_page;
 	std::vector<std::string>	__values;
-
 	/*initial action*/
 	__initial_action(__server);
 
@@ -352,16 +349,10 @@ void Web::__error_page(Server &__server, Location &__location)
 		__location.__attributes["error_page"].insert(__location.__attributes["error_page"].end(), __values.begin(), __values.end());
 	else
 	{
-		error_page = __server.__attributes.find("error_page");
-
-		/*remove default configuration*/
-		if (__server.__error_page_default)
-		{
-			error_page->second.clear();
-			__server.__error_page_default = false;
-		}
-
 		/*add valuses*/
+		if (__server.__attributes.find("error_page") == __server.__attributes.end())
+			__server.__attributes["error_page"];
+		error_page = __server.__attributes.find("error_page");
 		error_page->second.insert(error_page->second.end(), __values.begin(), __values.end());
 	}
 }
@@ -386,16 +377,9 @@ void Web::__upload_dir(Server &__server, Location &__location)
 		__location.__attributes["upload_dir"].insert(__location.__attributes["upload_dir"].end(), __values.begin(), __values.end());
 	else
 	{
+		if (__server.__attributes.find("upload_dir") == __server.__attributes.end())
+			__server.__attributes["upload_dir"];
 		upload_dir = __server.__attributes.find("upload_dir");
-
-		/*remove default configuration*/
-		if (__server.__upload_dir_default)
-		{
-			upload_dir->second.clear();
-			__server.__upload_dir_default = false;
-		}
-
-		/*add valuses*/
 		upload_dir->second.insert(upload_dir->second.end(), __values.begin(), __values.end());
 	}
 }

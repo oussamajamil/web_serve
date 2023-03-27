@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:49:57 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/20 11:54:43 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:48:55 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,26 @@ void __vector_display(std::vector<std::string> &vec)
 	for (; it != vec.end(); ++it)
 		std::cout << "[ " << *it << " ], ";
 	std::cout << std::endl;
-	std::cout << "........................................." << std::endl;
-	std::cout << std::endl;
+	// std::cout << std::endl;
 }
 
 void __map_display(std::map<std::string, std::vector<std::string> > &mp)
 {
+	int __x = 0;
 	std::map<std::string, std::vector<std::string> >::iterator it = mp.begin();
 	for (; it != mp.end(); ++it)
 	{	
-		std::cout << "-> " << it->first << "	";
+		__x = it->first.length();
+		std::cout << "	-> " << it->first;
+		for(int i = 0; i < 30 - __x;i++)
+			std::cout << ".";
 		__vector_display(it->second);
 	}
 }
 
 void __server_display(Server server)
 {
+	int __x = 0;
 	std::cout << std::endl << "-------------------------------------  SERVER START  --------------------------------------------" << std::endl;
 	std::cout << "ATTRIBUTES : " << server.__attributes.size() << std::endl;
 	std::cout << "LOCATIONS : " << server.__locations.size() << std::endl << std::endl;
@@ -102,14 +106,15 @@ void __server_display(Server server)
 	std::map<std::string, std::vector<std::string> >::iterator it = server.__attributes.begin();
 	for (; it != server.__attributes.end(); ++it)
 	{	
-		std::cout << "----> " << it->first << " : ";
+		__x = it->first.length();
+		std::cout << "-> " << it->first;
+		for(int i = 0; i < 30 - __x;i++)
+			std::cout << ".";
 		__vector_display(it->second);
 	}
 	std::cout << std::endl;
-	std::cout << std::endl;
 
 	std::cout << "LOCATIONS : " << std::endl;
-
 
 	std::vector<Location>::iterator					__vec_loc = server.__locations.begin();
 
