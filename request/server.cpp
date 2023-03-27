@@ -43,16 +43,15 @@ int main()
 		}
 
 		char buffer[BUFF_SIZE];
-
-		int read_size = recv(client_fd, buffer, BUFF_SIZE, 0);
+		int read_size = read(client_fd, buffer, BUFF_SIZE);
 		if (read_size == -1)
 		{
 			std::cout << "Error reading from socket" << std::endl;
 			return 1;
 		}
-		std::string request(buffer);
-
+		std::string request = buffer;
 		Request req(request);
+		req.is_valid();
 		close(client_fd);
 	}
 }

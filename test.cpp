@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:47:12 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/02/28 20:40:40 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/03/24 22:04:24 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,28 @@
 #include <sstream>
 void __parse_adress(std::string input)
 {
-    // std::string input = "192.168.1.1:8080";
-    // std::regex regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}:[0-9]{1,5}$");
+	// std::string input = "192.168.1.1:8080";
+	// std::regex regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}:[0-9]{1,5}$");
 
-    // if (std::regex_match(input, regex)) {
-    //     size_t pos = input.find(":");
-    //     std::string ip = input.substr(0, pos);
-    //     std::string port = input.substr(pos + 1);
+	// if (std::regex_match(input, regex)) {
+	//     size_t pos = input.find(":");
+	//     std::string ip = input.substr(0, pos);
+	//     std::string port = input.substr(pos + 1);
 
-    //     std::cout << "IP address: " << ip << std::endl;
-    //     std::cout << "Port number: " << port << std::endl;
-    // } else {
-    //     std::cerr << "Invalid input: " << input << std::endl;
-    // }
+	//     std::cout << "IP address: " << ip << std::endl;
+	//     std::cout << "Port number: " << port << std::endl;
+	// } else {
+	//     std::cerr << "Invalid input: " << input << std::endl;
+	// }
 
 	// std::string			__holder_str = str;
 	// std::string			__holder;
-    // size_t 				__pos;
-    // size_t 				__p;
+	// size_t 				__pos;
+	// size_t 				__p;
 	// int 				__num;
 
 	// int 				__i = 0;
 	// size_t 				__range;
-
 
 	// while (__holder_str[__i])
 	// {
@@ -54,7 +53,7 @@ void __parse_adress(std::string input)
 	// 		__holder = __holder_str.substr(0, __p);
 	// 	__num = std::stoi(__holder, &__pos);
 	// 	std::cout << "[ N ]  :" << __num << std::endl;
-		
+
 	// 	if (__pos != __holder.length())
 	// 	{
 	// 		std::cerr << "Invalid input: " << __holder << std::endl;
@@ -71,34 +70,27 @@ void __parse_adress(std::string input)
 	// std::cout << "r : " << __range << '\n';
 	// if (__range < 0 || __range > 255)
 	// 	std::cout << "error " << '\n';
-
-	
 }
-
-
 
 int main(int ac, char **av)
 {
 	// parse config file;
 	__parse_adress(av[1]);
-	
-    return 0;
+	return 0;
 }
 
-
-
-// 
+//
 // #include <arpa/inet.h>
 //
-	// struct in_addr 		__addr;	
-    // int 				__res;
+// struct in_addr 		__addr;
+// int 				__res;
 
-	// __res = inet_pton(AF_INET, ip_str.c_str(), &__addr);
-    // if (__res == 1)
-	// {
-    //     std::cout << "Valid IP address\n";
-    // } else if (__res == 0) {
-    //     std::cout << "Invalid IP address (not in presentation format)\n";
-    // } else {
-    //     std::cout << "Invalid IP address\n";
-    // }
+// __res = inet_pton(AF_INET, ip_str.c_str(), &__addr);
+// if (__res == 1)
+// {
+//     std::cout << "Valid IP address\n";
+// } else if (__res == 0) {
+//     std::cout << "Invalid IP address (not in presentation format)\n";
+// } else {
+//     std::cout << "Invalid IP address\n";
+// }
