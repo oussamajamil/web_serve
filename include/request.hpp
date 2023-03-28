@@ -8,6 +8,7 @@
 #include <vector>
 #include "../utils.hpp"
 #include "../include/server.hpp"
+#include "../include/receive.hpp"
 
 enum
 {
@@ -52,12 +53,13 @@ public:
     Server _server;
     std::string index;
     bool is_autoindex;
+    std::make_pair<std::string, std::string> _is_directory;
     int status_code;
 
 public:
     Request();
-    void parseRequest(std::string req);
-    Request(std::string req, Server *web);
+    void parseRequest(std::string header, std::string body);
+    Request(Receive *__r);
     void checkLocation();
     ~Request();
 };

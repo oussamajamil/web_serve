@@ -15,12 +15,10 @@
 
 Request::Request() {}
 
-void Request::parseRequest(std::string req)
+void Request::parseRequest(std::string header, std::string body)
 {
-	this->request = req;
-	std::vector<std::string> lines = split(req, "\r\n\r\n");
-	std::string header = lines[0];
-	this->body = lines[1];
+	this->request = header + "\r\n\r\n" + body;
+	this->body = body;
 
 	std::vector<std::string> header_lines = split(header, "\r\n");
 	std::vector<std::string> first_line = split(header_lines[0], " ");
@@ -80,13 +78,12 @@ void Request::parseRequest(std::string req)
 	std::cout << this->body << std::endl;
 }
 
-Request::Request(std::string req, Server *server)
+Request::Request(Receive *__r)
 {
 	this->status_code = 0;
-	this->parseRequest(req);
+	this->parseRequest(__r->__head, __r->__body);
 	if (this->method != "GET" && this->method != "POST" && this->method != "DELETE")
 	{
-		std::cout << "NOT_IMPLEMENTED" << std::endl;
 		this->status_code = NOT_IMPLEMENTED;
 	}
 	if (this->version != "HTTP/1.1" && this->version != "HTTP/1.0")
@@ -99,11 +96,10 @@ Request::Request(std::string req, Server *server)
 	{
 		if (this->headers["Content-Length"] != std::to_string(this->body.size()))
 		{
-			std::cout << "different size body" << std::endl;
 			this->status_code = BAD_REQUEST;
 		}
 	}
-	this->_server = server;
+	this->_server = *(__r->__server);
 	this->checkLocation();
 	if (this->_location.__attributes["methods"].size() > 0)
 	{
@@ -115,31 +111,9 @@ Request::Request(std::string req, Server *server)
 				this->status_code = METHOD_NOT_ALLOWED;
 		}
 	}
-}
 
-// void Request::checkServer(Web *web)
-// {
-// 	for (unsigned long i = 0; i < web->__servers.size(); i++)
-// 	{
-// 		std::map<std::string, std::vector<std::string> >::iterator it;
-// 		for (it = web->__servers[i].__attributes.begin(); it != web->__servers[i].__attributes.end(); it++)
-// 		{
-// 			if (it->first == "listen")
-// 			{
-// 				std::vector<std::string> listen = it->second;
-// 				for (unsigned long j = 0; j < listen.size(); j++)
-// 				{
-// 					std::vector<std::string> host_port = split(listen[j], ":");
-// 					if (host_port[0] == this->host && host_port[1] == this->port)
-// 					{
-// 						std::cout << "server found server: " << host_port[0] << "port" << host_port[1] << std::endl;
-// 						this->_server = web->__servers[i];
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// }
+	
+}
 
 void Request::checkLocation()
 {
