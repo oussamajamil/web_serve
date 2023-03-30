@@ -12,7 +12,6 @@
 
 #include "../include/request.hpp"
 #include "../include/server.hpp"
-
 Request::Request() {}
 
 void Request::parseRequest(std::string header, std::string body)
@@ -81,6 +80,7 @@ void Request::parseRequest(std::string header, std::string body)
 Request::Request(Receive *__r)
 {
 	this->status_code = 0;
+	this->is_fileexist = false;
 	this->parseRequest(__r->__head, __r->__body);
 	if (this->method != "GET" && this->method != "POST" && this->method != "DELETE")
 	{
@@ -111,8 +111,55 @@ Request::Request(Receive *__r)
 				this->status_code = METHOD_NOT_ALLOWED;
 		}
 	}
-
-	
+	std::string path = "/";
+	if (this->_location.__attributes["root"].size() > 0)
+		path += trim(this->_location.__attributes["root"][0], "/") + "/";
+	else
+		path += trim(this->_server.__attributes["root"][0], "/") + "/" + trim(this->_location.__path, "/") + "/" + trim(this->path, "/") + "/";
+	for (unsigned long i = 0; i < this->_location.__attributes["index"].size(); i++)
+	{
+		std::string index = this->_location.__attributes["index"][i];
+		std::string index_path = path + index;
+		if (file_exists(index_path))
+		{
+			this->path_content = index_path;
+			this->is_fileexist = true;
+			break;
+		}
+	}
+	if (!this->is_fileexist)
+	{
+		std::cout << "files not exist" << std::endl;
+		this->status_code = NOT_FOUND;
+	}
+	else
+	{
+		if (is_directory(this->path_content))
+		{
+			std::cout << "is directory" << std::endl;
+		}
+		else
+		{
+			std::cout << "is file" << std::endl;
+		}
+	}
+	// if (!this->is_fileexist)
+	// 	this->status_code = NOT_FOUND;
+	// else
+	// {
+	// 	std::cout << "check is directory" << is_directory(this->path_content) << std::endl;
+	// }
+	// 	std::cout << "path: " << path << std::endl;
+	// else
+	// {
+	// 	if
+	// 	// std::cout << "path_content: " << this->path_content << std::endl;
+	// }
+	// if (!this->is_fileexist)
+	// 	this->status_code = NOT_FOUND;
+	// else
+	// {
+	// }
 }
 
 void Request::checkLocation()

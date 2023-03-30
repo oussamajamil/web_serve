@@ -9,6 +9,9 @@
 #include "../utils.hpp"
 #include "../include/server.hpp"
 #include "../include/receive.hpp"
+#include <fstream>
+
+typedef std::basic_ifstream<char> ifstream;
 
 enum
 {
@@ -53,7 +56,9 @@ public:
     Server _server;
     std::string index;
     bool is_autoindex;
-    std::make_pair<std::string, std::string> _is_directory;
+    std::string path_content;
+    bool is_fileexist;
+    std::string responseMessage;
     int status_code;
 
 public:

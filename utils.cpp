@@ -1,5 +1,6 @@
 #include "./utils.hpp"
-
+#include <unistd.h>
+#include <sys/stat.h>
 std::vector<std::string> split(std::string content, std::string sparator)
 {
     std::vector<std::string> splt;
@@ -38,4 +39,21 @@ std::string trim(std::string content, std::string sparator)
     }
 
     return content;
+}
+
+bool file_exists(std::string fileName)
+{
+    const char *filename = fileName.c_str();
+    if (access(filename, F_OK) != -1)
+        return true;
+    else
+        return false;
+}
+
+bool is_directory(std::string filename)
+{
+    struct stat statbuf;
+    if (stat(filename.c_str(), &statbuf) != 0)
+        return false;
+    return S_ISDIR(statbuf.st_mode);
 }
