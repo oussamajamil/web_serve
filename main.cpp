@@ -24,6 +24,7 @@ int main(int ac, char **av)
 
 	catch (const std::exception &e)
 	{
+		std::cout << e.what() << std::endl;
 		// std::cerr << "\033[1;31m" << e.what() << "\033[0m" << std::endl;
 		std::cerr << "\033[1;31m"
 							<< "error: bad synatx"

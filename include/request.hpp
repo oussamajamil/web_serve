@@ -56,11 +56,9 @@ public:
     Server _server;
     std::string index;
     bool is_autoindex;
-    std::string path_content;
-    bool is_fileexist;
     std::string responseMessage;
     int status_code;
-
+    std::pair<bool, std::string> is_directory_file;
 public:
     Request();
     void parseRequest(std::string header, std::string body);

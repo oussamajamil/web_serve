@@ -25,11 +25,12 @@ std::vector<std::string> split(std::string content, std::string sparator)
 std::string trim(std::string content, std::string sparator)
 {
     int pos = content.find(sparator);
+    if(content == sparator)
+        return "";
     while (pos == 0)
     {
         content.erase(0, sparator.length());
         pos = content.find(sparator);
-        ;
     }
     pos = content.rfind(sparator);
     while (content[pos + sparator.length()] == '\0')
