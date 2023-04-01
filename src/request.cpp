@@ -40,13 +40,9 @@ void Request::parseRequest(std::string header, std::string body)
 	if (url_params.size() > 1)
 	{
 		this->path = url_params[0];
-		std::vector<std::string> params = split(url_params[1], "&");
-		for (unsigned long i = 0; i < params.size(); i++)
-		{
-			std::vector<std::string> param = split(params[i], "=");
-			this->query_params[param[0]] = param[1];
-		}
+		this->query_params = url_params[1];
 	}
+
 	std::cout << "****************** path/version/method ******************" << std::endl;
 	std::cout << "\033[1;32m method:  \033[0m"
 						<< this->method << std::endl;
@@ -67,11 +63,7 @@ void Request::parseRequest(std::string header, std::string body)
 	}
 
 	std::cout << "\n\n****************** query_params ******************" << std::endl;
-	for (it = this->query_params.begin(); it != this->query_params.end(); it++)
-	{
-		std::cout << "\033[1;32m " << it->first << ": \033[0m" << it->second << std::endl;
-		std::cout << std::endl;
-	}
+	std::cout << this->query_params << std::endl;
 
 	std::cout << "\n\n****************** body ******************" << std::endl;
 	std::cout << this->body << std::endl;
@@ -98,9 +90,43 @@ Request::Request(Receive *__r)
 		if (this->headers["Content-Length"] != std::to_string(this->body.size()))
 			this->status_code = BAD_REQUEST;
 	}
+	if (this->body.size() > 0)
+	{
+		std::cout << this->_server.__attributes["client_body_max_size"][0] << std::endl;
+		std::string body_size =trim(this->_server.__attributes["client_body_max_size"][0], " ");
+		if(body_size[body_size.length() - 1] =='G')
+		{
+			if (this->body.size() > size_t(std::atoi(body_size.c_str()) * 1024 * 1024 * 1024))
+			{
+				this->status_code = REQUEST_ENTITY_TOO_LARGE;
+			}
+		}
+		else if(body_size[body_size.length() - 1] =='M')
+		{
+			if (this->body.size() > size_t(std::atoi(body_size.c_str()) * 1024 * 1024))
+			{
+				this->status_code = REQUEST_ENTITY_TOO_LARGE;
+			}
+		}
+		else if(body_size[body_size.length() - 1] =='B')
+		{
+			if (this->body.size() > size_t(std::atoi(body_size.c_str())))
+				this->status_code = REQUEST_ENTITY_TOO_LARGE;
+		}
+		else
+		{
+			if (this->body.size() > size_t(std::atoi(body_size.c_str())))
+				this->status_code = REQUEST_ENTITY_TOO_LARGE;
+		}
+	}
 	this->_server = *(__r->__server);
 	this->checkLocation();
 
+	if (this->_location.__attributes["redirect"].size() > 0)
+	{
+		this->status_code = std::stoi(this->_location.__attributes["redirect"][0]);
+		this->headers["Location"] = this->_location.__attributes["redirect"][1];
+	}
 	if (this->_location.__attributes["methods"].size() > 0)
 	{
 		for (unsigned long i = 0; i < this->_location.__attributes["methods"].size(); i++)
@@ -121,21 +147,32 @@ Request::Request(Receive *__r)
 	
 	path = trim(path, "/");
 	path = "/" + path;
+	std::cout << "path: " << path << std::endl;
 	if(is_directory(path))
 	{
 		path += "/";
 		this->is_directory_file.first = true;
 		this->is_directory_file.second = path;
-		for (unsigned long i = 0; i < this->_location.__attributes["index"].size(); i++)
+		if(file_exists(path+"/index.html"))
 		{
-			std::string index = this->_location.__attributes["index"][i];
-			std::string index_path = this->is_directory_file.second + index;
-			if (file_exists(index_path))
-			{
-				this->is_directory_file.first = false;
-				this->is_directory_file.second = index_path;
-				break;
-			}
+			std::cout << "is file with index.html" << std::endl;
+			this->is_directory_file.first = false;
+			this->is_directory_file.second = path+"/index.html";
+		}
+		else
+		{
+			for (unsigned long i = 0; i < this->_location.__attributes["index"].size(); i++)
+				{
+					std::string index = this->_location.__attributes["index"][i];
+					std::string index_path = this->is_directory_file.second + index;
+					if (file_exists(index_path))
+					{
+						std::cout << "is file with index" << std::endl;
+						this->is_directory_file.first = false;
+						this->is_directory_file.second = index_path;
+						break;
+					}
+				}
 		}
 	}
 	else
@@ -182,11 +219,10 @@ Request::Request(Receive *__r)
 					out.close();
 			}
 			else
-			{
-				this->body_form_data[name] = value;
-			}		
+				this->body_form_data[name] = value;	
 		}
 	}
+	
 }
 void Request::checkLocation()
 {

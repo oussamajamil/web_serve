@@ -36,7 +36,8 @@ enum
     BAD_GATEWAY = 502,
     SERVICE_UNAVAILABLE = 503,
     GATEWAY_TIMEOUT = 504,
-    HTTP_VERSION_NOT_SUPPORTED = 505
+    HTTP_VERSION_NOT_SUPPORTED = 505,
+     REQUEST_ENTITY_TOO_LARGE = 413,
 };
 
 class Request
@@ -49,15 +50,15 @@ public:
     std::string path;
     std::string version;
     std::map<std::string, std::string> headers;
-    std::map<std::string, std::string> query_params;
+    std::string query_params;
     std::string body;
     std::string port;
     std::string host;
     Location _location;
     Server _server;
-    std::string index;
     bool is_autoindex;
     std::string responseMessage;
+    std::vector<std::string> error_page;
     int status_code;
     std::vector<std::string> body_boundary;
     std::pair<bool, std::string> is_directory_file;
