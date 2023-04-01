@@ -222,6 +222,15 @@ Request::Request(Receive *__r)
 				this->body_form_data[name] = value;	
 		}
 	}
+
+	if (this->status_code != 0){
+		for (unsigned long i = 0; i < this->_location.__attributes["error_page"].size(); i=i+2)
+		{
+			this->error_page_map[std::atoi(this->_location.__attributes["error_page"][i].c_str())] = this->_location.__attributes["error_page"][i+1];
+		}
+	}
+	else 
+		this->status_code = OK;
 	
 }
 void Request::checkLocation()

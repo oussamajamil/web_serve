@@ -10,13 +10,15 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-class response
+class Response
 {
 private:
     std::string responseMessage;
 public:
-    response(bool is_autoindex,std::map<std::string,std::string>body_form_data,int status_code,std::string version,std::string path,std::string method,std::string host,std::string port,std::pair<bool,std::string>is_directory_file);
+    response(bool is_autoindex,std::map<std::string,std::string>body_form_data,int status_code,std::string version,std::string path,std::string method,std::string host,std::string port,std::pair<bool,std::string>is_directory_file.std::map<int,std::string> page_error);
     ~response();
+    std::string default_error_page(int status_code);
+    std::string get_message(int status_code);
 }; 
 
 // void Request::handle_content_type()
