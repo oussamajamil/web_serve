@@ -10,6 +10,7 @@
 #include "../include/server.hpp"
 #include "../include/receive.hpp"
 #include <fstream>
+#include <sys/stat.h>
 
 typedef std::basic_ifstream<char> ifstream;
 
@@ -58,7 +59,9 @@ public:
     bool is_autoindex;
     std::string responseMessage;
     int status_code;
+    std::vector<std::string> body_boundary;
     std::pair<bool, std::string> is_directory_file;
+    std::map<std::string, std::string> body_form_data;
 public:
     Request();
     void parseRequest(std::string header, std::string body);

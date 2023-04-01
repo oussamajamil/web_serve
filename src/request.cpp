@@ -82,6 +82,7 @@ Request::Request(Receive *__r)
 	this->status_code = 0;
 	this->is_directory_file.first = false;
 	this->is_directory_file.second = "";
+	this->is_autoindex = false;
 	this->parseRequest(__r->__head, __r->__body);
 	if (this->method != "GET" && this->method != "POST" && this->method != "DELETE")
 	{
@@ -92,8 +93,7 @@ Request::Request(Receive *__r)
 		std::cout << "HTTP_VERSION_NOT_SUPPORTED" << std::endl;
 		this->status_code = HTTP_VERSION_NOT_SUPPORTED;
 	}
-
-	if (this->method == "POST")
+	if (this->body.size() > 0)
 	{
 		if (this->headers["Content-Length"] != std::to_string(this->body.size()))
 			this->status_code = BAD_REQUEST;
@@ -150,35 +150,44 @@ Request::Request(Receive *__r)
 		}
 	}
 
-	
-	// std::cout << "path: " << path << std::endl;
-	// std::cout << "path_content: " << this->path_content << std::endl;
-	// if (!this->is_fileexist)
-	// {
-	// 	std::cout << "file doesnt exists" << std::endl;
-	// 	this->status_code = NOT_FOUND;
-	// }
-	// else
-	// {
-	// 	std::cout << "file exists" << std::endl;
-	// 	if (is_directory(this->path_content))
-	// 	{
+	if (this->is_directory_file.first && this->_location.__attributes["autoindex"].size() > 0)
+	{
+		if (this->_location.__attributes["autoindex"][0] == "on")
+			this->is_autoindex = true;
+		else
+			this->status_code = FORBIDDEN;
+	}
 
-	// 		std::cout << "is directory" << std::endl;
-	// 		this->is_directory_file.first = true;
-	// 		this->is_directory_file.second = this->path_content;
-	// 	}
-	// 	else
-	// 	{
-	// 		std::cout << "is file" << std::endl;	
-	// 		this->is_directory_file.first = false;
-	// 		this->is_directory_file.second = this->path_content;
-	// 	}
-	// }
+	if(this->method == "POST"){
+		std::string boundary ="--";
+		boundary += this->headers["Content-Type"].substr(this->headers["Content-Type"].find("boundary=") + 9);
+		this->body_boundary = split(this->body, boundary);
 
+		for (unsigned long i = 0; i < this->body_boundary.size(); i++)
+		{
+			std::string name = this->body_boundary[i].substr(this->body_boundary[i].find("name=\"") + 6);
+			name = name.substr(0, name.find("\""));
+			std::string value = this->body_boundary[i].substr(this->body_boundary[i].find("\r\n\r\n") + 4);
+			value = value.substr(0, value.find("\r\n"));
 
+			if( this->body_boundary[i].find("filename=\"") != std::string::npos)
+			{
+				std::string filename = this->body_boundary[i].substr(this->body_boundary[i].find("filename=\"") + 10);
+				filename = filename.substr(0, filename.find("\""));
+				std::string file = this->_server.__attributes["upload_dir"][0]+"/"+filename;
+				if(!file_exists(this->_server.__attributes["upload_dir"][0]))
+					mkdir(this->_server.__attributes["upload_dir"][0].c_str(), 0777);
+				std::ofstream out(file.c_str());
+					out << value;
+					out.close();
+			}
+			else
+			{
+				this->body_form_data[name] = value;
+			}		
+		}
+	}
 }
-
 void Request::checkLocation()
 {
 	unsigned long match = 0;
