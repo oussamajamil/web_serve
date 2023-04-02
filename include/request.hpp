@@ -62,7 +62,9 @@ public:
     std::pair<bool, std::string> is_directory_file;
     std::map<int, std::string> error_page_map;
     std::map<std::string, std::string> body_form_data;
+    std::string redirect_path;
     std::string root;
+    std::string _connection;
 public:
     Request();
     void parseRequest(std::string header, std::string body);

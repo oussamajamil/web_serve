@@ -76,6 +76,32 @@ std::string  Response::get_message(int code){
         return "Method Not Allowed";
     else if (code == FORBIDDEN)
         return "Forbidden";
+    else if (code == CREATED)
+        return "Created";
+    else if (code == ACCEPTED)
+        return "Accepted";
+    else if (code == NO_CONTENT)
+        return "No Content";
+    else if (code == MOVED_PERMANENTLY)
+        return "Moved Permanently";
+    else if (code == FOUND)
+        return "Found";
+    else if (code == SEE_OTHER)
+        return "See Other";
+    else if (code == NOT_MODIFIED)
+        return "Not Modified";
+    else if(code == TEMPORARY_REDIRECT)
+        return "Temporary Redirect";
+    else if (code == UNAUTHORIZED)
+        return "Unauthorized";
+    else if (code == INTERNAL_SERVER_ERROR)
+        return "Internal Server Error";
+    else if (code == BAD_GATEWAY)
+        return "Bad Gateway";
+    else if( code == SERVICE_UNAVAILABLE)
+        return "Service Unavailable";
+    else if (code == GATEWAY_TIMEOUT)
+        return "Gateway Timeout";
     else 
         return "OK";
 }
@@ -90,7 +116,9 @@ std::string Response::get_file_extencion(std::string file){
 std::string Response::generate_response(std::string version,int code, std::string body,std::string file){
     std::string response = version + " " + std::to_string(code) + " " + get_message(code);
     response += "\r\n";
+    response+="Server: " + "web_serve" + "\r\n";
     response += "Content-Length: " + std::to_string(body.length()) + "\r\n";
+
     if (file != "")
     response += "Content-Type: "+this->content_type[get_file_extencion(file)] + "\r\n";
     else{
@@ -174,43 +202,68 @@ std::string Response::default_post_page(std::map<std::string,std::string>body_fo
     res += "</pre><hr></body></html>";
     return res;
 }
-Response::Response(bool is_autoindex, std::string version,std::string path,std::string root, std::map<int, std::string> error_page_map ,int status_code,std::pair<bool, std::string> is_directory_file,std::map<std::string,std::string>body_form_data,std::string method){
+std::string Response::generate_response_redirect(std::string version,int code,std::string redirect){
+    std::string response = version + " " + std::to_string(code) + " " + get_message(code);
+    response+= "\r\n";
+    response += "Connection: "+ Request::_connection + "\r\n";
+    response += "Date: " + get_date() + "\r\n";
+    response += "Server: web_serve"  + "\r\n";
+    response += "\r\n";
+    response += "Location: " + redirect + "\r\n";
+    response += "\r\n";
+    response += redirect;
+    return response;
+}
+Response::Response(bool is_autoindex, std::string version,std::string path,std::string root, std::map<int, std::string> error_page_map ,int status_code,std::pair<bool, std::string> is_directory_file,std::map<std::string,std::string>body_form_data,std::string method,std::string redirect){
     (void)path;
     handle_content_type();
+    if (redirect != "")
+    {
+            this->response_message = generate_response_redirect(version,OK,redirect);
+            std::cout <<
+            return;
+    }
     if(status_code != OK)
     {
         this->body = error_page(status_code,error_page_map,root);
         this->response_message = generate_response(version,status_code,this->body,this->path);
+        return;
     }
     else
     {
         if(method == "DELETE"){
             this->body = default_delete_page();
             this->response_message = generate_response(version,OK,this->body,"");
+            return;
         }
         else if(method == "POST"){
             this->body = default_post_page(body_form_data);
             this->response_message = generate_response(version,OK,this->body,"");
+            return;
         }
          else 
         {
-        if (is_directory_file.first){
-            if (is_autoindex)
-            {
-                this->body = autoIndexPage(is_directory_file.second);
-                this->response_message = generate_response(version,OK,this->body,"");
+      
+            if (is_directory_file.first){
+                if (is_autoindex)
+                {
+                    this->body = autoIndexPage(is_directory_file.second);
+                    this->response_message = generate_response(version,OK,this->body,"");
+                    return;
+                }
+                else
+                {
+                    this->body = error_page(403,error_page_map,root);
+                    this->response_message = generate_response(version,403,this->body,this->path);
+                    return;
+                }
             }
             else
             {
-                this->body = error_page(403,error_page_map,root);
-                this->response_message = generate_response(version,403,this->body,this->path);
+                this->body = get_file(is_directory_file.second);
+                this->response_message = generate_response(version,status_code,this->body,is_directory_file.second);
+                return;
             }
-        }
-        else
-        {
-            this->body = get_file(is_directory_file.second);
-            this->response_message = generate_response(version,status_code,this->body,is_directory_file.second);
-        }
         }
     }
     std::cout << "respone: " << this->response_message << std::endl;

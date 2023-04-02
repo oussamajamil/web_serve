@@ -303,7 +303,12 @@ void Server_launch::__input_handler(int __ident, int __data, Receive *__r)
 		/* --------------------------- parse requset ---------------------------- */
 		// TODO:
 		Request __request(__r);
-		Response __response(__request.is_autoindex,__request.version,__request.path,__request.root,__request.error_page_map,__request.status_code,__request.is_directory_file,__request.body_form_data,__request.method);
+		Response __response(__request.is_autoindex,__request.version,__request.path,__request.root,__request.error_page_map,__request.status_code,__request.is_directory_file,__request.body_form_data,__request.method,__request.redirect_path);
+		// __r->__scoket
+		//send response
+		send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
+		// __response.response_message 
+
 		/* ------------------------------ execute ------------------------------- */
 		
 		// TODO:

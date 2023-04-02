@@ -75,7 +75,9 @@ Request::Request(Receive *__r)
 	this->is_directory_file.first = false;
 	this->is_directory_file.second = "";
 	this->is_autoindex = false;
+	this->redirect_path = "";
 	this->parseRequest(__r->__head, __r->__body);
+	this->_connection = this->headers["Connection"];
 	if (this->method != "GET" && this->method != "POST" && this->method != "DELETE")
 	{
 		this->status_code = NOT_IMPLEMENTED;
@@ -132,19 +134,20 @@ Request::Request(Receive *__r)
 	if (this->_location.__attributes["redirect"].size() > 0)
 	{
 		this->status_code = std::stoi(this->_location.__attributes["redirect"][0]);
-		this->headers["Location"] = this->_location.__attributes["redirect"][1];
+		this->redirect_path = this->_location.__attributes["redirect"][1];
 	}
 	if (this->_location.__attributes["methods"].size() > 0)
 	{
-		for (unsigned long i = 0; i < this->_location.__attributes["methods"].size(); i++)
+		unsigned long i;
+		for ( i = 0; i < this->_location.__attributes["methods"].size(); i++)
 		{
 			if (this->_location.__attributes["methods"][i] == this->method)
 				break;
-			else
-			{
-				this->status_code = METHOD_NOT_ALLOWED;
-				return;
-			}
+		}
+		if (i == this->_location.__attributes["methods"].size())
+		{
+			this->status_code = METHOD_NOT_ALLOWED;
+			return;
 		}
 	}
 	std::string path = "/";
