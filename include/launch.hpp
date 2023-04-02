@@ -14,6 +14,8 @@
 #include <map>
 #include "../include/server.hpp"
 #include "../include/receive.hpp"
+#include "../include/response.hpp"
+
 
 typedef struct socket_info
 {

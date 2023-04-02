@@ -18,6 +18,7 @@
 #include <fcntl.h>
 #include <sys/event.h>
 #include "../include/request.hpp"
+#include "../include/response.hpp"
 
 /* ------------------------------ Constructors ------------------------------ */
 /* ------------------------------ Constructors ------------------------------ */
@@ -302,7 +303,9 @@ void Server_launch::__input_handler(int __ident, int __data, Receive *__r)
 		/* --------------------------- parse requset ---------------------------- */
 		// TODO:
 		Request __request(__r);
+		Response __response(__request.is_autoindex,__request.version,__request.path,__request.root,__request.error_page_map,__request.status_code,__request.is_directory_file,__request.body_form_data,__request.method);
 		/* ------------------------------ execute ------------------------------- */
+		
 		// TODO:
 
 		//   if (__r->__close)

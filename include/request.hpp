@@ -57,12 +57,12 @@ public:
     Location _location;
     Server _server;
     bool is_autoindex;
-    std::string responseMessage;
     int status_code;
     std::vector<std::string> body_boundary;
     std::pair<bool, std::string> is_directory_file;
     std::map<int, std::string> error_page_map;
     std::map<std::string, std::string> body_form_data;
+    std::string root;
 public:
     Request();
     void parseRequest(std::string header, std::string body);

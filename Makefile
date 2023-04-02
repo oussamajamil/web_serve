@@ -24,6 +24,7 @@ SRC	=  main.cpp src/server.cpp\
 				\
 				utils.cpp\
 				src/request.cpp\
+				src/response.cpp\
 				cerr/errors.cpp
 
 OBJ = $(SRC:.cpp=.o)

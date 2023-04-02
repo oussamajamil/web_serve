@@ -79,16 +79,19 @@ Request::Request(Receive *__r)
 	if (this->method != "GET" && this->method != "POST" && this->method != "DELETE")
 	{
 		this->status_code = NOT_IMPLEMENTED;
+		return;
 	}
 	if (this->version != "HTTP/1.1" && this->version != "HTTP/1.0")
 	{
 		std::cout << "HTTP_VERSION_NOT_SUPPORTED" << std::endl;
 		this->status_code = HTTP_VERSION_NOT_SUPPORTED;
+		return;
 	}
 	if (this->body.size() > 0)
 	{
 		if (this->headers["Content-Length"] != std::to_string(this->body.size()))
 			this->status_code = BAD_REQUEST;
+			return;
 	}
 	if (this->body.size() > 0)
 	{
@@ -99,6 +102,7 @@ Request::Request(Receive *__r)
 			if (this->body.size() > size_t(std::atoi(body_size.c_str()) * 1024 * 1024 * 1024))
 			{
 				this->status_code = REQUEST_ENTITY_TOO_LARGE;
+				return;
 			}
 		}
 		else if(body_size[body_size.length() - 1] =='M')
@@ -106,17 +110,20 @@ Request::Request(Receive *__r)
 			if (this->body.size() > size_t(std::atoi(body_size.c_str()) * 1024 * 1024))
 			{
 				this->status_code = REQUEST_ENTITY_TOO_LARGE;
+				return;
 			}
 		}
 		else if(body_size[body_size.length() - 1] =='B')
 		{
 			if (this->body.size() > size_t(std::atoi(body_size.c_str())))
 				this->status_code = REQUEST_ENTITY_TOO_LARGE;
+				return;
 		}
 		else
 		{
 			if (this->body.size() > size_t(std::atoi(body_size.c_str())))
 				this->status_code = REQUEST_ENTITY_TOO_LARGE;
+				return;
 		}
 	}
 	this->_server = *(__r->__server);
@@ -134,17 +141,43 @@ Request::Request(Receive *__r)
 			if (this->_location.__attributes["methods"][i] == this->method)
 				break;
 			else
+			{
 				this->status_code = METHOD_NOT_ALLOWED;
+				return;
+			}
 		}
 	}
 	std::string path = "/";
 	if (this->_location.__attributes["root"].size() > 0)
 	{
 		path += trim(this->_location.__attributes["root"][0], "/") + "/" + trim(this->path, "/");
+		this->root = trim(this->_location.__attributes["root"][0], "/");
 	}
 	else
+	{
 		path += trim(this->_server.__attributes["root"][0], "/")  + "/" + trim(this->path, "/");
-	
+		this->root = trim(this->_server.__attributes["root"][0], "/");
+	}
+	if (this->method == "DELETE"){
+		if (file_exists(path))
+		{
+			if (remove(path.c_str()) != 0)
+			{
+				this->status_code = INTERNAL_SERVER_ERROR;
+				return;
+			}
+			else
+			{
+				this->status_code = OK;
+				return;
+			}
+		}
+		else
+		{
+			this->status_code = NOT_FOUND;
+			return;
+		}	
+	}
 	path = trim(path, "/");
 	path = "/" + path;
 	std::cout << "path: " << path << std::endl;
@@ -153,7 +186,7 @@ Request::Request(Receive *__r)
 		path += "/";
 		this->is_directory_file.first = true;
 		this->is_directory_file.second = path;
-		if(file_exists(path+"/index.html"))
+		if(file_exists(path+"/index.html") && !is_directory(path+"/index.html"))
 		{
 			std::cout << "is file with index.html" << std::endl;
 			this->is_directory_file.first = false;
@@ -161,18 +194,36 @@ Request::Request(Receive *__r)
 		}
 		else
 		{
-			for (unsigned long i = 0; i < this->_location.__attributes["index"].size(); i++)
-				{
-					std::string index = this->_location.__attributes["index"][i];
-					std::string index_path = this->is_directory_file.second + index;
-					if (file_exists(index_path))
+			if (this->_location.__attributes["index"].size() > 0)
+			{
+				for (unsigned long i = 0; i < this->_location.__attributes["index"].size(); i++)
 					{
-						std::cout << "is file with index" << std::endl;
-						this->is_directory_file.first = false;
-						this->is_directory_file.second = index_path;
-						break;
+						std::string index = this->_location.__attributes["index"][i];
+						std::string index_path = this->is_directory_file.second + index;
+						if (file_exists(index_path) && !is_directory(index_path))
+						{
+							std::cout << "is file with index" << std::endl;
+							this->is_directory_file.first = false;
+							this->is_directory_file.second = index_path;
+							break;
+						}
 					}
-				}
+			}
+			else if (this->_server.__attributes["index"].size() > 0)
+			{
+				for (unsigned long i = 0; i < this->_server.__attributes["index"].size(); i++)
+					{
+						std::string index = this->_server.__attributes["index"][i];
+						std::string index_path = this->is_directory_file.second + index;
+						if (file_exists(index_path) && !is_directory(index_path))
+						{
+							std::cout << "is file with index" << std::endl;
+							this->is_directory_file.first = false;
+							this->is_directory_file.second = index_path;
+							break;
+						}
+					}
+			}
 		}
 	}
 	else
@@ -184,6 +235,7 @@ Request::Request(Receive *__r)
 		else
 		{
 			this->status_code = NOT_FOUND;
+			return;
 		}
 	}
 
@@ -192,7 +244,10 @@ Request::Request(Receive *__r)
 		if (this->_location.__attributes["autoindex"][0] == "on")
 			this->is_autoindex = true;
 		else
-			this->status_code = FORBIDDEN;
+		{
+			this->status_code = NOT_FOUND;
+			return;
+		}
 	}
 
 	if(this->method == "POST"){
@@ -229,7 +284,7 @@ Request::Request(Receive *__r)
 			this->error_page_map[std::atoi(this->_location.__attributes["error_page"][i].c_str())] = this->_location.__attributes["error_page"][i+1];
 		}
 	}
-	else 
+	else
 		this->status_code = OK;
 	
 }
