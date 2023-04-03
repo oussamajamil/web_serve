@@ -6,7 +6,7 @@
 /*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/28 01:05:54 by oussama          ###   ########.fr       */
+/*   Updated: 2023/04/03 16:18:05 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,14 +303,15 @@ void Server_launch::__input_handler(int __ident, int __data, Receive *__r)
 		/* --------------------------- parse requset ---------------------------- */
 		// TODO:
 		Request __request(__r);
-		Response __response(__request.is_autoindex,__request.version,__request.path,__request.root,__request.error_page_map,__request.status_code,__request.is_directory_file,__request.body_form_data,__request.method,__request.redirect_path);
+		Response __response(__request);
+		// Response __response(__request.is_autoindex,__request.version,__request.path,__request.root,__request.error_page_map,__request.status_code,__request.is_directory_file,__request.body_form_data,__request.method,__request.redirect_path);
 		// __r->__scoket
-		//send response
+		// send response
 		send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
-		// __response.response_message 
+		// __response.response_message
 
 		/* ------------------------------ execute ------------------------------- */
-		
+
 		// TODO:
 
 		//   if (__r->__close)

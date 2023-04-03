@@ -93,13 +93,13 @@ Request::Request(Receive *__r)
 	{
 		if (this->headers["Content-Length"] != std::to_string(this->body.size()))
 			this->status_code = BAD_REQUEST;
-			return;
+		return;
 	}
 	if (this->body.size() > 0)
 	{
 		std::cout << this->_server.__attributes["client_body_max_size"][0] << std::endl;
-		std::string body_size =trim(this->_server.__attributes["client_body_max_size"][0], " ");
-		if(body_size[body_size.length() - 1] =='G')
+		std::string body_size = trim(this->_server.__attributes["client_body_max_size"][0], " ");
+		if (body_size[body_size.length() - 1] == 'G')
 		{
 			if (this->body.size() > size_t(std::atoi(body_size.c_str()) * 1024 * 1024 * 1024))
 			{
@@ -107,7 +107,7 @@ Request::Request(Receive *__r)
 				return;
 			}
 		}
-		else if(body_size[body_size.length() - 1] =='M')
+		else if (body_size[body_size.length() - 1] == 'M')
 		{
 			if (this->body.size() > size_t(std::atoi(body_size.c_str()) * 1024 * 1024))
 			{
@@ -115,17 +115,17 @@ Request::Request(Receive *__r)
 				return;
 			}
 		}
-		else if(body_size[body_size.length() - 1] =='B')
+		else if (body_size[body_size.length() - 1] == 'B')
 		{
 			if (this->body.size() > size_t(std::atoi(body_size.c_str())))
 				this->status_code = REQUEST_ENTITY_TOO_LARGE;
-				return;
+			return;
 		}
 		else
 		{
 			if (this->body.size() > size_t(std::atoi(body_size.c_str())))
 				this->status_code = REQUEST_ENTITY_TOO_LARGE;
-				return;
+			return;
 		}
 	}
 	this->_server = *(__r->__server);
@@ -135,11 +135,12 @@ Request::Request(Receive *__r)
 	{
 		this->status_code = std::stoi(this->_location.__attributes["redirect"][0]);
 		this->redirect_path = this->_location.__attributes["redirect"][1];
+		return;
 	}
 	if (this->_location.__attributes["methods"].size() > 0)
 	{
 		unsigned long i;
-		for ( i = 0; i < this->_location.__attributes["methods"].size(); i++)
+		for (i = 0; i < this->_location.__attributes["methods"].size(); i++)
 		{
 			if (this->_location.__attributes["methods"][i] == this->method)
 				break;
@@ -158,10 +159,11 @@ Request::Request(Receive *__r)
 	}
 	else
 	{
-		path += trim(this->_server.__attributes["root"][0], "/")  + "/" + trim(this->path, "/");
+		path += trim(this->_server.__attributes["root"][0], "/") + "/" + trim(this->path, "/");
 		this->root = trim(this->_server.__attributes["root"][0], "/");
 	}
-	if (this->method == "DELETE"){
+	if (this->method == "DELETE")
+	{
 		if (file_exists(path))
 		{
 			if (remove(path.c_str()) != 0)
@@ -179,61 +181,62 @@ Request::Request(Receive *__r)
 		{
 			this->status_code = NOT_FOUND;
 			return;
-		}	
+		}
 	}
 	path = trim(path, "/");
 	path = "/" + path;
 	std::cout << "path: " << path << std::endl;
-	if(is_directory(path))
+	if (is_directory(path))
 	{
 		path += "/";
 		this->is_directory_file.first = true;
 		this->is_directory_file.second = path;
-		if(file_exists(path+"/index.html") && !is_directory(path+"/index.html"))
+		if (file_exists(path + "/index.html") && !is_directory(path + "/index.html"))
 		{
 			std::cout << "is file with index.html" << std::endl;
 			this->is_directory_file.first = false;
-			this->is_directory_file.second = path+"/index.html";
+			this->is_directory_file.second = path + "/index.html";
 		}
 		else
 		{
 			if (this->_location.__attributes["index"].size() > 0)
 			{
 				for (unsigned long i = 0; i < this->_location.__attributes["index"].size(); i++)
+				{
+					std::string index = this->_location.__attributes["index"][i];
+					std::string index_path = this->is_directory_file.second + index;
+					if (file_exists(index_path) && !is_directory(index_path))
 					{
-						std::string index = this->_location.__attributes["index"][i];
-						std::string index_path = this->is_directory_file.second + index;
-						if (file_exists(index_path) && !is_directory(index_path))
-						{
-							std::cout << "is file with index" << std::endl;
-							this->is_directory_file.first = false;
-							this->is_directory_file.second = index_path;
-							break;
-						}
+						std::cout << "is file with index" << std::endl;
+						this->is_directory_file.first = false;
+						this->is_directory_file.second = index_path;
+						break;
 					}
+				}
 			}
 			else if (this->_server.__attributes["index"].size() > 0)
 			{
 				for (unsigned long i = 0; i < this->_server.__attributes["index"].size(); i++)
+				{
+					std::string index = this->_server.__attributes["index"][i];
+					std::string index_path = this->is_directory_file.second + index;
+					if (file_exists(index_path) && !is_directory(index_path))
 					{
-						std::string index = this->_server.__attributes["index"][i];
-						std::string index_path = this->is_directory_file.second + index;
-						if (file_exists(index_path) && !is_directory(index_path))
-						{
-							std::cout << "is file with index" << std::endl;
-							this->is_directory_file.first = false;
-							this->is_directory_file.second = index_path;
-							break;
-						}
+						std::cout << "is file with index" << std::endl;
+						this->is_directory_file.first = false;
+						this->is_directory_file.second = index_path;
+						break;
 					}
+				}
 			}
 		}
 	}
 	else
 	{
-		if(file_exists(path)){
+		if (file_exists(path))
+		{
 			this->is_directory_file.first = false;
-			this->is_directory_file.second =path;
+			this->is_directory_file.second = path;
 		}
 		else
 		{
@@ -253,8 +256,9 @@ Request::Request(Receive *__r)
 		}
 	}
 
-	if(this->method == "POST"){
-		std::string boundary ="--";
+	if (this->method == "POST")
+	{
+		std::string boundary = "--";
 		boundary += this->headers["Content-Type"].substr(this->headers["Content-Type"].find("boundary=") + 9);
 		this->body_boundary = split(this->body, boundary);
 
@@ -265,31 +269,31 @@ Request::Request(Receive *__r)
 			std::string value = this->body_boundary[i].substr(this->body_boundary[i].find("\r\n\r\n") + 4);
 			value = value.substr(0, value.find("\r\n"));
 
-			if( this->body_boundary[i].find("filename=\"") != std::string::npos)
+			if (this->body_boundary[i].find("filename=\"") != std::string::npos)
 			{
 				std::string filename = this->body_boundary[i].substr(this->body_boundary[i].find("filename=\"") + 10);
 				filename = filename.substr(0, filename.find("\""));
-				std::string file = this->_server.__attributes["upload_dir"][0]+"/"+filename;
-				if(!file_exists(this->_server.__attributes["upload_dir"][0]))
+				std::string file = this->_server.__attributes["upload_dir"][0] + "/" + filename;
+				if (!file_exists(this->_server.__attributes["upload_dir"][0]))
 					mkdir(this->_server.__attributes["upload_dir"][0].c_str(), 0777);
 				std::ofstream out(file.c_str());
-					out << value;
-					out.close();
+				out << value;
+				out.close();
 			}
 			else
-				this->body_form_data[name] = value;	
+				this->body_form_data[name] = value;
 		}
 	}
 
-	if (this->status_code != 0){
-		for (unsigned long i = 0; i < this->_location.__attributes["error_page"].size(); i=i+2)
+	if (this->status_code != 0)
+	{
+		for (unsigned long i = 0; i < this->_location.__attributes["error_page"].size(); i = i + 2)
 		{
-			this->error_page_map[std::atoi(this->_location.__attributes["error_page"][i].c_str())] = this->_location.__attributes["error_page"][i+1];
+			this->error_page_map[std::atoi(this->_location.__attributes["error_page"][i].c_str())] = this->_location.__attributes["error_page"][i + 1];
 		}
 	}
 	else
 		this->status_code = OK;
-	
 }
 void Request::checkLocation()
 {
