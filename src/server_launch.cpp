@@ -6,7 +6,7 @@
 /*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/03 16:18:05 by oussama          ###   ########.fr       */
+/*   Updated: 2023/04/03 23:21:14 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,9 +304,8 @@ void Server_launch::__input_handler(int __ident, int __data, Receive *__r)
 		// TODO:
 		Request __request(__r);
 		Response __response(__request);
-		// Response __response(__request.is_autoindex,__request.version,__request.path,__request.root,__request.error_page_map,__request.status_code,__request.is_directory_file,__request.body_form_data,__request.method,__request.redirect_path);
-		// __r->__scoket
-		// send response
+
+		std::cout << __response.response_message << std::endl;
 		send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
 		// __response.response_message
 

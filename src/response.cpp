@@ -113,11 +113,8 @@ std::string Response::default_error_page(int code)
 }
 std::string Response::get_file_extencion(std::string file)
 {
-
     return file.substr(file.find_last_of(".") + 1);
 }
-
-// get date now
 std::string date()
 {
     time_t now = time(0);
@@ -137,8 +134,8 @@ std::string Response::generate_response(Request *req)
     response += "Connection: " + req->headers.find("Connection")->second + "\r\n";
     if (req->redirect_path != "")
         response += "Location: " + req->redirect_path + "\r\n";
-    if (req->body != "")
-        response += "Content-Length: " + std::to_string(req->body.length()) + "\r\n";
+    if (this->body != "")
+        response += "Content-Length: " + std::to_string(this->body.length()) + "\r\n";
     if (req->is_directory_file.first == true)
         response += "Content-Type: text/html\r\n";
     else if (req->is_directory_file.first == false && req->is_directory_file.second != "")
@@ -147,8 +144,8 @@ std::string Response::generate_response(Request *req)
 
     if (req->redirect_path != "")
         response += req->redirect_path;
-    else if (req->body != "")
-        response += req->body;
+    else if (this->body != "")
+        response += this->body;
     return response;
 }
 
@@ -163,7 +160,7 @@ std::string autoIndexPage(std::string path)
         {
             if (ent->d_name[0] != '.')
             {
-                res += "<a href=\"" + std::string(ent->d_name) + "\">" + std::string(ent->d_name) + "</a>";
+                res += "<a href=\"" + std::string(ent->d_name) + "\">" + std::string(ent->d_name) + "</a><br/>";
             }
         }
         closedir(dir);
@@ -233,7 +230,6 @@ Response::Response(Request req)
     handle_content_type();
     if (req.redirect_path != "")
     {
-        std::cout << "i am here" << std::endl;
         this->response_message = generate_response(&req);
         std::cout << "||||" << this->response_message << "||||" << std::endl;
         return;
@@ -284,5 +280,4 @@ Response::Response(Request req)
             }
         }
     }
-    std::cout << "respone: " << this->response_message << std::endl;
 }

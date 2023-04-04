@@ -85,7 +85,6 @@ Request::Request(Receive *__r)
 	}
 	if (this->version != "HTTP/1.1" && this->version != "HTTP/1.0")
 	{
-		std::cout << "HTTP_VERSION_NOT_SUPPORTED" << std::endl;
 		this->status_code = HTTP_VERSION_NOT_SUPPORTED;
 		return;
 	}
@@ -162,6 +161,7 @@ Request::Request(Receive *__r)
 		path += trim(this->_server.__attributes["root"][0], "/") + "/" + trim(this->path, "/");
 		this->root = trim(this->_server.__attributes["root"][0], "/");
 	}
+	std::cout << path << std::endl;
 	if (this->method == "DELETE")
 	{
 		if (file_exists(path))
@@ -179,13 +179,14 @@ Request::Request(Receive *__r)
 		}
 		else
 		{
+			std::cout << "i am here this is path is deroctory" << std::endl;
 			this->status_code = NOT_FOUND;
 			return;
 		}
 	}
 	path = trim(path, "/");
 	path = "/" + path;
-	std::cout << "path: " << path << std::endl;
+
 	if (is_directory(path))
 	{
 		path += "/";
