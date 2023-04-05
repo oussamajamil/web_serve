@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/04 21:18:42 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:02:18 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,14 +245,10 @@ void Server_launch::__run()
 			{
 				if (__handler)
 				{
-					// std::cout << "H data: " << __data << std::endl;
-					// std::cout << "H id: " << __ident << std::endl;
 					__input_handler(__ident, __data, static_cast<Receive *>(__handler));
 				}
 				else
 				{
-					// std::cout << "A id: " << __ident << std::endl;
-					// std::cout << "A data: " << __data << std::endl;
 					__accept(__ident);
 				}
 			}
@@ -309,6 +305,12 @@ void Server_launch::__input_handler(int __client, int __data, Receive *__r)
 
 		std::cout << __read_handler[__client].__head << std::endl;
 		std::cout << __read_handler[__client].__body << std::endl;
+		// std::cout << __read_handler[__client].__head_read_done << std::endl;
+		// std::cout << __read_handler[__client].__body_read_done << std::endl;
+		// std::cout << __read_handler[__client].__body.size() << std::endl;
+		// std::cout << __read_handler[__client].__head.size() << std::endl;
+		// std::cout << __read_handler[__client].__length << std::endl;
+		// std::cout << __read_handler[__client].__content_length << std::endl;
 		
 		/* --------------------------- parse requset ---------------------------- */
 		// TODO:
