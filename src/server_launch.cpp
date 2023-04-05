@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_launch.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/03 23:21:14 by oussama          ###   ########.fr       */
+/*   Updated: 2023/04/04 21:18:42 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,7 @@ void Server_launch::__launch()
 /* --------------------------------- Runing --------------------------------- */
 void Server_launch::__run()
 {
-	int __event_number;
+	int __event_number = 0;
 
 	__out_events.resize(EVENTS_NUBMBER);
 	while (true)
@@ -245,16 +245,20 @@ void Server_launch::__run()
 			{
 				if (__handler)
 				{
+					// std::cout << "H data: " << __data << std::endl;
+					// std::cout << "H id: " << __ident << std::endl;
 					__input_handler(__ident, __data, static_cast<Receive *>(__handler));
 				}
 				else
 				{
+					// std::cout << "A id: " << __ident << std::endl;
+					// std::cout << "A data: " << __data << std::endl;
 					__accept(__ident);
 				}
 			}
 			else if (__out_events[i].filter == EVFILT_WRITE)
 			{
-				std::cout << "EVFILT_WRITE" << std::endl;
+				// std::cout << "EVFILT_WRITE" << std::endl;
 				// send response
 				if (__read_handler[__ident].__close)
 					close(__ident);
@@ -285,28 +289,34 @@ Server *Server_launch::__server_set(int __ident, std::string &__host)
 	return __globle_sockets[__ident].__servers[0];
 }
 
-void Server_launch::__input_handler(int __ident, int __data, Receive *__r)
+void Server_launch::__input_handler(int __client, int __data, Receive *__r)
 {
-	__r->__request_read(__ident, __data);
+	
+	__r->__request_read(__client, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
 	if (__r->__body_read_done || __r->__content_length == 0)
 	{
 		struct kevent event;
 
 		// delete event
-		EV_SET(&event, __ident, EVFILT_READ, EV_DELETE, 0, 0, NULL);
+		EV_SET(&event, __client, EVFILT_READ, EV_DELETE, 0, 0, NULL);
 		kevent(__kq, &event, 1, NULL, 0, 0);
 
 		// add write event
-		EV_SET(&event, __ident, EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, NULL);
+		EV_SET(&event, __client, EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, NULL);
 		kevent(__kq, &event, 1, NULL, 0, 0);
+
+
+		std::cout << __read_handler[__client].__head << std::endl;
+		std::cout << __read_handler[__client].__body << std::endl;
+		
 		/* --------------------------- parse requset ---------------------------- */
 		// TODO:
-		Request __request(__r);
-		Response __response(__request);
+		// Request __request(__r);
+		// Response __response(__request);
 
-		std::cout << __response.response_message << std::endl;
-		send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
+		// std::cout << __response.response_message << std::endl;
+		// send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
 		// __response.response_message
 
 		/* ------------------------------ execute ------------------------------- */
