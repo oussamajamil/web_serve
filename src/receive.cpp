@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/05 22:06:45 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/05 23:59:55 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ __requet_read_done(false),
 __content_length(0),
 __length(0)
 {
-	__head.resize(0);
+	__head.resize(10);
 	__body.resize(0);
 }
 
@@ -40,7 +40,7 @@ void Receive::__init_requst()
 	__length = 0;
 	__head.clear();
 	__body.clear();
-	__head.resize(0);
+	__head.resize(10);
 	__body.resize(0);
 }
 
@@ -130,43 +130,55 @@ void Receive::__read_head(int __client, int &__data)
 		__head = __head.substr(0, crlf + 4);
 		__length -= crlf + 4;
 	}
-	std::cout << "- " << __body.size() << std::endl;
-	// std::cout << "- " << __length << std::endl;
-	// std::cout << "- " << crlf << std::endl;
-	std::cout << __head;
-	std::cout << "--------------------------------< \n";
-	std::cout << __body;
+	// std::cout << "- " << __body.size() << std::endl;
+	// // std::cout << "- " << __length << std::endl;
+	// // std::cout << "- " << crlf << std::endl;
+	// std::cout << __head;
+	// std::cout << "--------------------------------< \n";
+	// std::cout << __body;
 
-	exit(1);
 }
 
 void Receive::__read_body(int __client, int &__data)
 {
 	int     __r = 0;
 
+	// std::cout << "data  : " << __data << std::endl;
+	// std::cout << "size(): " << __body.size() << std::endl;
+	// std::cout << "len: " << __length << std::endl;
 
 	__body.resize(__body.size() + __data);
-    {
-        __r = recv(__client, (void *)(__body.data() + __length), __data, 0);
-		__length +=  __r;
-		if (__r == -1)
+	// std::cout << "size(): " << __body.size() << std::endl;
+    // do
+	// {
+		// if (__data > 0)
+			__r = recv(__client, (void *)(__body.data() + __length), __body.size() - __length, 0);
+			// std::cout << "R: " << __r << std::endl<< std::endl;
+			__length +=  __r;
 		{
-			std::cout << "error: recv(body)" << std::endl;
-			exit(1);
+			// if (__data > BUFFER)
+			// 	__r = recv(__client, (void *)(__body.data() + __length), BUFFER, 0);
+			// else
+			// 	__r = recv(__client, (void *)(__body.data() + __length), __data, 0);
+			if (__r == -1)
+			{
+				std::cout << "error: recv(body)" << std::endl;
+				exit(1);
+			}
+			if (__r == 0)
+			{
+				std::cout << "Connection closed by client." << std::endl; 
+			}
+			__data -= __r;
 		}
-		if (__r == 0)
+		if (__content_length == __body.size())
 		{
-			std::cout << "Connection closed by client." << std::endl; 
+			// std::cout << "DONE" << std::endl; 
+			__body_read_done = true;
+			return;
 		}
-		// __data -= __r;
-    }
-	if (__content_length == __body.size())
-	{
-		std::cout << "DONE" << std::endl; 
-		__body_read_done = true;
-		return;
-	}
     // } while (__data > 0);
+
 }
 
 std::string Receive::__search_str(std::string __str)
