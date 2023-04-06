@@ -314,11 +314,11 @@ void Server_launch::__input_handler(int __client, int __data, Receive *__r)
 		
 		/* --------------------------- parse requset ---------------------------- */
 		// TODO:
-		// Request __request(__r);
-		// Response __response(__request);
+		Request __request(__r);
+		Response __response(__request);
 
 		// std::cout << __response.response_message << std::endl;
-		// send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
+		 send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
 		// __response.response_message
 
 		/* ------------------------------ execute ------------------------------- */

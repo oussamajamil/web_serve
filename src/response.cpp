@@ -250,6 +250,25 @@ Response::Response(Request req)
         }
         else if (req.method == "POST")
         {
+            if (req.is_directory_file.first == false && req.is_directory_file.second != "")
+            {
+                std::vector<std::string> vec_cgi;
+                std::string extension = get_file_extencion(req.is_directory_file.second);
+                vec_cgi = req._location.__attributes.find("cgi")->second;
+                for(unsigned int i = 0; i < vec_cgi.size();i=i+2)
+                {
+                    if (vec_cgi[i] == extension)
+                    {
+                        std::string script = vec_cgi[i + 1];
+                        std::string path = req.root + script;
+                        std::cout << "path:cgi"<< path << std::endl;
+                        // this->body = cgi(&req, path);
+                        // this->response_message = generate_response(&req);
+                        // return;
+                    }
+                }
+
+            }
             this->body = default_post_page(req.body_form_data);
             this->response_message = generate_response(&req);
             return;
@@ -274,6 +293,22 @@ Response::Response(Request req)
             }
             else
             {
+                std::string extension = get_file_extencion(req.is_directory_file.second);
+                std::vector<std::string> vec_cgi;
+
+                vec_cgi = req._location.__attributes.find("cgi")->second;
+                for(unsigned int i = 0; i < vec_cgi.size();i=i+2)
+                {
+                    if (vec_cgi[i] == extension)
+                    {
+                        std::string script = vec_cgi[i+1];
+                        std::string path = req.root + script;
+                        std::cout << "path:cgi"<< path << std::endl;
+                        // this->body = cgi(&req, path);
+                        // this->response_message = generate_response(&req);
+                        // return;
+                    }
+                }
                 this->body = get_file(req.is_directory_file.second);
                 this->response_message = generate_response(&req);
                 return;
