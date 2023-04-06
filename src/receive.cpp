@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/05 23:59:55 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:06:26 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void Receive::__read_body(int __client, int &__data)
 			// if (__data > BUFFER)
 			// 	__r = recv(__client, (void *)(__body.data() + __length), BUFFER, 0);
 			// else
-			// 	__r = recv(__client, (void *)(__body.data() + __length), __data, 0);
+			// 	__r = recv(__client, (void *)(__body.data() + __length), __data, 0)
 			if (__r == -1)
 			{
 				std::cout << "error: recv(body)" << std::endl;
