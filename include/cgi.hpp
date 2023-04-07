@@ -14,6 +14,7 @@ void initial_env_file();
 
 
 public:
+    std::string body;
     Cgi();
     Cgi(Request req, std::string file);
     ~Cgi();

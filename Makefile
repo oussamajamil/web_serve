@@ -17,6 +17,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC	=  main.cpp src/server.cpp\
 				src/server_launch.cpp\
 				src/receive.cpp\
+				src/cgi.cpp\
 				\
 				utils/utl_string.cpp\
 				utils/utl_helper.cpp\

@@ -1,6 +1,6 @@
 #include "../include/response.hpp"
 #include "../include/request.hpp"
-
+#include "../include/cgi.hpp"
 Response::Response()
 {
 }
@@ -262,6 +262,8 @@ Response::Response(Request req)
                         std::string script = vec_cgi[i + 1];
                         std::string path = req.root + script;
                         std::cout << "path:cgi"<< path << std::endl;
+                        Cgi  _cgi(req, path);
+                        this->body = _cgi.body;
                         // this->body = cgi(req, path);
                         // this->response_message = generate_response(&req);
                         // return;
@@ -304,7 +306,8 @@ Response::Response(Request req)
                         std::string script = vec_cgi[i+1];
                         std::string path = req.root + script;
                         std::cout << "path:cgi"<< path << std::endl;
-                        // this->body = cgi(req, path);
+                        Cgi _cgi(req, path);
+                        this->body = _cgi.body;
                         // this->response_message = generate_response(&req);
                         // return;
                     }
