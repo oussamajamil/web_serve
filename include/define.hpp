@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:59:18 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/20 11:18:02 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:58:37 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #define METHODS "GET"
 #define LISTEN_BACKLOG 128
 #define EVENTS_NUBMBER 128
-#define BUFFER 1024
+#define BUFFER 500000
 
 
 #define NPOS "npos"

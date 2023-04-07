@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/05 22:02:18 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:50:59 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,10 @@ void Server_launch::__listen_socket(socket_info &socket_add)
 void Server_launch::__accept(int __ident)
 {
 	struct kevent event;
+	struct sockaddr_in	addr;
+	socklen_t	len = sizeof(addr);
 
-	int __client = accept(__ident, NULL, NULL);
+	int __client = accept(__ident, (struct sockaddr *)&addr, &len);
 	if (__client < 0)
 	{
 		std::cerr << "Error: accept" << std::endl;
@@ -290,7 +292,7 @@ void Server_launch::__input_handler(int __client, int __data, Receive *__r)
 	
 	__r->__request_read(__client, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
-	if (__r->__body_read_done || __r->__content_length == 0)
+	if (__r->__read_done || __r->__content_length == 0)
 	{
 		struct kevent event;
 
@@ -303,7 +305,9 @@ void Server_launch::__input_handler(int __client, int __data, Receive *__r)
 		kevent(__kq, &event, 1, NULL, 0, 0);
 
 
-		std::cout << __read_handler[__client].__head << std::endl;
+		// std::cout << "Request Headers :: " << std::endl;
+		// std::cout << __read_handler[__client].__head << std::endl;
+		// std::cout << "Request Body :: " << std::endl;
 		std::cout << __read_handler[__client].__body << std::endl;
 		// std::cout << __read_handler[__client].__head_read_done << std::endl;
 		// std::cout << __read_handler[__client].__body_read_done << std::endl;
