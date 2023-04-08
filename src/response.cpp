@@ -141,12 +141,11 @@ std::string Response::generate_response(Request *req)
     else if (req->is_directory_file.first == false && req->is_directory_file.second != "")
         response += "Content-Type: " + this->content_type[get_file_extencion(req->is_directory_file.second)] + "\r\n";
     response += "\r\n";
-
     if (req->redirect_path != "")
         response += req->redirect_path;
     else if (this->body != "")
-        response += this->body;
-    // response += "\r\n";
+        response.append(this->body);
+    std::cout << response;
     return response;
 }
 
@@ -172,18 +171,22 @@ std::string autoIndexPage(std::string path)
 
 std::string Response::get_file(std::string path)
 {
-    std::ifstream file(path);
-    std::string res;
-    if (file.is_open())
-    {
-        std::string line;
-        while (getline(file, line))
-        {
-            res += line + "\n";
-        }
-        file.close();
-    }
-    return trim(res, "\n");
+    // std::ifstream ifs (path, std::ifstream::binary);
+    std::ifstream ifs;
+    ifs.open(path, std::ifstream::in);
+    std::stringstream pbuf;
+    pbuf << ifs.rdbuf();
+    // std::size_t size = pbuf->pubseekoff (0,ifs.end,ifs.in);
+    // pbuf->pubseekpos (0,ifs.in);
+    // char* buffer=new char[size];
+    // pbuf->sgetn (buffer,size);
+    // std::string res(buffer, size);  
+    // delete[] buffer;
+    // std::cout << pbuf.str();
+    ifs.close();
+
+    return pbuf.str();
+
 }
 
 std::string Response::error_page(int status_code, std::map<int, std::string> error, std::string root)
