@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/08 03:06:54 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/08 10:50:39 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,23 +306,23 @@ void Server_launch::__input_handler(int __client, int __data, Receive *__r)
 
 
 		// std::cout << __read_handler[__client].__head << std::endl;
-		// std::cout << __read_handler[__client].__body << std::endl;exit(30);
+		// std::cout << __read_handler[__client].__body << std::endl;
 		/* --------------------------- parse requset ---------------------------- */
 		// TODO:
 		Request __request(__r);
 		Response __response(__request);
 
 		// std::cout << __response.response_message << std::endl;
-		 send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
+		send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
 		// __response.response_message
 
 		/* ------------------------------ execute ------------------------------- */
 
 		// TODO:
 
-		//   if (__r->__close)
-		// __read_handler.erase(__r->__scoket);
-		//   else
-		// __r->__init_requst();
+		if (__r->__close)
+			__read_handler.erase(__r->__scoket);
+		else
+			__r->__init_requst();
 	}
 }
