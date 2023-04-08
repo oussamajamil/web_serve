@@ -311,18 +311,33 @@ void Server_launch::__input_handler(int __client, int __data, Receive *__r)
 		// TODO:
 		Request __request(__r);
 		Response __response(__request);
-
 		// std::cout << __response.response_message << std::endl;
-		send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
+		size_t w = 0;
+		do 
+		{
+			w += send(__r->__scoket, __response.response_message.c_str(), BUFFER, 0);
+
+		}while (w < __response.response_message.size());
+
+		__request.clear();
+		__response.clear();
+		__r->__body.clear();
+		__r->__head.clear();
+		__r->__read_done = false;
+		__r->__content_length = 0;
+		__r->__close = false;
+		__r->__init_requst();
+		// std::cout << __response.response_message << std::endl;
+		// write(__client, __response.response_message.c_str(), __response.response_message.size());
 		// __response.response_message
 
 		/* ------------------------------ execute ------------------------------- */
 
 		// TODO:
 
-		if (__r->__close)
-			__read_handler.erase(__r->__scoket);
-		else
-			__r->__init_requst();
+		// if (__r->__close)
+		// 	__read_handler.erase(__r->__scoket);
+		// else
+		// 	__r->__init_requst();
 	}
 }

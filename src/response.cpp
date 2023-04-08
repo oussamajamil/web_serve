@@ -146,6 +146,7 @@ std::string Response::generate_response(Request *req)
         response += req->redirect_path;
     else if (this->body != "")
         response += this->body;
+    // response += "\r\n";
     return response;
 }
 
@@ -165,9 +166,6 @@ std::string autoIndexPage(std::string path)
         }
         closedir(dir);
     }
-    else
-    {
-    }
     res += "</pre><hr></body></html>";
     return res;
 }
@@ -181,11 +179,11 @@ std::string Response::get_file(std::string path)
         std::string line;
         while (getline(file, line))
         {
-            res += line;
+            res += line + "\n";
         }
         file.close();
     }
-    return res;
+    return trim(res, "\n");
 }
 
 std::string Response::error_page(int status_code, std::map<int, std::string> error, std::string root)
@@ -231,7 +229,7 @@ Response::Response(Request req)
     if (req.redirect_path != "")
     {
         this->response_message = generate_response(&req);
-        std::cout << "||||" << this->response_message << "||||" << std::endl;
+        
         return;
     }
     if (req.status_code != OK)
@@ -250,6 +248,7 @@ Response::Response(Request req)
         }
         else if (req.method == "POST")
         {
+        
             if (req.is_directory_file.first == false && req.is_directory_file.second != "")
             {
                 std::vector<std::string> vec_cgi;
@@ -261,7 +260,7 @@ Response::Response(Request req)
                     {
                         std::string script = vec_cgi[i + 1];
                         std::string path = req.root + script;
-                        std::cout << "path:cgi"<< path << std::endl;
+                      
                         Cgi  _cgi(req, path);
                         this->body = _cgi.body;
                         // this->body = cgi(req, path);
@@ -275,9 +274,8 @@ Response::Response(Request req)
             this->response_message = generate_response(&req);
             return;
         }
-        else
+        else if (req.method == "GET")
         {
-
             if (req.is_directory_file.first)
             {
                 if (req.is_autoindex)
@@ -305,7 +303,6 @@ Response::Response(Request req)
                     {
                         std::string script = vec_cgi[i+1];
                         std::string path = req.root + script;
-                        std::cout << "path:cgi"<< path << std::endl;
                         Cgi _cgi(req, path);
                         this->body = _cgi.body;
                         // this->response_message = generate_response(&req);
@@ -318,4 +315,12 @@ Response::Response(Request req)
             }
         }
     }
+}
+
+
+void Response::clear(){
+    this->header.clear();
+    this->body.clear();
+    this->content_type.clear();
+    this->path.clear();
 }

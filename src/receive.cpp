@@ -130,11 +130,11 @@ void Receive::__read_(int __client, int &__data)
 		else
 		{
 			__body.append(__request.c_str(), __r);
-			if (__content_length == __length)
-			{
-				__read_done = true;
-				return;
-			}
+		}
+		if (__content_length == __length)
+		{
+			__read_done = true;
+			return;
 		}
 		size_t	__s = __request.size();
 		__request.clear();

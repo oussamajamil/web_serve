@@ -53,6 +53,7 @@ public:
     std::string query_params;
     std::string body;
     std::string port;
+    std::string path_res;
     std::string host;
     Location _location;
     Server _server;
@@ -70,7 +71,7 @@ public:
     void parseRequest(std::string header, std::string body);
     Request(Receive *__r);
     void checkLocation();
-    
+    void clear();
     ~Request();
 };
 #endif

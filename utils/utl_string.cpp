@@ -128,13 +128,10 @@ void __server_display(Server server)
 
 void __servers_display(Web &web)
 {
-	// std::cout << "server = " << web.__servers.size();;
 
 	std::vector<Server>::iterator it = web.__servers.begin();
 	for (; it != web.__servers.end(); ++it)
 	{
 		__server_display(*it);
 	}
-	std::cout << std::endl;
-	std::cout << std::endl;
 }

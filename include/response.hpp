@@ -35,6 +35,7 @@ public:
     void handle_content_type();
     std::string get_file_extencion(std::string file);
     std::string default_delete_page();
+    void clear();
     std::string default_post_page(std::map<std::string, std::string> body_form_data);
 };
 
