@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:50:19 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/07 22:53:37 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/08 09:49:36 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ public:
 	bool							__read_done;
 	bool							__head_read_done;
 	bool							__requet_read_done;
-	bool							__b;
 
 	int								__ident;
 	int								__scoket;

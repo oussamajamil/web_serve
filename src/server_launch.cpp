@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/08 03:06:54 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/08 10:30:49 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include <fcntl.h>
 #include <sys/event.h>
 #include "../include/request.hpp"
-#include "../include/response.hpp"
 
 /* ------------------------------ Constructors ------------------------------ */
 /* ------------------------------ Constructors ------------------------------ */
@@ -228,7 +227,8 @@ void Server_launch::__launch()
 /* --------------------------------- Runing --------------------------------- */
 void Server_launch::__run()
 {
-	int __event_number = 0;
+	int 			__event_number = 0;
+	std::string 	__response;
 
 	__out_events.resize(EVENTS_NUBMBER);
 	while (true)
@@ -247,7 +247,7 @@ void Server_launch::__run()
 			{
 				if (__handler)
 				{
-					__input_handler(__ident, __data, static_cast<Receive *>(__handler));
+					__response = __input_handler(__ident, __data, static_cast<Receive *>(__handler));
 				}
 				else
 				{
@@ -256,8 +256,16 @@ void Server_launch::__run()
 			}
 			else if (__out_events[i].filter == EVFILT_WRITE)
 			{
-				// std::cout << "EVFILT_WRITE" << std::endl;
 				// send response
+				__output_handler(__ident, __data, static_cast<Sender *>(__handler));
+
+				// delete write event
+				struct kevent event;
+
+				EV_SET(&event, __ident, EVFILT_READ, EV_DELETE, 0, 0, NULL);
+				kevent(__kq, &event, 1, NULL, 0, 0);
+
+
 				if (__read_handler[__ident].__close)
 					close(__ident);
 				else
@@ -287,9 +295,9 @@ Server *Server_launch::__server_set(int __ident, std::string &__host)
 	return __globle_sockets[__ident].__servers[0];
 }
 
-void Server_launch::__input_handler(int __client, int __data, Receive *__r)
+std::string Server_launch::__input_handler(int __client, int __data, Receive *__r)
 {
-	
+	std::string *__h = NULL;
 	__r->__request_read(__client, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
 	if (__r->__read_done || __r->__content_length == 0)
@@ -301,28 +309,32 @@ void Server_launch::__input_handler(int __client, int __data, Receive *__r)
 		kevent(__kq, &event, 1, NULL, 0, 0);
 
 		// add write event
-		EV_SET(&event, __client, EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, NULL);
+		EV_SET(&event, __client, EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, &__send_handler[__r->__scoket]);
 		kevent(__kq, &event, 1, NULL, 0, 0);
 
 
 		// std::cout << __read_handler[__client].__head << std::endl;
-		// std::cout << __read_handler[__client].__body << std::endl;exit(30);
-		/* --------------------------- parse requset ---------------------------- */
-		// TODO:
+		std::cout << __read_handler[__client].__body << std::endl;exit(30);
+
+		/* -------------------------------- Response -------------------------------- */
 		Request __request(__r);
 		Response __response(__request);
-
+		// __h = &__response.response_message;
 		// std::cout << __response.response_message << std::endl;
-		 send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
-		// __response.response_message
+		// send(__r->__scoket, __response.response_message.c_str(), __response.response_message.size(), 0);
 
-		/* ------------------------------ execute ------------------------------- */
-
-		// TODO:
-
-		//   if (__r->__close)
-		// __read_handler.erase(__r->__scoket);
-		//   else
-		// __r->__init_requst();
+		if (__r->__close)
+			__read_handler.erase(__r->__scoket);
+		else
+			__r->__init_requst();
 	}
+	return *__h;
+}
+
+
+void Server_launch::__output_handler(int __client, int __data, Sender *__s)
+{
+	(void)__client;
+	(void)__data;
+	(void)__s;
 }

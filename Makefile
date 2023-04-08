@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oussama <oussama@student.42.fr>            +#+  +:+       +#+         #
+#    By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 16:38:20 by obelkhad          #+#    #+#              #
-#    Updated: 2023/03/28 00:30:47 by oussama          ###   ########.fr        #
+#    Updated: 2023/04/08 10:25:55 by obelkhad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC	=  main.cpp src/server.cpp\
 				src/server_launch.cpp\
 				src/receive.cpp\
+				src/sender.cpp\
 				src/cgi.cpp\
 				\
 				utils/utl_string.cpp\

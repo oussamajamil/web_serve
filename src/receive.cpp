@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/08 02:57:09 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/08 09:49:07 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ __chunks(false),
 __read_done(false),
 __head_read_done(false),
 __requet_read_done(false),
-__b(false),
 __content_length(0),
 __length(0)
 {
@@ -42,10 +41,9 @@ void Receive::__init_requst()
 	__content_length = 0;
 	__length = 0;
 	__request.clear();
+	__request.resize(BUFFER);
 	__head.clear();
 	__body.clear();
-	// __head.resize(0);
-	// __body.resize(0);
 }
 
 void Receive::__request_read(int __client, int __data)
