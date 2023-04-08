@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:50:19 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/07 15:05:49 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/07 22:53:37 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ public:
 	size_t							__content_length;
 	size_t							__length;
 
+	std::string						__request;
 	std::string						__head;
 	std::string						__body;
 	std::string						__host;

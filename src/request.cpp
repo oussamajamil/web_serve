@@ -43,30 +43,30 @@ void Request::parseRequest(std::string header, std::string body)
 		this->query_params = url_params[1];
 	}
 
-	std::cout << "****************** path/version/method ******************" << std::endl;
-	std::cout << "\033[1;32m method:  \033[0m"
-						<< this->method << std::endl;
-	std::cout << "\033[1;32m path:    \033[0m"
-						<< this->path << std::endl;
-	std::cout << "\033[1;32m version: \033[0m"
-						<< this->version << std::endl;
-	std::cout << "\033[1;32m host:    \033[0m"
-						<< this->host << std::endl;
-	std::cout << "\033[1;32m port:    \033[0m"
-						<< this->port << std::endl;
-	std::cout << "\n\n****************** headers ******************" << std::endl;
-	std::map<std::string, std::string>::iterator it;
-	for (it = this->headers.begin(); it != this->headers.end(); it++)
-	{
-		std::cout << "\033[1;32m " << it->first << ": \033[0m" << it->second << std::endl;
-		std::cout << std::endl;
-	}
+	// std::cout << "****************** path/version/method ******************" << std::endl;
+	// std::cout << "\033[1;32m method:  \033[0m"
+	// 					<< this->method << std::endl;
+	// std::cout << "\033[1;32m path:    \033[0m"
+	// 					<< this->path << std::endl;
+	// std::cout << "\033[1;32m version: \033[0m"
+	// 					<< this->version << std::endl;
+	// std::cout << "\033[1;32m host:    \033[0m"
+	// 					<< this->host << std::endl;
+	// std::cout << "\033[1;32m port:    \033[0m"
+	// 					<< this->port << std::endl;
+	// std::cout << "\n\n****************** headers ******************" << std::endl;
+	// std::map<std::string, std::string>::iterator it;
+	// for (it = this->headers.begin(); it != this->headers.end(); it++)
+	// {
+	// 	std::cout << "\033[1;32m " << it->first << ": \033[0m" << it->second << std::endl;
+	// 	std::cout << std::endl;
+	// }
 
-	std::cout << "\n\n****************** query_params ******************" << std::endl;
-	std::cout << this->query_params << std::endl;
+	// std::cout << "\n\n****************** query_params ******************" << std::endl;
+	// std::cout << this->query_params << std::endl;
 
-	std::cout << "\n\n****************** body ******************" << std::endl;
-	std::cout << this->body << std::endl;
+	// std::cout << "\n\n****************** body ******************" << std::endl;
+	// std::cout << this->body << std::endl;
 }
 
 Request::Request(Receive *__r)

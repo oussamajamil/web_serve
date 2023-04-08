@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/07 15:50:59 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/08 03:06:54 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,17 +305,8 @@ void Server_launch::__input_handler(int __client, int __data, Receive *__r)
 		kevent(__kq, &event, 1, NULL, 0, 0);
 
 
-		// std::cout << "Request Headers :: " << std::endl;
 		// std::cout << __read_handler[__client].__head << std::endl;
-		// std::cout << "Request Body :: " << std::endl;
-		std::cout << __read_handler[__client].__body << std::endl;
-		// std::cout << __read_handler[__client].__head_read_done << std::endl;
-		// std::cout << __read_handler[__client].__body_read_done << std::endl;
-		// std::cout << __read_handler[__client].__body.size() << std::endl;
-		// std::cout << __read_handler[__client].__head.size() << std::endl;
-		// std::cout << __read_handler[__client].__length << std::endl;
-		// std::cout << __read_handler[__client].__content_length << std::endl;
-		
+		// std::cout << __read_handler[__client].__body << std::endl;exit(30);
 		/* --------------------------- parse requset ---------------------------- */
 		// TODO:
 		Request __request(__r);

@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/07 17:19:54 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/08 02:57:09 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ __b(false),
 __content_length(0),
 __length(0)
 {
+	__request.clear();
+	__request.resize(BUFFER);
 	__head.clear();
 	__body.clear();
 }
@@ -39,6 +41,7 @@ void Receive::__init_requst()
 	__head_read_done = false;
 	__content_length = 0;
 	__length = 0;
+	__request.clear();
 	__head.clear();
 	__body.clear();
 	// __head.resize(0);
@@ -88,26 +91,19 @@ void Receive::__read_chunkes_body(int __ident, int &__data)
 
 void Receive::__read_(int __client, int &__data)
 {
-	int				__r;
+	size_t			__r;
 	size_t  		crlf;
 	size_t  		__old_pos = __length;
-	char			buff[BUFFER];
 
-	(void)__data;
-
-	// std::cout  << std::endl << std::endl;
-	// std::cout << "cl  : " << __content_length << std::endl;
-	// std::cout << "data  : " << __data << std::endl;
-	// std::cout << "size(): " << __body.size() << std::endl;
-	// std::cout << "len: " << __length << std::endl;
-	// std::cout << "__head_read_done: " << __head_read_done << std::endl;
-	// std::cout << "__client: " << __client << std::endl;
-	// std::cout << "BUFFER: " << BUFFER << std::endl;
-
-	bzero(&buff, BUFFER);
-	do{
-		__r = recv(__client, buff, BUFFER, 0);
-		if (__r == -1)
+	do
+	{
+		if (__length == __request.length())
+            __request.resize(__length * 2);
+		if (__request.size() - __length <= (size_t)__data)
+			__r = recv(__client, (void *)(__request.data()), __request.length() - __length, 0);
+		else
+			__r = recv(__client, (void *)(__request.data()), __data, 0);
+		if (__r == (size_t)-1)
 		{
 			std::cout << "Error: recv() \n";
 			exit(1);
@@ -117,88 +113,34 @@ void Receive::__read_(int __client, int &__data)
 			std::cout << "Connection closed by client\n";
 		}
 		__length += __r;
-		if (!__head_read_done)
+        __request.resize(__length);
+		if (__head_read_done == false)
 		{
-			__head.append(buff, __r);
-			// std::cout << __head << std::endl;
-			// std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << std::endl;
-			crlf = __crlf(__head, __old_pos);
+			__head.append(__request.c_str(), __r);
+			crlf = __crlf(__request, __old_pos);
 			if (crlf != std::string::npos)
 			{
-				__parse_info();
 				__head_read_done = true;
 				__body = __head.substr(crlf + 4);
-				__head = __head.substr(0, crlf + 4);
-				// std::cout << __head << std::endl;
-				// std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@####" << std::endl;
-				// std::cout << __body << std::endl;
+				__head = __request.substr(0, crlf + 4);
+				__parse_info();
 				__length -= crlf + 4;
 			}	
 		}
 		else
 		{
-			__body.append(buff, __r);
-			// std::cout << "CL : " << __content_length << std::endl
-			// << "Length : " << __length << std::endl;
-			if (__content_length <= __length)
+			__body.append(__request.c_str(), __r);
+			if (__content_length == __length)
 			{
 				__read_done = true;
 				return;
 			}
 		}
+		size_t	__s = __request.size();
+		__request.clear();
+		__request.resize(__s);
 		__data -= __r;
 	}while(__data > 0);
-}
-
-void Receive::__read_body(int __client, int &__data)
-{
-	int     __r = 0;
-
-	// char *buff = {0};
-	//	r = recv(buff);
-	//
-	// if ("\r\n\r\n" == ila makanch)
-	// {
-		// 
-	// 		head.append(buff, r)
-	//		content
-	// }
-	//	else
-	//		body.append(buff, r);
-	
-
-	// std::cout << "cl  : " << __content_length << std::endl;
-	// std::cout << "data  : " << __data << std::endl;
-	// std::cout << "size(): " << __body.size() << std::endl;
-	// std::cout << "len: " << __length << std::endl;
-
-	__body.resize(__body.size() + __data);
-	// std::cout << "AF size(): " << __body.size() << std::endl;
-
-	// std::cout << "OO: " <<  __body.size() - __length << std::endl;
-	__r = recv(__client, (void *)(__body.data() + __length), __data, 0);
-	std::cout << "__r (Body): " << __r << std::endl << std::endl;
-	
-	__length +=  __r;
-	// std::cout << "__ll: " << __length << std::endl << std::endl;
-
-	if (__r == -1)
-	{
-		std::cout << "****** error: recv(--body)" << std::endl;
-		exit(1);
-	}
-	if (__r == 0)
-	{
-		std::cout << "Connection closed by client." << std::endl; 
-	}
-	__data -= __r;
-
-	if (__content_length == __length + 1)
-	{
-		// std::cout << "DONE" << std::endl; 
-		__read_done = true;
-		return;
-	}
 }
 
 std::string Receive::__search_str(std::string __str)
