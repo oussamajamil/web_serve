@@ -149,7 +149,7 @@ std::string Response::generate_response(Request *req)
     return response;
 }
 
-std::string autoIndexPage(std::string path)
+std::string autoIndexPage(std::string path,std::string root)
 {
     std::string res = "<html><head><title>Index of " + path + "</title></head><body bgcolor=\"white\"><h1>Index of " + path + "</h1><hr><pre><a href=\"../\">../</a>";
     DIR *dir;
@@ -160,7 +160,11 @@ std::string autoIndexPage(std::string path)
         {
             if (ent->d_name[0] != '.')
             {
-                res += "<a href=\"" + std::string(ent->d_name) + "\">" + std::string(ent->d_name) + "</a><br/>";
+              if (path.length()< root.length())
+                    res += "<a href=\"/" + std::string(ent->d_name) + "\">" + std::string(ent->d_name) + "</a><br/>";
+                else
+                    res += "<a href=\"" + path.substr(root.length()+1,path.length()+1) + std::string(ent->d_name) + "\">" + std::string(ent->d_name) + "</a><br/>";
+
             }
         }
         closedir(dir);
@@ -176,15 +180,7 @@ std::string Response::get_file(std::string path)
     ifs.open(path, std::ifstream::in);
     std::stringstream pbuf;
     pbuf << ifs.rdbuf();
-    // std::size_t size = pbuf->pubseekoff (0,ifs.end,ifs.in);
-    // pbuf->pubseekpos (0,ifs.in);
-    // char* buffer=new char[size];
-    // pbuf->sgetn (buffer,size);
-    // std::string res(buffer, size);  
-    // delete[] buffer;
-    // std::cout << pbuf.str();
     ifs.close();
-
     return pbuf.str();
 
 }
@@ -283,7 +279,7 @@ Response::Response(Request req)
             {
                 if (req.is_autoindex)
                 {
-                    this->body = autoIndexPage(req.is_directory_file.second);
+                    this->body = autoIndexPage(req.is_directory_file.second, req.root);
                     this->response_message = generate_response(&req);
                     return;
                 }
