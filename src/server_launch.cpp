@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/08 10:50:39 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/11 00:01:04 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,8 @@ void Server_launch::__listen_socket(socket_info &socket_add)
 /* --------------------------------- accept --------------------------------- */
 /* --------------------------------- accept --------------------------------- */
 /* --------------------------------- accept --------------------------------- */
-void Server_launch::__accept(int __ident)
+void Server_launch::__accept(int &__ident)
 {
-	struct kevent event;
 	struct sockaddr_in	addr;
 	socklen_t	len = sizeof(addr);
 
@@ -145,9 +144,13 @@ void Server_launch::__accept(int __ident)
 		std::cerr << "Error: accept" << std::endl;
 		exit(1);
 	}
-	EV_SET(&event, __client, EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, &__read_handler[__client]);
 	__read_handler[__client].__ident = __ident;
 	__read_handler[__client].__scoket = __client;
+	__read_handler[__client].__addr = addr;
+	__read_handler[__client].__len = len;
+
+	struct kevent event;
+	EV_SET(&event, __client, EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, &__read_handler[__client]);
 	kevent(__kq, &event, 1, NULL, 0, 0);
 }
 
@@ -238,16 +241,18 @@ void Server_launch::__run()
 			std::cerr << "Error: kevent out" << std::endl;
 			exit(1);
 		}
-		for (size_t i = 0; i < static_cast<size_t>(__event_number); ++i)
+		for (int i = 0; i < __event_number; ++i)
 		{
 			int __ident = static_cast<int>(__out_events[i].ident);
 			int __data = static_cast<int>(__out_events[i].data);
-			void *__handler = __out_events[i].udata;
+			Transfer *__handler = static_cast<Transfer *>(__out_events[i].udata);
+
 			if (__out_events[i].filter == EVFILT_READ)
 			{
 				if (__handler)
 				{
-					__input_handler(__ident, __data, static_cast<Receive *>(__handler));
+					std::cout << "~~~~~~~~~~      STR	  ~~~~~~~~~~~" << std::endl;
+					__input_handler(__ident, __data, __handler);		
 				}
 				else
 				{
@@ -256,15 +261,11 @@ void Server_launch::__run()
 			}
 			else if (__out_events[i].filter == EVFILT_WRITE)
 			{
-				// std::cout << "EVFILT_WRITE" << std::endl;
-				// send response
-				if (__read_handler[__ident].__close)
-					close(__ident);
-				else
-				{
-					struct kevent event;
-					EV_SET(&event, __ident, EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, &__read_handler[__ident]);
-				}
+				// send
+				if (__handler)		
+					__output_handler(__ident, __data, __handler);
+				// exit(600);
+				
 			}
 		}
 	}
@@ -287,49 +288,60 @@ Server *Server_launch::__server_set(int __ident, std::string &__host)
 	return __globle_sockets[__ident].__servers[0];
 }
 
-void Server_launch::__input_handler(int __client, int __data, Receive *__r)
+void Server_launch::__output_handler(int __client, int __data, Transfer *__r)
 {
-	
+	if (!__r->__response_send_done)
+		__r->__response_send(__client, __data);
+	else
+	{
+		// if (__r->__close)
+		// 	close(__client);
+		// else
+		{
+			__r->__init_requst();
+			struct kevent event;
+
+			EV_SET(&event, __client, EVFILT_WRITE, EV_DELETE, 0, 0, NULL);
+			kevent(__kq, &event, 1, NULL, 0, 0);
+			
+			// EV_SET(&event, __client, EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, __r);
+			// kevent(__kq, &event, 1, NULL, 0, 0);
+			std::cout << "~~~~~~~~~~      END	  ~~~~~~~~~~~" << std::endl;
+		}
+	}
+}
+
+void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
+{
 	__r->__request_read(__client, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
 	if (__r->__read_done || __r->__content_length == 0)
 	{
-		struct kevent event;
+		// std::cout << "H > " << std::endl << __r->__head ;
+		// std::cout << "B > " << std::endl << __r->__body ;
 
+		/* -------------------------------- RESPONSE -------------------------------- */
+		std::cout << "SEGFAULT (1) " << std::endl;
+		Request __request(__r);
+		std::cout << "SEGFAULT (2) " << std::endl;
+		Response __response(__request);
+		std::cout << "SEGFAULT (3) " << std::endl;
+
+		// std::cout << "R > " << std::endl << __response.response_message << std::endl;
+		// std::cout << "SEGMM > " << std::endl;
+		// std::cout << "```````````````````" << std::endl ;
+		
+		__r->__res_buff = __response.response_message.data();
+		__r->__res_buff_len = __response.response_message.length();
+		/* ---------------------------------- EVENT --------------------------------- */
+		struct kevent event;
 		// delete event
 		EV_SET(&event, __client, EVFILT_READ, EV_DELETE, 0, 0, NULL);
 		kevent(__kq, &event, 1, NULL, 0, 0);
 
-		// add write event
-		EV_SET(&event, __client, EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, NULL);
+		// add write event		
+		EV_SET(&event, __client, EVFILT_WRITE, EV_ADD | EV_CLEAR, 0, 0, __r);
 		kevent(__kq, &event, 1, NULL, 0, 0);
 
-
-		// std::cout << __read_handler[__client].__head << std::endl;
-		// std::cout << __read_handler[__client].__body << std::endl;
-		/* --------------------------- parse requset ---------------------------- */
-		// TODO:
-		Request __request(__r);
-		Response __response(__request);
-		// std::cout << __response.response_message << std::endl;
-		size_t w = 0;
-		while (w < __response.response_message.size())
-		{
-			int indexx = send(__r->__scoket, __response.response_message.c_str(), BUFFER, 0);
-			__response.response_message.erase(0, indexx);
-			w += indexx;
-		}
-		// int indexx = 0;
-		// do 
-		// {
-		// 	indexx = send(__r->__scoket, __response.response_message.c_str(), BUFFER, 0);
-		// 	__response.response_message.erase(0, indexx);
-		// 	w += indexx;
-
-		// }while (w < __response.response_message.size());
-
-		__request.clear();
-		__response.clear();
-		__r->__init_requst();
 	}
 }

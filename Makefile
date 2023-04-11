@@ -3,20 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oussama <oussama@student.42.fr>            +#+  +:+       +#+         #
+#    By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 16:38:20 by obelkhad          #+#    #+#              #
-#    Updated: 2023/03/28 00:30:47 by oussama          ###   ########.fr        #
+#    Updated: 2023/04/09 23:49:46 by obelkhad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++ -std=c++98
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 SRC	=  main.cpp src/server.cpp\
 				src/server_launch.cpp\
-				src/receive.cpp\
+				src/transfer.cpp\
 				src/cgi.cpp\
 				\
 				utils/utl_string.cpp\

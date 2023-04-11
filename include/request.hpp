@@ -8,7 +8,7 @@
 #include <vector>
 #include "../utils.hpp"
 #include "../include/server.hpp"
-#include "../include/receive.hpp"
+#include "../include/transfer.hpp"
 #include <fstream>
 #include <sys/stat.h>
 
@@ -69,7 +69,7 @@ public:
 public:
     Request();
     void parseRequest(std::string header, std::string body);
-    Request(Receive *__r);
+    Request(Transfer *__r);
     void checkLocation();
     void clear();
     ~Request();
