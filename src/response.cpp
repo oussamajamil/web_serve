@@ -149,7 +149,7 @@ std::string Response::generate_response(Request *req)
     return response;
 }
 
-std::string autoIndexPage(std::string path,std::string root)
+std::string autoIndexPage(std::string path, std::string root)
 {
     std::string res = "<html><head><title>Index of " + path + "</title></head><body bgcolor=\"white\"><h1>Index of " + path + "</h1><hr><pre><a href=\"../\">../</a>";
     DIR *dir;
@@ -160,11 +160,10 @@ std::string autoIndexPage(std::string path,std::string root)
         {
             if (ent->d_name[0] != '.')
             {
-              if (path.length()< root.length())
+                if (path.length() < root.length())
                     res += "<a href=\"/" + std::string(ent->d_name) + "\">" + std::string(ent->d_name) + "</a><br/>";
                 else
-                    res += "<a href=\"" + path.substr(root.length()+1,path.length()+1) + std::string(ent->d_name) + "\">" + std::string(ent->d_name) + "</a><br/>";
-
+                    res += "<a href=\"" + path.substr(root.length() + 1, path.length() + 1) + std::string(ent->d_name) + "\">" + std::string(ent->d_name) + "</a><br/>";
             }
         }
         closedir(dir);
@@ -175,14 +174,12 @@ std::string autoIndexPage(std::string path,std::string root)
 
 std::string Response::get_file(std::string path)
 {
-    // std::ifstream ifs (path, std::ifstream::binary);
     std::ifstream ifs;
     ifs.open(path, std::ifstream::in);
     std::stringstream pbuf;
     pbuf << ifs.rdbuf();
     ifs.close();
     return pbuf.str();
-
 }
 
 std::string Response::error_page(int status_code, std::map<int, std::string> error, std::string root)
@@ -228,7 +225,7 @@ Response::Response(Request req)
     if (req.redirect_path != "")
     {
         this->response_message = generate_response(&req);
-        
+
         return;
     }
     if (req.status_code != OK)
@@ -247,27 +244,26 @@ Response::Response(Request req)
         }
         else if (req.method == "POST")
         {
-        
+
             if (req.is_directory_file.first == false && req.is_directory_file.second != "")
             {
                 std::vector<std::string> vec_cgi;
                 std::string extension = get_file_extencion(req.is_directory_file.second);
                 vec_cgi = req._location.__attributes.find("cgi")->second;
-                for(unsigned int i = 0; i < vec_cgi.size();i=i+2)
+                for (unsigned int i = 0; i < vec_cgi.size(); i = i + 2)
                 {
                     if (vec_cgi[i] == extension)
                     {
                         std::string script = vec_cgi[i + 1];
                         std::string path = req.root + script;
-                      
-                        Cgi  _cgi(req, path);
+
+                        Cgi _cgi(req, path);
                         this->body = _cgi.body;
                         // this->body = cgi(req, path);
                         // this->response_message = generate_response(&req);
                         // return;
                     }
                 }
-
             }
             this->body = default_post_page(req.body_form_data);
             this->response_message = generate_response(&req);
@@ -296,11 +292,11 @@ Response::Response(Request req)
                 std::vector<std::string> vec_cgi;
 
                 vec_cgi = req._location.__attributes.find("cgi")->second;
-                for(unsigned int i = 0; i < vec_cgi.size();i=i+2)
+                for (unsigned int i = 0; i < vec_cgi.size(); i = i + 2)
                 {
                     if (vec_cgi[i] == extension)
                     {
-                        std::string script = vec_cgi[i+1];
+                        std::string script = vec_cgi[i + 1];
                         std::string path = req.root + script;
                         Cgi _cgi(req, path);
                         this->body = _cgi.body;
@@ -316,8 +312,8 @@ Response::Response(Request req)
     }
 }
 
-
-void Response::clear(){
+void Response::clear()
+{
     this->header.clear();
     this->body.clear();
     this->content_type.clear();

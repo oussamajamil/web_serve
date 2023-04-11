@@ -25,7 +25,7 @@ std::vector<std::string> split(std::string content, std::string sparator)
 std::string trim(std::string content, std::string sparator)
 {
     int pos = content.find(sparator);
-    if(content == sparator)
+    if (content == sparator)
         return "";
     while (pos == 0)
     {
@@ -45,7 +45,7 @@ std::string trim(std::string content, std::string sparator)
 bool file_exists(std::string fileName)
 {
     const char *filename = fileName.c_str();
-    if (access(filename,F_OK) != -1 && access(filename,R_OK) != -1)
+    if (access(filename, F_OK) != -1 && access(filename, R_OK) != -1)
         return true;
     else
         return false;
