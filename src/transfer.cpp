@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   receive.cpp                                        :+:      :+:    :+:   */
+/*   transfer.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/08 02:57:09 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/10 23:54:50 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/receive.hpp"
+#include "../include/transfer.hpp"
 
-Receive::Receive() : 
+Transfer::Transfer() : 
 __request_read_done(false),
 __close(true),
 __chunks(false),
 __read_done(false),
 __head_read_done(false),
 __requet_read_done(false),
-__b(false),
+__response_send_done(false),
 __content_length(0),
-__length(0)
+__length(0),
+__length_s_(0)
 {
 	__request.clear();
 	__request.resize(BUFFER);
@@ -29,26 +30,27 @@ __length(0)
 	__body.clear();
 }
 
-Receive::~Receive()
+Transfer::~Transfer()
 {}
 
-void Receive::__init_requst()
+void Transfer::__init_requst()
 {
 	__request_read_done = false;
 	__close = false;
 	__chunks = false;
 	__read_done = false;
 	__head_read_done = false;
+	__response_send_done = false;
 	__content_length = 0;
 	__length = 0;
+	__length_s_ = 0;
 	__request.clear();
+	__request.resize(BUFFER);
 	__head.clear();
 	__body.clear();
-	// __head.resize(0);
-	// __body.resize(0);
 }
 
-void Receive::__request_read(int __client, int __data)
+void Transfer::__request_read(int __client, int __data)
 {
 	if (!__read_done)
 	{
@@ -60,7 +62,7 @@ void Receive::__request_read(int __client, int __data)
 	}
 }
 
-void Receive::__read_chunkes_body(int __ident, int &__data)
+void Transfer::__read_chunkes_body(int __ident, int &__data)
 {
 	(void)__ident;
 	(void)__data;
@@ -89,21 +91,64 @@ void Receive::__read_chunkes_body(int __ident, int &__data)
 	// Remove "chunked" from Transfer-Encoding
 }
 
-void Receive::__read_(int __client, int &__data)
+void Transfer::__response_send(int __client, int __data)
 {
-	size_t			__r;
+	int __s = 0;
+	// int	__buf = BUFFER;
+    do
+    {
+	std::cout << "__client :: " << __client << std::endl;
+	std::cout << "__data :: " << __data << std::endl;
+	std::cout << "__length_s_ :: " << __length_s_ << std::endl;
+	std::cout << "__res_buff_len :: " << __res_buff_len << std::endl;
+	// if ( __data > 0)
+	// {
+
+        __s = send(__client, (void *)(&__res_buff[__length_s_]), __res_buff_len - __length_s_, 0);
+        // __s = send(__client, (void *)(&__res_buff[__length_s_]), BUFFER * 2, 0);
+		std::cout << "__s :: " << __s << std::endl;
+		if (__length_s_ == __res_buff_len)
+		{
+			__response_send_done = true;
+			return ;
+		}
+        if (__s == -1)
+		{
+			std::cout << "Error: send() \n";
+			exit(1);
+		}
+        if (__s == 0)
+		{
+			std::cout << "Connection closed by client send ()\n";
+		}
+		__length_s_ += __s;
+		std::cout << "__length_s_ :: " << __length_s_ << std::endl << std::endl;
+		// __buf *= 2;
+        __data -= __s;
+		// std::cout << "__data :: " << __data << std::endl<< std::endl;
+	// }
+    } while (__data > 0);
+}
+
+void Transfer::__read_(int __client, int &__data)
+{
+	int				__r;
 	size_t  		crlf;
 	size_t  		__old_pos = __length;
 
+	// std::cout << "__client :: " << __client << std::endl;
+	// std::cout << "__data :: " << __data << std::endl;
+	// std::cout << "__request.length() :: " << __request.length() << std::endl;
+	// std::cout << "__length :: " << __length << std::endl;
 	do
 	{
 		if (__length == __request.length())
             __request.resize(__length * 2);
 		if (__request.size() - __length <= (size_t)__data)
 			__r = recv(__client, (void *)(__request.data()), __request.length() - __length, 0);
-		else
+		else if (__data > 0)
 			__r = recv(__client, (void *)(__request.data()), __data, 0);
-		if (__r == (size_t)-1)
+		if (__r == -1)
 		{
 			std::cout << "Error: recv() \n";
 			exit(1);
@@ -143,7 +188,7 @@ void Receive::__read_(int __client, int &__data)
 	}while(__data > 0);
 }
 
-std::string Receive::__search_str(std::string __str)
+std::string Transfer::__search_str(std::string __str)
 {
 	size_t		pos;
 
@@ -156,7 +201,7 @@ std::string Receive::__search_str(std::string __str)
 	return (NPOS);
 }
 
-void Receive::__parse_info()
+void Transfer::__parse_info()
 {
 	std::string	__holder;
 	/* ---------------------------- Transfer Encoding --------------------------- */

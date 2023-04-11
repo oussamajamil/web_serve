@@ -1,51 +1,1060 @@
-HTTP/1.1 200 OK
-Server: webserv
-Date: Sun, 09 Apr 2023 10:55:42 +00
-Connection: keep-alive
-Content-Length: 511
-Content-Type: text/html
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 7
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 196
+__s :: 196
+__length_s_ :: 196
 
-<html><head><title>Index of /Users/ojamil/Desktop/web_serve/test/</title></head><body bgcolor="white"><h1>Index of /Users/ojamil/Desktop/web_serve/test/</h1><hr><pre><a href="../">../</a><a href="/data">data</a><br/><a href="/dindex.html">dindex.html</a><br/><a href="/img.png">img.png</a><br/><a href="/index.php">index.php</a><br/><a href="/index2.html">index2.html</a><br/><a href="/logo.svg">logo.svg</a><br/><a href="/lol.png">lol.png</a><br/><a href="/script.js">script.js</a><br/></pre><hr></body></html>HTTP/1.1 200 OK
-Server: webserv
-Date: Sun, 09 Apr 2023 10:55:42 +00
-Connection: keep-alive
-Content-Length: 511
-Content-Type: text/html
+__client :: 7
+__data :: 146792
+__length_s_ :: 196
+__res_buff_len :: 196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 8
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 196
+__s :: 196
+__length_s_ :: 196
 
-<html><head><title>Index of /Users/ojamil/Desktop/web_serve/test/</title></head><body bgcolor="white"><h1>Index of /Users/ojamil/Desktop/web_serve/test/</h1><hr><pre><a href="../">../</a><a href="/data">data</a><br/><a href="/dindex.html">dindex.html</a><br/><a href="/img.png">img.png</a><br/><a href="/index.php">index.php</a><br/><a href="/index2.html">index2.html</a><br/><a href="/logo.svg">logo.svg</a><br/><a href="/lol.png">lol.png</a><br/><a href="/script.js">script.js</a><br/></pre><hr></body></html>HTTP/1.1 200 OK
-Server: webserv
-Date: Sun, 09 Apr 2023 10:55:42 +00
-Connection: keep-alive
-Content-Length: 511
-Content-Type: text/html
+__client :: 8
+__data :: 146792
+__length_s_ :: 196
+__res_buff_len :: 196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 9
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 196
+__s :: 196
+__length_s_ :: 196
 
-<html><head><title>Index of /Users/ojamil/Desktop/web_serve/test/</title></head><body bgcolor="white"><h1>Index of /Users/ojamil/Desktop/web_serve/test/</h1><hr><pre><a href="../">../</a><a href="/data">data</a><br/><a href="/dindex.html">dindex.html</a><br/><a href="/img.png">img.png</a><br/><a href="/index.php">index.php</a><br/><a href="/index2.html">index2.html</a><br/><a href="/logo.svg">logo.svg</a><br/><a href="/lol.png">lol.png</a><br/><a href="/script.js">script.js</a><br/></pre><hr></body></html>HTTP/1.1 200 OK
-Server: webserv
-Date: Sun, 09 Apr 2023 10:55:43 +00
-Connection: keep-alive
-Content-Length: 511
-Content-Type: text/html
+__client :: 9
+__data :: 146792
+__length_s_ :: 196
+__res_buff_len :: 196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 10
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 196
+__s :: 196
+__length_s_ :: 196
 
-<html><head><title>Index of /Users/ojamil/Desktop/web_serve/test/</title></head><body bgcolor="white"><h1>Index of /Users/ojamil/Desktop/web_serve/test/</h1><hr><pre><a href="../">../</a><a href="/data">data</a><br/><a href="/dindex.html">dindex.html</a><br/><a href="/img.png">img.png</a><br/><a href="/index.php">index.php</a><br/><a href="/index2.html">index2.html</a><br/><a href="/logo.svg">logo.svg</a><br/><a href="/lol.png">lol.png</a><br/><a href="/script.js">script.js</a><br/></pre><hr></body></html>HTTP/1.1 200 OK
-Server: webserv
-Date: Sun, 09 Apr 2023 10:55:43 +00
-Connection: keep-alive
-Content-Length: 511
-Content-Type: text/html
+__client :: 10
+__data :: 146792
+__length_s_ :: 196
+__res_buff_len :: 196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 11
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 196
+__s :: 196
+__length_s_ :: 196
 
-<html><head><title>Index of /Users/ojamil/Desktop/web_serve/test/</title></head><body bgcolor="white"><h1>Index of /Users/ojamil/Desktop/web_serve/test/</h1><hr><pre><a href="../">../</a><a href="/data">data</a><br/><a href="/dindex.html">dindex.html</a><br/><a href="/img.png">img.png</a><br/><a href="/index.php">index.php</a><br/><a href="/index2.html">index2.html</a><br/><a href="/logo.svg">logo.svg</a><br/><a href="/lol.png">lol.png</a><br/><a href="/script.js">script.js</a><br/></pre><hr></body></html>HTTP/1.1 200 OK
-Server: webserv
-Date: Sun, 09 Apr 2023 10:55:45 +00
-Connection: keep-alive
-Content-Length: 511
-Content-Type: text/html
+__client :: 11
+__data :: 146792
+__length_s_ :: 196
+__res_buff_len :: 196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 13
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 8175900
+__s :: 261676
+__length_s_ :: 261676
 
-<html><head><title>Index of /Users/ojamil/Desktop/web_serve/test/</title></head><body bgcolor="white"><h1>Index of /Users/ojamil/Desktop/web_serve/test/</h1><hr><pre><a href="../">../</a><a href="/data">data</a><br/><a href="/dindex.html">dindex.html</a><br/><a href="/img.png">img.png</a><br/><a href="/index.php">index.php</a><br/><a href="/index2.html">index2.html</a><br/><a href="/logo.svg">logo.svg</a><br/><a href="/lol.png">lol.png</a><br/><a href="/script.js">script.js</a><br/></pre><hr></body></html>HTTP/1.1 200 OK
-Server: webserv
-Date: Sun, 09 Apr 2023 10:55:47 +00
-Connection: keep-alive
-Content-Length: 262
-Content-Type: text/html
+__client :: 13
+__data :: 106184
+__length_s_ :: 261676
+__res_buff_len :: 8175900
+__s :: 400732
+__length_s_ :: 662408
 
-<!DOCTYPE html>
-<html lang="e
+__client :: 13
+__data :: 310828
+__length_s_ :: 662408
+__res_buff_len :: 8175900
+__s :: 310828
+__length_s_ :: 973236
+
+__client :: 13
+__data :: 294080
+__length_s_ :: 973236
+__res_buff_len :: 8175900
+__s :: 294080
+__length_s_ :: 1267316
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 1267316
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 1528628
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 1528628
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 1789940
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 1789940
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2051252
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 2051252
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2312564
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 2312564
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2573876
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 2573876
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2835188
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 2835188
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3096500
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 3096500
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3357812
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 3357812
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3619124
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 3619124
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3880436
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 3880436
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 4141748
+
+__client :: 13
+__data :: 343024
+__length_s_ :: 4141748
+__res_buff_len :: 8175900
+__s :: 343024
+__length_s_ :: 4484772
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 4484772
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 4746084
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 4746084
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5007396
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 5007396
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5268708
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 5268708
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5530020
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 5530020
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5791332
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 5791332
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6052644
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 6052644
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6313956
+
+__client :: 13
+__data :: 334832
+__length_s_ :: 6313956
+__res_buff_len :: 8175900
+__s :: 334832
+__length_s_ :: 6648788
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 6648788
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6910100
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 6910100
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7171412
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 7171412
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7432724
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 7432724
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7694036
+
+__client :: 13
+__data :: 261312
+__length_s_ :: 7694036
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7955348
+
+__client :: 13
+__data :: 326640
+__length_s_ :: 7955348
+__res_buff_len :: 8175900
+__s :: 220552
+__length_s_ :: 8175900
+
+__client :: 13
+__data :: 106088
+__length_s_ :: 8175900
+__res_buff_len :: 8175900
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 14
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 670
+__s :: 670
+__length_s_ :: 670
+
+__client :: 14
+__data :: 146318
+__length_s_ :: 670
+__res_buff_len :: 670
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 15
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 670
+__s :: 670
+__length_s_ :: 670
+
+__client :: 15
+__data :: 146318
+__length_s_ :: 670
+__res_buff_len :: 670
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 16
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 2691
+__s :: 2691
+__length_s_ :: 2691
+
+__client :: 16
+__data :: 144297
+__length_s_ :: 2691
+__res_buff_len :: 2691
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 17
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 17
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 18
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 18
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 19
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 19
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 20
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 20
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 21
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 21
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 22
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 22
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 23
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 23
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 24
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 24
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 31
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 31
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 32
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 31196
+__s :: 31196
+__length_s_ :: 31196
+
+__client :: 32
+__data :: 115792
+__length_s_ :: 31196
+__res_buff_len :: 31196
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 33
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 670
+__s :: 670
+__length_s_ :: 670
+
+__client :: 33
+__data :: 146318
+__length_s_ :: 670
+__res_buff_len :: 670
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 34
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 405
+__s :: 405
+__length_s_ :: 405
+
+__client :: 34
+__data :: 146583
+__length_s_ :: 405
+__res_buff_len :: 405
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 35
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 670
+__s :: 670
+__length_s_ :: 670
+
+__client :: 35
+__data :: 146318
+__length_s_ :: 670
+__res_buff_len :: 670
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 36
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 670
+__s :: 670
+__length_s_ :: 670
+
+__client :: 36
+__data :: 146318
+__length_s_ :: 670
+__res_buff_len :: 670
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 37
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 8175900
+__s :: 261676
+__length_s_ :: 261676
+
+__client :: 37
+__data :: 138848
+__length_s_ :: 261676
+__res_buff_len :: 8175900
+__s :: 400524
+__length_s_ :: 662200
+
+__client :: 37
+__data :: 310828
+__length_s_ :: 662200
+__res_buff_len :: 8175900
+__s :: 310828
+__length_s_ :: 973028
+
+__client :: 37
+__data :: 294080
+__length_s_ :: 973028
+__res_buff_len :: 8175900
+__s :: 294080
+__length_s_ :: 1267108
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 1267108
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 1528420
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 1528420
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 1789732
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 1789732
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2051044
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 2051044
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2312356
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 2312356
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2573668
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 2573668
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2834980
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 2834980
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3096292
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 3096292
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3357604
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 3357604
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3618916
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 3618916
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3880228
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 3880228
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 4141540
+
+__client :: 37
+__data :: 326640
+__length_s_ :: 4141540
+__res_buff_len :: 8175900
+__s :: 326640
+__length_s_ :: 4468180
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 4468180
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 4729492
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 4729492
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 4990804
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 4990804
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5252116
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 5252116
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5513428
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 5513428
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5774740
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 5774740
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6036052
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 6036052
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6297364
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 6297364
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6558676
+
+__client :: 37
+__data :: 310360
+__length_s_ :: 6558676
+__res_buff_len :: 8175900
+__s :: 310360
+__length_s_ :: 6869036
+
+__client :: 37
+__data :: 277644
+__length_s_ :: 6869036
+__res_buff_len :: 8175900
+__s :: 277644
+__length_s_ :: 7146680
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 7146680
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7407992
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 7407992
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7669304
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 7669304
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7930616
+
+__client :: 37
+__data :: 261312
+__length_s_ :: 7930616
+__res_buff_len :: 8175900
+__s :: 245284
+__length_s_ :: 8175900
+
+__client :: 37
+__data :: 16028
+__length_s_ :: 8175900
+__res_buff_len :: 8175900
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 38
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 8175900
+__s :: 261676
+__length_s_ :: 261676
+
+__client :: 38
+__data :: 138848
+__length_s_ :: 261676
+__res_buff_len :: 8175900
+__s :: 269868
+__length_s_ :: 531544
+
+__client :: 38
+__data :: 97992
+__length_s_ :: 531544
+__res_buff_len :: 8175900
+__s :: 130656
+__length_s_ :: 662200
+
+__client :: 38
+__data :: 310828
+__length_s_ :: 662200
+__res_buff_len :: 8175900
+__s :: 310828
+__length_s_ :: 973028
+
+__client :: 38
+__data :: 294080
+__length_s_ :: 973028
+__res_buff_len :: 8175900
+__s :: 294080
+__length_s_ :: 1267108
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 1267108
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 1528420
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 1528420
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 1789732
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 1789732
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2051044
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 2051044
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2312356
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 2312356
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2573668
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 2573668
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 2834980
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 2834980
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3096292
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 3096292
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 3357604
+
+__client :: 38
+__data :: 310360
+__length_s_ :: 3357604
+__res_buff_len :: 8175900
+__s :: 310360
+__length_s_ :: 3667964
+
+__client :: 38
+__data :: 277644
+__length_s_ :: 3667964
+__res_buff_len :: 8175900
+__s :: 277644
+__length_s_ :: 3945608
+
+__client :: 38
+__data :: 326640
+__length_s_ :: 3945608
+__res_buff_len :: 8175900
+__s :: 326640
+__length_s_ :: 4272248
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 4272248
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 4533560
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 4533560
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 4794872
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 4794872
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5056184
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 5056184
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5317496
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 5317496
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5578808
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 5578808
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 5840120
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 5840120
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6101432
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 6101432
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6362744
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 6362744
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6624056
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 6624056
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 6885368
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 6885368
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7146680
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 7146680
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7407992
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 7407992
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7669304
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 7669304
+__res_buff_len :: 8175900
+__s :: 261312
+__length_s_ :: 7930616
+
+__client :: 38
+__data :: 261312
+__length_s_ :: 7930616
+__res_buff_len :: 8175900
+__s :: 245284
+__length_s_ :: 8175900
+
+__client :: 38
+__data :: 16028
+__length_s_ :: 8175900
+__res_buff_len :: 8175900
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+SEGFAULT (1) 
+SEGFAULT (2) 
+SEGFAULT (3) 
+__client :: 39
+__data :: 146988
+__length_s_ :: 0
+__res_buff_len :: 670
+__s :: 670
+__length_s_ :: 670
+
+__client :: 39
+__data :: 146318
+__length_s_ :: 670
+__res_buff_len :: 670
+__s :: 0
+~~~~~~~~~~      END	  ~~~~~~~~~~~
+~~~~~~~~~~      STR	  ~~~~~~~~~~~
+Error: recv() 

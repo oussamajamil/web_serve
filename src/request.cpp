@@ -72,7 +72,7 @@ void Request::parseRequest(std::string header, std::string body)
 	// std::cout << this->body << std::endl;
 }
 
-Request::Request(Receive *__r)
+Request::Request(Transfer *__r)
 {
 	this->status_code = 0;
 	this->path_res = "/";

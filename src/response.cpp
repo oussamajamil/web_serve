@@ -145,7 +145,7 @@ std::string Response::generate_response(Request *req)
         response += req->redirect_path;
     else if (this->body != "")
         response.append(this->body);
-    std::cout << response;
+    // std::cout << response;
     return response;
 }
 
