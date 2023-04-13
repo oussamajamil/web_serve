@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transfer.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhamdani <mhamdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/10 23:54:50 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:57:21 by mhamdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,16 @@ void Transfer::__response_send(int __client, int __data)
 	// int	__buf = BUFFER;
     do
     {
-	std::cout << "__client :: " << __client << std::endl;
-	std::cout << "__data :: " << __data << std::endl;
-	std::cout << "__length_s_ :: " << __length_s_ << std::endl;
-	std::cout << "__res_buff_len :: " << __res_buff_len << std::endl;
+	// std::cout << "__client :: " << __client << std::endl;
+	// std::cout << "__data :: " << __data << std::endl;
+	// std::cout << "__length_s_ :: " << __length_s_ << std::endl;
+	// std::cout << "__res_buff_len :: " << __res_buff_len << std::endl;
 	// if ( __data > 0)
 	// {
 
         __s = send(__client, (void *)(&__res_buff[__length_s_]), __res_buff_len - __length_s_, 0);
         // __s = send(__client, (void *)(&__res_buff[__length_s_]), BUFFER * 2, 0);
-		std::cout << "__s :: " << __s << std::endl;
+		// std::cout << "__s :: " << __s << std::endl;
 		if (__length_s_ == __res_buff_len)
 		{
 			__response_send_done = true;

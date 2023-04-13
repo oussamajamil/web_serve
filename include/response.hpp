@@ -12,15 +12,17 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "../include/request.hpp"
+#include "../include/cgi.hpp"
 
 class Response
 {
 private:
     std::string header;
     std::string body;
-    ;
     std::map<std::string, std::string> content_type;
     std::string path;
+    Cgi _cgi;
+
 
 public:
     Response();

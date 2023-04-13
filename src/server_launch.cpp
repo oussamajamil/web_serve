@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_launch.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhamdani <mhamdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/11 00:01:04 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:57:12 by mhamdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ void Server_launch::__run()
 			{
 				if (__handler)
 				{
-					std::cout << "~~~~~~~~~~      STR	  ~~~~~~~~~~~" << std::endl;
+					// std::cout << "~~~~~~~~~~      STR	  ~~~~~~~~~~~" << std::endl;
 					__input_handler(__ident, __data, __handler);		
 				}
 				else
@@ -306,7 +306,7 @@ void Server_launch::__output_handler(int __client, int __data, Transfer *__r)
 			
 			// EV_SET(&event, __client, EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, __r);
 			// kevent(__kq, &event, 1, NULL, 0, 0);
-			std::cout << "~~~~~~~~~~      END	  ~~~~~~~~~~~" << std::endl;
+			// std::cout << "~~~~~~~~~~      END	  ~~~~~~~~~~~" << std::endl;
 		}
 	}
 }
@@ -321,11 +321,11 @@ void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
 		// std::cout << "B > " << std::endl << __r->__body ;
 
 		/* -------------------------------- RESPONSE -------------------------------- */
-		std::cout << "SEGFAULT (1) " << std::endl;
+		// std::cout << "SEGFAULT (1) " << std::endl;
 		Request __request(__r);
-		std::cout << "SEGFAULT (2) " << std::endl;
+		// std::cout << "SEGFAULT (2) " << std::endl;
 		Response __response(__request);
-		std::cout << "SEGFAULT (3) " << std::endl;
+		// std::cout << "SEGFAULT (3) " << std::endl;
 
 		// std::cout << "R > " << std::endl << __response.response_message << std::endl;
 		// std::cout << "SEGMM > " << std::endl;

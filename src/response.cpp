@@ -256,12 +256,20 @@ Response::Response(Request req)
                     {
                         std::string script = vec_cgi[i + 1];
                         std::string path = req.root + script;
-
-                        Cgi _cgi(req, path);
-                        this->body = _cgi.body;
-                        // this->body = cgi(req, path);
-                        // this->response_message = generate_response(&req);
-                        // return;
+                        if (_cgi.execute(req,req.is_directory_file.second,vec_cgi[i+1]) == -1){
+                            req.status_code = 500;
+                                this->body = error_page(req.status_code, req.error_page_map, req.root);
+                                this->response_message = generate_response(&req);
+                                return;
+                        }
+                        else
+                        {
+                            req.status_code = 200;
+                             _cgi.getCgiRespoHeader();
+                            this->body =  _cgi.getCgiRespoBody();
+                             this->response_message = generate_response(&req);
+                             return;
+                        }                   
                     }
                 }
             }
@@ -298,10 +306,21 @@ Response::Response(Request req)
                     {
                         std::string script = vec_cgi[i + 1];
                         std::string path = req.root + script;
-                        Cgi _cgi(req, path);
-                        this->body = _cgi.body;
-                        // this->response_message = generate_response(&req);
-                        // return;
+                        if (_cgi.execute(req,req.is_directory_file.second,vec_cgi[i+1]) == -1){
+                                req.status_code = 500;
+                                this->body = error_page(req.status_code, req.error_page_map, req.root);
+                                this->response_message = generate_response(&req);
+                                return;
+                        }
+                        else
+                        {
+                            req.status_code = 200;
+                             _cgi.getCgiRespoHeader();
+                            this->body =  _cgi.getCgiRespoBody();
+                            std::cout << "smail body get"<<this->body <<std::endl;
+                             this->response_message = generate_response(&req);
+                             return;
+                        }                   
                     }
                 }
                 this->body = get_file(req.is_directory_file.second);
