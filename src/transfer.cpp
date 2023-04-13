@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/10 23:54:50 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:46:15 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ __requet_read_done(false),
 __response_send_done(false),
 __content_length(0),
 __length(0),
-__length_s_(0)
+__length_s_(0),
+__rest(0),
+__sub_chunck(0),
+__res_buff_len(0)
 {
 	__request.clear();
 	__request.resize(BUFFER);
@@ -42,8 +45,13 @@ void Transfer::__init_requst()
 	__head_read_done = false;
 	__response_send_done = false;
 	__content_length = 0;
+	__res_buff_len = 0;
 	__length = 0;
 	__length_s_ = 0;
+	__rest = 0;
+	__sub_chunck = 0;
+	// __res_buff = NULL;
+	__res_buff.clear();
 	__request.clear();
 	__request.resize(BUFFER);
 	__head.clear();
@@ -52,82 +60,61 @@ void Transfer::__init_requst()
 
 void Transfer::__request_read(int __client, int __data)
 {
+// 	if (__chunks)
+// 	{
+// 		__read_chunkes(__client, __data);
+// 	}
+// 	else if (!__read_done)
+// 	{
+// 		__read_(__client, __data);
 	if (!__read_done)
 	{
 		__read_(__client, __data);
 	}
-	else if (__chunks)
-	{
-		__read_chunkes_body(__client, __data);
-	}
-}
-
-void Transfer::__read_chunkes_body(int __ident, int &__data)
-{
-	(void)__ident;
-	(void)__data;
-	// length := 0
-	// read chunk-size, chunk-ext (if any), and CRLF
-	// while (chunk-size > 0) {
-	// 	read chunk-data and CRLF
-	// 	append chunk-data to content
-	// 	length := length + chunk-size
-	// 	read chunk-size, chunk-ext (if any), and CRLF
-	// }
-	// read trailer field
-	// while (trailer field is not empty) {
-	// 	if (trailer fields are stored/forwarded separately) {
-	// 		append trailer field to existing trailer fields
-	// 	}
-	// 	else if (trailer field is understood and defined as mergeable) {
-	// 		merge trailer field with existing header fields
-	// 	}
-	// 	else {
-	// 		discard trailer field
-	// 	}
-	// 	read trailer field
-	// }
-	// Content-Length := length
-	// Remove "chunked" from Transfer-Encoding
 }
 
 void Transfer::__response_send(int __client, int __data)
 {
 	int __s = 0;
 	// int	__buf = BUFFER;
-    do
-    {
-	std::cout << "__client :: " << __client << std::endl;
-	std::cout << "__data :: " << __data << std::endl;
-	std::cout << "__length_s_ :: " << __length_s_ << std::endl;
-	std::cout << "__res_buff_len :: " << __res_buff_len << std::endl;
-	// if ( __data > 0)
-	// {
-
-        __s = send(__client, (void *)(&__res_buff[__length_s_]), __res_buff_len - __length_s_, 0);
-        // __s = send(__client, (void *)(&__res_buff[__length_s_]), BUFFER * 2, 0);
-		std::cout << "__s :: " << __s << std::endl;
+    // do
+    // {
+	// std::cout << "s__client :: " << __client << std::endl;
+	// // std::cout << "s__data :: " << __data << std::endl;
+	// std::cout << "s__length_s_ :: " << __length_s_ << std::endl;
+	// std::cout << "s__res_buff_len :: " << __res_buff_len << std::endl;
+	// std::cout << "s__res_buff :: " << __res_buff << std::endl;
+	// std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " << std::endl;
+	// std::cout << "s__res_buff :: " << __res_buff[__length_s_] << std::endl;
+	if ( __data > 0)
+	{
+		
+		__s = send(__client, (void *)(&__res_buff[__length_s_]), __res_buff_len - __length_s_, 0);
+		// __s = send(__client, (void *)(&__res_buff[__length_s_]), BUFFER * 2, 0);
+		// std::cout << "s__s :: " << __s << std::endl;
+		if (__s == -1)
+		{
+			std::cout << "Error: send() \n";
+			return ;
+		}
+		// if (__s == 0)
+		// {
+		// 	std::cout << "Connection closed by client send ()\n";
+		// }
+		// if (__s > 0)
+		{
+			__length_s_ += __s;
+			__data -= __s;
+		}
+		// std::cout << "s__data :: " << __data << std::endl<< std::endl;
+		// std::cout << "s__length_s_ :: " << __length_s_ << std::endl << std::endl;
 		if (__length_s_ == __res_buff_len)
 		{
 			__response_send_done = true;
 			return ;
 		}
-        if (__s == -1)
-		{
-			std::cout << "Error: send() \n";
-			exit(1);
-		}
-        if (__s == 0)
-		{
-			std::cout << "Connection closed by client send ()\n";
-		}
-		__length_s_ += __s;
-		std::cout << "__length_s_ :: " << __length_s_ << std::endl << std::endl;
-		// __buf *= 2;
-        __data -= __s;
-		// std::cout << "__data :: " << __data << std::endl<< std::endl;
-	// }
-    } while (__data > 0);
+	}
+    // } while (__data > 0);
 }
 
 void Transfer::__read_(int __client, int &__data)
@@ -136,56 +123,111 @@ void Transfer::__read_(int __client, int &__data)
 	size_t  		crlf;
 	size_t  		__old_pos = __length;
 
-	// std::cout << "__client :: " << __client << std::endl;
-	// std::cout << "__data :: " << __data << std::endl;
-	// std::cout << "__request.length() :: " << __request.length() << std::endl;
-	// std::cout << "__length :: " << __length << std::endl;
-	do
-	{
+	// std::cout << "r__client :: " << __client << std::endl;
+	// std::cout << "r__data :: " << __data << std::endl;
+	// std::cout << "r__request.length() :: " << __request.length() << std::endl;
+	// std::cout << "r__length :: " << __length << std::endl;
+	// do
+	// {
 		if (__length == __request.length())
             __request.resize(__length * 2);
-		if (__request.size() - __length <= (size_t)__data)
+		if (__data > 0)
+		{	
+			// if ((int)(__request.size() - __length) <= __data)
 			__r = recv(__client, (void *)(__request.data()), __request.length() - __length, 0);
-		else if (__data > 0)
-			__r = recv(__client, (void *)(__request.data()), __data, 0);
-		if (__r == -1)
-		{
-			std::cout << "Error: recv() \n";
-			exit(1);
-		}
-		if (__r == 0)
-		{
-			std::cout << "Connection closed by client\n";
-		}
-		__length += __r;
-        __request.resize(__length);
-		if (__head_read_done == false)
-		{
-			__head.append(__request.c_str(), __r);
-			crlf = __crlf(__request, __old_pos);
-			if (crlf != std::string::npos)
+			// else if (__data > 0)
+			// 	__r = recv(__client, (void *)(__request.data()), __data, 0);
+			// std::cout << "r__r :: " << __r << std::endl;
+			if (__r == -1)
 			{
-				__head_read_done = true;
-				__body = __head.substr(crlf + 4);
-				__head = __request.substr(0, crlf + 4);
-				__parse_info();
-				__length -= crlf + 4;
-			}	
+				std::cout << "Error: recv() \n";
+				return;
+			}
+			if (__r == 0)
+			{
+				std::cout << "Connection closed by client\n";
+			}
+			__length += __r;
+			// std::cout << "__length :: " << __length << std::endl<< std::endl;
+			__request.resize(__length);
+			size_t	__s = __request.size();
+			if (__head_read_done == false)
+			{
+				__head.append(__request.c_str(), __r);
+				crlf = __crlf(__request, __old_pos);
+				if (crlf != std::string::npos)
+				{
+					__head_read_done = true;
+					__body = __head.substr(crlf + 4);
+					__head = __request.substr(0, crlf + 4);
+					__parse_info();
+					__length -= crlf + 4;
+					if (__chunks)
+					{
+						int	__l = stoi(__body.substr(0, __body.find("\r\n")));
+						__body.erase(0, __body.find("\r\n") + 2);
+						__body.erase(0, 2);
+						__sub_chunck = __l - __body.length();
+						if (__sub_chunck < 0)
+							__rest = __l;
+						// __length_chunck += __sub_chunck;
+					}
+				}	
+			}
+			else if (__chunks)
+			{
+				if (__rest)
+				{
+					__request.insert(0, __body.substr(__rest + 2));
+					__body.erase(__rest, __body.length() - __rest);
+				}
+				__read_chunkes();
+			}
+			else
+			{	
+				__body.append(__request.c_str(), __r);
+				if (__content_length == __length)
+				{
+					__read_done = true;
+					return;
+				}
+			}
+			__request.clear();
+			__request.resize(__s);
+			__data -= __r;
 		}
-		else
+	// }while(__data > 0);
+}
+
+void Transfer::__read_chunkes()
+{
+	int	__l;
+
+	while (__request.length() > 0)
+	{
+		if (__sub_chunck > 0)
 		{
-			__body.append(__request.c_str(), __r);
+			__body.append(__request.c_str(), __sub_chunck);
+			__request.erase(0, __sub_chunck + 2);
 		}
-		if (__content_length == __length)
+		if (__request.length() > 0)
 		{
-			__read_done = true;
-			return;
+			__l = stoi(__request.substr(0, __request.find("\r\n")));
+			__request.erase(0, __request.find("\r\n") + 2);;
+			__request.erase(0, 2);
+			if (__request.length() > (size_t)(__l + 2))
+			{
+				__body.append(__request.c_str(), __l);
+				__request.erase(0, __l + 2);
+			}
+			else
+			{
+				__body.append(__request.c_str(), __request.length());
+				__request.erase(0, __request.length());
+				__sub_chunck = __l - __request.length();
+			}
 		}
-		size_t	__s = __request.size();
-		__request.clear();
-		__request.resize(__s);
-		__data -= __r;
-	}while(__data > 0);
+	}
 }
 
 std::string Transfer::__search_str(std::string __str)
@@ -204,6 +246,7 @@ std::string Transfer::__search_str(std::string __str)
 void Transfer::__parse_info()
 {
 	std::string	__holder;
+
 	/* ---------------------------- Transfer Encoding --------------------------- */
 	__holder = __search_str("Transfer-Encoding: ");
 	if (__holder != NPOS && __holder == "chunked")
@@ -217,7 +260,10 @@ void Transfer::__parse_info()
 		if (__holder != NPOS)
 			__content_length = stoi(__holder);
 		else
+		{
+			__read_done = true;
 			__content_length = 0;	
+		}
 	}
 	
 	/* ------------------------------- keep-alive ------------------------------- */

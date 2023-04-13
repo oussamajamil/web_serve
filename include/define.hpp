@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:59:18 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/07 23:07:06 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:11:04 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define SEVER_NAME "webserv.com"
 #define METHODS "GET"
 #define LISTEN_BACKLOG 128
-#define EVENTS_NUBMBER 128
+#define EVENTS_NUBMBER 1
 #define BUFFER 2048
 
 

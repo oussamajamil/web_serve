@@ -222,6 +222,7 @@ std::string Response::default_post_page(std::map<std::string, std::string> body_
 Response::Response(Request req)
 {
     handle_content_type();
+    this->response_message.clear();
     if (req.redirect_path != "")
     {
         this->response_message = generate_response(&req);

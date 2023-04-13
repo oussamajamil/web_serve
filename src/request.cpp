@@ -80,6 +80,11 @@ Request::Request(Transfer *__r)
 	this->is_directory_file.second = "";
 	this->is_autoindex = false;
 	this->redirect_path = "";
+	//TODO:
+	// std::cout << "H > " << std::endl << __r->__head << std::endl;
+	// std::cout << "B > " << std::endl << __r->__body << std::endl;
+	// std::cout << "HSIZE > " << std::endl << __r->__head.size() << std::endl;
+	// std::cout << "BSIZE > " << std::endl << __r->__body.size() << std::endl;
 	this->parseRequest(__r->__head, __r->__body);
 	this->_connection = this->headers["Connection"];
 	if (this->method != "GET" && this->method != "POST" && this->method != "DELETE")
