@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/12 23:46:37 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:12:49 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,7 +348,7 @@ void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
 	__r->__server = __server_set(__r->__ident, __r->__host);
 	if (__r->__read_done)
 	{
-		// std::cout << "H > " << std::endl << __r->__head  << std::endl;
+		std::cout << "H > " << std::endl << __r->__head  << std::endl;
 		// std::cout << "B > " << std::endl << __r->__body.substr(0, 5000)  << std::endl;
 
 		/* -------------------------------- RESPONSE -------------------------------- */
