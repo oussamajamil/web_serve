@@ -49,11 +49,19 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
     int fdIn = fileno(fIn);
     int fdOut = fileno(fOut);
     
+    // // std::cout << "here 4 ===> " << av[2] << std::endl;
+    // // char c;
     write(fdIn, req.body.c_str(), req.body.size());
+    // // while (read(fdIn, &c, 1) > 0)
+    // //     std::cout << c;
     lseek(fdIn, 0, SEEK_SET);
-    pid_t pid = fork();;
+    pid_t pid = fork();
+    // for(int i = 0; _env[i] != NULL; i++)
+    //     std::cout << _env[i] << std::endl;
     if (pid == 0)
     {
+        // std::cout << "here 2 ===> |" << av[0] << "|" << std::endl;
+        // std::cout << "here 3 ===> |" << av[1] << "|" << std::endl;
         dup2(fdIn, STDIN_FILENO);
         dup2(fdOut, STDOUT_FILENO);
         execve(av[0], (char **)av, _env);
@@ -68,7 +76,7 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
         while ((n = read(fdOut, buf, 1024)) > 0)
             result += std::string(buf, n);
         std::cout << "---------------------------------------------------------------" << std::endl;
-        this->results = result;
+        std::cout << "result: " << result << std::endl;
         std::cout << "---------------------------------------------------------------" << std::endl;
     }
     fclose(fIn);
@@ -76,8 +84,8 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
 
     for (int i = 0; i < allocSize; i++)
         delete[] _env[i];
-    for (int i = 0; i <3 ; i++)
-        delete[] av[i];
+    // for (int i = 0; i <3 ; i++)
+    //     delete[] av[i];
     return 0;
 }
 
@@ -118,3 +126,33 @@ void Cgi::setEnv()
     }
     _env[iEnv] = NULL;
  }
+
+
+ void Cgi::setCgiRespoHeaders(std::vector <std::string> &v)
+ {
+    if (v.size() >= 2)
+        _cgiRespoHeader = v[0] + '\n' + v[1];
+ }
+
+std::string Cgi::getCgiRespoHeader()
+{
+    return _cgiRespoHeader;
+}
+
+
+void Cgi::setCgiRespoBody(std::vector <std::string> &v)
+{
+    std::string temp;
+    for(unsigned long i = 2; i < v.size(); i++)
+    {
+        temp += v[i];
+        if (i != v.size() - 1)
+            temp += '\n';
+    }
+    _cgiRespoBody = temp;
+}
+
+std::string Cgi::getCgiRespoBody()
+{
+    return _cgiRespoBody;
+}

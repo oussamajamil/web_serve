@@ -24,6 +24,8 @@ char **_env;
 // std::string     body;
 std::string     path;
 std::string cgiInput;
+std::string _cgiRespoHeader;
+std::string _cgiRespoBody;
 std::map <std::string,std::string> env_map;
 
 void _envMap (Request req, std::string file);
@@ -40,8 +42,10 @@ public:
     Cgi();
     Cgi(Request req, std::string file);
     ~Cgi();
-    std::string     results;
+    std::string     body;
     int execute(Request req, std::string cgi_filePath, std::string file);
+    std::string getCgiRespoHeader(void);
+    std::string getCgiRespoBody(void);
 };
 
 #endif
