@@ -140,6 +140,8 @@ std::string Response::generate_response(Request *req)
         response += "Content-Type: text/html\r\n";
     else if (req->is_directory_file.first == false && req->is_directory_file.second != "")
         response += "Content-Type: " + this->content_type[get_file_extencion(req->is_directory_file.second)] + "\r\n";
+    if (req->headers.find("Set-Cookie") != req->headers.end())
+        response += req->headers.find("Set-Cookie")->second + "\r\n";
     response += "\r\n";
     if (req->redirect_path != "")
         response += req->redirect_path;
@@ -246,26 +248,42 @@ Response::Response(Request req)
         else if (req.method == "POST")
         {
 
-            // if (req.is_directory_file.first == false && req.is_directory_file.second != "")
-            // {
-            //     std::vector<std::string> vec_cgi;
-            //     std::string extension = get_file_extencion(req.is_directory_file.second);
-            //     vec_cgi = req._location.__attributes.find("cgi")->second;
-            //     for (unsigned int i = 0; i < vec_cgi.size(); i = i + 2)
-            //     {
-            //         if (vec_cgi[i] == extension)
-            //         {
-            //             std::string script = vec_cgi[i + 1];
-            //             std::string path = req.root + script;
+             std::string extension = get_file_extencion(req.is_directory_file.second);
+                std::vector<std::string> vec_cgi;
 
-            //             Cgi _cgi(req, path);
-            //             this->body = _cgi.body;
-            //             // this->body = cgi(req, path);
-            //             // this->response_message = generate_response(&req);
-            //             // return;
-            //         }
-            //     }
-            // }
+                vec_cgi = req._location.__attributes.find("cgi")->second;
+                for (unsigned int i = 0; i < vec_cgi.size(); i = i + 2)
+                {
+                    if (vec_cgi[i] == extension)
+                    {
+                        std::string path = vec_cgi[i + 1];
+                        // std::cout << "here 1 ===> " << path << " | " << req.is_directory_file.second << std::endl;
+                        cgi.execute(req, path, req.is_directory_file.second);
+                        std::vector<std::string> vec = split(cgi.results, "\r\n\r\n");
+                        this->body = vec[1];
+                        this->header = vec[0];
+                        std::vector<std::string> vec_header = split(this->header, "\r\n");
+                        // std::cout<< "|||||||"<< cgi.results << "|||||||||||||||" <<std::endl;
+                        std::cout << "body: " << this->body << std::endl;
+                        std::cout << "header: " << this->header << std::endl;
+
+                        for (unsigned int i = 0; i < vec_header.size(); i++)
+                        {
+                            std::string _cookie;
+                            if (vec_header[i].find("Content-Type") != std::string::npos)
+                            {
+                                req.headers["Content-Type"] = vec_header[i].substr(vec_header[i].find(":") + 1);
+                            }
+                            if(vec_header[i].find("Set-Cookie") != std::string::npos)
+                            {
+                                req.headers["Set-Cookie"] += vec_header[i];
+                            }
+                        }
+
+                        this->response_message = generate_response(&req);
+                        return;
+                    }
+                }
             this->body = default_post_page(req.body_form_data);
             this->response_message = generate_response(&req);
             return;
@@ -300,10 +318,29 @@ Response::Response(Request req)
                         std::string path = vec_cgi[i + 1];
                         // std::cout << "here 1 ===> " << path << " | " << req.is_directory_file.second << std::endl;
                         cgi.execute(req, path, req.is_directory_file.second);
-                        std::cout << "body: " << cgi.getCgiRespoBody() << std::endl;
-                        std::cout << "header: " << cgi.getCgiRespoHeader() << std::endl;
-                        // this->response_message = generate_response(&req);
-                        // return;
+                        std::vector<std::string> vec = split(cgi.results, "\r\n\r\n");
+                        this->body = vec[1];
+                        this->header = vec[0];
+                        std::vector<std::string> vec_header = split(this->header, "\r\n");
+                        // std::cout<< "|||||||"<< cgi.results << "|||||||||||||||" <<std::endl;
+                        std::cout << "body: " << this->body << std::endl;
+                        std::cout << "header: " << this->header << std::endl;
+
+                        for (unsigned int i = 0; i < vec_header.size(); i++)
+                        {
+                            std::string _cookie;
+                            if (vec_header[i].find("Content-Type") != std::string::npos)
+                            {
+                                req.headers["Content-Type"] = vec_header[i].substr(vec_header[i].find(":") + 1);
+                            }
+                            if(vec_header[i].find("Set-Cookie") != std::string::npos)
+                            {
+                                req.headers["Set-Cookie"] += vec_header[i];
+                            }
+                        }
+
+                        this->response_message = generate_response(&req);
+                        return;
                     }
                 }
                 this->body = get_file(req.is_directory_file.second);

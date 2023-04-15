@@ -9,20 +9,24 @@ void Cgi::_envMap(Request req, std::string file)
 	this->env_map["REDIRECT_STATUS"] = "200";
     this->env_map["QUERY_STRING"]=req.query_params;
     this->env_map["CONTENT_TYPE"]=req.headers.find("Content-Type")->second;
+    ///////
     // this->env_map["SERVER_NAME"]="";
 	// this->env_map["GATEWAY_INTERFACE"] = "CGI/1.1";
+    ///////
     this->env_map["SERVER_PORT"]=req.port+"";
     this->env_map["CONTENT_LENGTH"]=req.headers.find("Content-Length")->second!="" ? req.headers.find("Content-Length")->second : "";
     this->env_map["REMOTE_HOST"]=req.host;
+    ///////
     // this->env_map["REQUEST_METHOD"]=req.method;
     // std::cout << "|" << req.method << "|" << std::endl;
+    ////////
     this->env_map["SCRIPT_NAME"]=file;
     this->env_map["PATH_INFO"]=req.is_directory_file.second.substr(req.root.length());
     this->env_map["PATH_TRANSLATED"]=req.is_directory_file.second.substr(req.root.length());
     this->env_map["AUTH_TYPE"] = "Basic";
     this->env_map["REMOTE_USER"] = req.headers.find("From")->second !="" ? req.headers.find("From")->second : "";
     this->env_map["SERVER_PROTOCOL"] = req.version;
-    this->env_map["SERVER_SOFTWARE"] = "webserv/1.0";
+    // this->env_map["SERVER_SOFTWARE"] = "webserv/1.0";
     this->env_map["HTTP_ACCEPT"] = req.headers.find("Accept")->second!="" ? req.headers.find("Accept")->second : "";
     this->env_map["HTTP_COOKIE"] = req.headers.find("Cookie")->second!="" ? req.headers.find("Cookie")->second : "";
     this->env_map["HTTP_ACCEPT_LANGUAGE"] = req.headers.find("Accept-Language")->second!="" ? req.headers.find("Accept-Language")->second : "";
@@ -51,7 +55,7 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
     
     write(fdIn, req.body.c_str(), req.body.size());
     lseek(fdIn, 0, SEEK_SET);
-    pid_t pid = fork();;
+    pid_t pid = fork();
     if (pid == 0)
     {
         dup2(fdIn, STDIN_FILENO);
@@ -76,8 +80,8 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
 
     for (int i = 0; i < allocSize; i++)
         delete[] _env[i];
-    for (int i = 0; i <3 ; i++)
-        delete[] av[i];
+    // for (int i = 0; i <3 ; i++)
+    //     delete[] av[i];
     return 0;
 }
 

@@ -74,6 +74,7 @@ void Request::parseRequest(std::string header, std::string body)
 
 Request::Request(Transfer *__r)
 {
+	std::cout << "****************** request ******************" << std::endl;
 	this->status_code = 0;
 	this->is_directory_file.first = false;
 	this->is_directory_file.second = "";
