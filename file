@@ -1,0 +1,664 @@
+H > 
+GET /index.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/index.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0mfr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/index.php
+location i/|||/index.php
+location i/template|||/index.php
+location i/test2|||/index.php
+path_res: Users/mhamdani/Desktop/hamdanicgi/test/index.php
+root:Users/mhamdani/Desktop/hamdanicgi/test
+result: Status: 404 Not Found
+X-Powered-By: PHP/7.4.10
+Content-type: text/html; charset=UTF-8
+
+No input file specified.
+
+---------------------------
+i am here
+H > 
+GET /index.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/index.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0mfr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/index.php
+location i/|||/index.php
+location i/template|||/index.php
+location i/test2|||/index.php
+path_res: Users/mhamdani/Desktop/hamdanicgi/test/index.php
+root:Users/mhamdani/Desktop/hamdanicgi/test
+result: Status: 404 Not Found
+X-Powered-By: PHP/7.4.10
+Content-type: text/html; charset=UTF-8
+
+No input file specified.
+
+----------- **/*********----------------
+i am here
+H > 
+GET /index.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/index.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0mfr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/index.php
+location i/|||/index.php
+location i/template|||/index.php
+location i/test2|||/index.php
+path_res: Users/mhamdani/Desktop/hamdanicgi/test/index.php
+root:Users/mhamdani/Desktop/hamdanicgi/test
+result: Status: 404 Not Found
+X-Powered-By: PHP/7.4.10
+Content-type: text/html; charset=UTF-8
+
+No input file specified.
+
+---------------------------
+i am here
+H > 
+GET /index.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/index.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0mfr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/index.php
+location i/|||/index.php
+location i/template|||/index.php
+location i/test2|||/index.php
+path_res: Users/mhamdani/Desktop/hamdanicgi/test/index.php
+root:Users/mhamdani/Desktop/hamdanicgi/test
+result: Status: 404 Not Found
+X-Powered-By: PHP/7.4.10
+Content-type: text/html; charset=UTF-8
+
+No input file specified.
+
+---------------------------
+i am here
+H > 
+GET /index.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/index.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0mfr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/index.php
+location i/|||/index.php
+location i/template|||/index.php
+location i/test2|||/index.php
+path_res: Users/mhamdani/Desktop/hamdanicgi/test/index.php
+root:Users/mhamdani/Desktop/hamdanicgi/test
+result: Status: 404 Not Found
+X-Powered-By: PHP/7.4.10
+Content-type: text/html; charset=UTF-8
+
+No input file specified.
+
+---------------------------
+i am here
+H > 
+GET /index.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/index.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0mfr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/index.php
+location i/|||/index.php
+location i/template|||/index.php
+location i/test2|||/index.php
+path_res: Users/mhamdani/Desktop/hamdanicgi/test/index.php
+root:Users/mhamdani/Desktop/hamdanicgi/test
+result: Status: 404 Not Found
+X-Powered-By: PHP/7.4.10
+Content-type: text/html; charset=UTF-8
+
+No input file specified.
+
+---------------------------
+i am here
+H > 
+GET /index.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/index.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0mfr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/index.php
+location i/|||/index.php
+location i/template|||/index.php
+location i/test2|||/index.php
+path_res: Users/mhamdani/Desktop/hamdanicgi/test/index.php
+root:Users/mhamdani/Desktop/hamdanicgi/test
+result: Status: 404 Not Found
+X-Powered-By: PHP/7.4.10
+Content-type: text/html; charset=UTF-8
+
+No input file specified.
+
+---------------------------
+i am here
+                                                                                                                                             H > 
+GET /index.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/index.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0mfr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/index.php
+location i/|||/index.php
+location i/template|||/index.php
+location i/test2|||/index.php
+path_res: Users/mhamdani/Desktop/hamdanicgi/test/index.php
+root:Users/mhamdani/Desktop/hamdanicgi/test
+result: Status: 404 Not Found
+X-Powered-By: PHP/7.4.10
+Content-type: text/html; charset=UTF-8
+
+No input file specified.
+
+---------------------------
+i am here

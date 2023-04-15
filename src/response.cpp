@@ -298,6 +298,7 @@ Response::Response(Request req)
                     if (vec_cgi[i] == extension)
                     {
                         std::string path = vec_cgi[i + 1];
+                        // std::cout << "here 1 ===> " << path << " | " << req.is_directory_file.second << std::endl;
                         cgi.execute(req, path, req.is_directory_file.second);
                         std::cout << "body: " << cgi.getCgiRespoBody() << std::endl;
                         std::cout << "header: " << cgi.getCgiRespoHeader() << std::endl;

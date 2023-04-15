@@ -6,15 +6,16 @@ Cgi::~Cgi() {};
 
 void Cgi::_envMap(Request req, std::string file)
 {
+	this->env_map["REDIRECT_STATUS"] = "200";
     this->env_map["QUERY_STRING"]=req.query_params;
     this->env_map["CONTENT_TYPE"]=req.headers.find("Content-Type")->second;
-    this->env_map["SERVER_NAME"]="webserv";
-    this->env_map["REDIRECT_STATUS"] = "200";
-	this->env_map["GATEWAY_INTERFACE"] = "CGI/1.1";
+    // this->env_map["SERVER_NAME"]="";
+	// this->env_map["GATEWAY_INTERFACE"] = "CGI/1.1";
     this->env_map["SERVER_PORT"]=req.port+"";
     this->env_map["CONTENT_LENGTH"]=req.headers.find("Content-Length")->second!="" ? req.headers.find("Content-Length")->second : "";
     this->env_map["REMOTE_HOST"]=req.host;
-    this->env_map["REQUEST_METHOD"]=req.method;
+    // this->env_map["REQUEST_METHOD"]=req.method;
+    // std::cout << "|" << req.method << "|" << std::endl;
     this->env_map["SCRIPT_NAME"]=file;
     this->env_map["PATH_INFO"]=req.is_directory_file.second.substr(req.root.length());
     this->env_map["PATH_TRANSLATED"]=req.is_directory_file.second.substr(req.root.length());
@@ -37,8 +38,6 @@ void Cgi::_envMap(Request req, std::string file)
 int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
 {
     std::string result = "";
-	cgiInput = _getInput(file);
-    cgiInput = req.body;
     _envMap(req, file);
     setEnv();
     char *av[3];
@@ -49,14 +48,15 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
     FILE *fOut = tmpfile();
     int fdIn = fileno(fIn);
     int fdOut = fileno(fOut);
-    write(fdIn, cgiInput.c_str(), cgiInput.size());
+    
+    write(fdIn, req.body.c_str(), req.body.size());
     lseek(fdIn, 0, SEEK_SET);
-    pid_t pid = fork();
+    pid_t pid = fork();;
     if (pid == 0)
     {
         dup2(fdIn, STDIN_FILENO);
         dup2(fdOut, STDOUT_FILENO);
-        execve(av[0], av, _env);
+        execve(av[0], (char **)av, _env);
         write(fdOut, "error 500", 5);
     }
     else
@@ -67,16 +67,17 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
         int n;
         while ((n = read(fdOut, buf, 1024)) > 0)
             result += std::string(buf, n);
-        std::cout << "result: " << result << std::endl;
+        std::cout << "---------------------------------------------------------------" << std::endl;
+        this->results = result;
+        std::cout << "---------------------------------------------------------------" << std::endl;
     }
     fclose(fIn);
     fclose(fOut);
 
     for (int i = 0; i < allocSize; i++)
         delete[] _env[i];
-    // delete[] _env;
-    // for (int i = 0; i <3 ; i++)
-    //     delete[] av[i];
+    for (int i = 0; i <3 ; i++)
+        delete[] av[i];
     return 0;
 }
 
@@ -117,33 +118,3 @@ void Cgi::setEnv()
     }
     _env[iEnv] = NULL;
  }
-
-
- void Cgi::setCgiRespoHeaders(std::vector <std::string> &v)
- {
-    if (v.size() >= 2)
-        _cgiRespoHeader = v[0] + '\n' + v[1];
- }
-
-std::string Cgi::getCgiRespoHeader()
-{
-    return _cgiRespoHeader;
-}
-
-
-void Cgi::setCgiRespoBody(std::vector <std::string> &v)
-{
-    std::string temp;
-    for(unsigned long i = 2; i < v.size(); i++)
-    {
-        temp += v[i];
-        if (i != v.size() - 1)
-            temp += '\n';
-    }
-    _cgiRespoBody = temp;
-}
-
-std::string Cgi::getCgiRespoBody()
-{
-    return _cgiRespoBody;
-}
