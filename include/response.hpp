@@ -12,7 +12,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "../include/request.hpp"
-
+#include "../include/cgi.hpp"
 class Response
 {
 private:
@@ -26,6 +26,7 @@ public:
     Response();
     std::string response_message;
     ~Response();
+    Cgi cgi;
     Response(Request request);
     std::string default_error_page(int status_code);
     std::string get_message(int status_code);

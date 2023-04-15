@@ -46,45 +46,39 @@ void Request::parseRequest(std::string header, std::string body)
 		this->query_params = url_params[1];
 	}
 
-	// std::cout << "****************** path/version/method ******************" << std::endl;
-	// std::cout << "\033[1;32m method:  \033[0m"
-	// 					<< this->method << std::endl;
-	// std::cout << "\033[1;32m path:    \033[0m"
-	// 					<< this->path << std::endl;
-	// std::cout << "\033[1;32m version: \033[0m"
-	// 					<< this->version << std::endl;
-	// std::cout << "\033[1;32m host:    \033[0m"
-	// 					<< this->host << std::endl;
-	// std::cout << "\033[1;32m port:    \033[0m"
-	// 					<< this->port << std::endl;
-	// std::cout << "\n\n****************** headers ******************" << std::endl;
-	// std::map<std::string, std::string>::iterator it;
-	// for (it = this->headers.begin(); it != this->headers.end(); it++)
-	// {
-	// 	std::cout << "\033[1;32m " << it->first << ": \033[0m" << it->second << std::endl;
-	// 	std::cout << std::endl;
-	// }
+	std::cout << "****************** path/version/method ******************" << std::endl;
+	std::cout << "\033[1;32m method:  \033[0m"
+						<< this->method << std::endl;
+	std::cout << "\033[1;32m path:    \033[0m"
+						<< this->path << std::endl;
+	std::cout << "\033[1;32m version: \033[0m"
+						<< this->version << std::endl;
+	std::cout << "\033[1;32m host:    \033[0m"
+						<< this->host << std::endl;
+	std::cout << "\033[1;32m port:    \033[0m"
+						<< this->port << std::endl;
+	std::cout << "\n\n****************** headers ******************" << std::endl;
+	std::map<std::string, std::string>::iterator it;
+	for (it = this->headers.begin(); it != this->headers.end(); it++)
+	{
+		std::cout << "\033[1;32m " << it->first << ": \033[0m" << it->second << std::endl;
+		std::cout << std::endl;
+	}
 
-	// std::cout << "\n\n****************** query_params ******************" << std::endl;
-	// std::cout << this->query_params << std::endl;
+	std::cout << "\n\n****************** query_params ******************" << std::endl;
+	std::cout << this->query_params << std::endl;
 
-	// std::cout << "\n\n****************** body ******************" << std::endl;
-	// std::cout << this->body << std::endl;
+	std::cout << "\n\n****************** body ******************" << std::endl;
+	std::cout << this->body << std::endl;
 }
 
 Request::Request(Transfer *__r)
 {
 	this->status_code = 0;
-	this->path_res = "/";
 	this->is_directory_file.first = false;
 	this->is_directory_file.second = "";
 	this->is_autoindex = false;
 	this->redirect_path = "";
-	//TODO:
-	// std::cout << "H > " << std::endl << __r->__head << std::endl;
-	// std::cout << "B > " << std::endl << __r->__body << std::endl;
-	// std::cout << "HSIZE > " << std::endl << __r->__head.size() << std::endl;
-	// std::cout << "BSIZE > " << std::endl << __r->__body.size() << std::endl;
 	this->parseRequest(__r->__head, __r->__body);
 	this->_connection = this->headers["Connection"];
 	if (this->method != "GET" && this->method != "POST" && this->method != "DELETE")
@@ -141,7 +135,6 @@ Request::Request(Transfer *__r)
 	}
 	this->_server = *(__r->__server);
 	this->checkLocation();
-
 	if (this->_location.__attributes["redirect"].size() > 0)
 	{
 		this->status_code = std::stoi(this->_location.__attributes["redirect"][0]);
@@ -164,14 +157,11 @@ Request::Request(Transfer *__r)
 	}
 	if (this->_location.__attributes["root"].size() > 0)
 	{
-		this->path_res += trim(this->_location.__attributes["root"][0], "/") + "/" + trim(this->path, "/");
+		this->path_res += trim(this->_location.__attributes["root"][0], "/")+ "/"+ trim(this->path, "/");
 		this->root = trim(this->_location.__attributes["root"][0], "/");
 	}
-	else
-	{
-		this->path_res += trim(this->_server.__attributes["root"][0], "/") + "/" + trim(this->path, "/");
-		this->root = trim(this->_server.__attributes["root"][0], "/");
-	}
+	std::cout << "path_res: " << this->path_res << std::endl;
+	std::cout << "root:" << this->root << std::endl;
 	if (this->method == "DELETE")
 	{
 
@@ -197,7 +187,6 @@ Request::Request(Transfer *__r)
 	}
 	this->path_res = trim(this->path_res, "/");
 	this->path_res = "/" + this->path_res;
-
 	if (is_directory(this->path_res))
 	{
 		this->path_res += "/";
@@ -324,9 +313,12 @@ void Request::checkLocation()
 	std::vector<Location> locations = this->_server.__locations;
 	for (unsigned long i = 0; i < locations.size(); i++)
 	{
+		std::cout << "location i"<< locations[i].__path<< "|||"<<this->path << std::endl;
 		if (locations[i].__path == this->path)
 		{
+
 			this->_location = locations[i];
+			std::cout << "location ---+++---"<< locations[i].__path<< "|||"<< std::endl;
 			return;
 		}
 		else if (this->path.find(locations[i].__path) == 0)
@@ -339,9 +331,7 @@ void Request::checkLocation()
 		}
 	}
 	if (indexLocation != -1)
-	{
 		this->_location = locations[indexLocation];
-	}
 }
 void Request::clear()
 {
