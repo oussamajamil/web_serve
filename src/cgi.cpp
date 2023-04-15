@@ -41,6 +41,7 @@ void Cgi::_envMap(Request req, std::string file)
 
 int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
 {
+    std::cout << "execute request body" << req.body << std::endl;
     std::string result = "";
     _envMap(req, file);
     setEnv();
@@ -54,6 +55,9 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
     int fdOut = fileno(fOut);
     
     write(fdIn, req.body.c_str(), req.body.size());
+    char buff[100000];
+    read(fdIn, buff, 100000);
+    std::cout << "buff -------: " << buff << std::endl;
     lseek(fdIn, 0, SEEK_SET);
     pid_t pid = fork();
     if (pid == 0)

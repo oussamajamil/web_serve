@@ -127,6 +127,7 @@ void Transfer::__read_(int __client, int &__data)
 	// std::cout << "r__data :: " << __data << std::endl;
 	// std::cout << "r__request.length() :: " << __request.length() << std::endl;
 	// std::cout << "r__length :: " << __length << std::endl;
+
 	// do
 	// {
 		if (__length == __request.length())
@@ -148,7 +149,6 @@ void Transfer::__read_(int __client, int &__data)
 				std::cout << "Connection closed by client\n";
 			}
 			__length += __r;
-			// std::cout << "__length :: " << __length << std::endl<< std::endl;
 			__request.resize(__length);
 			size_t	__s = __request.size();
 			if (__head_read_done == false)
@@ -186,16 +186,18 @@ void Transfer::__read_(int __client, int &__data)
 			else
 			{	
 				__body.append(__request.c_str(), __r);
-				if (__content_length == __length)
-				{
-					__read_done = true;
-					return;
-				}
+			}
+			// std::cout << "__length :: " << __length << std::endl<< std::endl;
+			if (__content_length == __length)
+			{
+				__read_done = true;
+				return;
 			}
 			__request.clear();
 			__request.resize(__s);
 			__data -= __r;
 		}
+		std::cout << "head :: " << __head << std::endl<< std::endl;
 	// }while(__data > 0);
 }
 

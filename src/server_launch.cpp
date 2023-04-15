@@ -346,6 +346,7 @@ void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
 {
 	__r->__request_read(__client, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
+	std::cout << "H > " << __r->__read_done  << std::endl;
 	if (__r->__read_done)
 	{
 		std::cout << "H > " << std::endl << __r->__head  << std::endl;
