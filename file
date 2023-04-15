@@ -1,0 +1,1752 @@
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/get_cookie.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/get_cookie.php
+location i/|||/cgi/get_cookie.php
+location i/template|||/cgi/get_cookie.php
+location i/test2|||/cgi/get_cookie.php
+path_res: Users/ojamil/web_serve/test/cgi/get_cookie.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/style.css
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/css,*/*;q=0.1
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi/get_cookie.php
+
+[1;32m Sec-Fetch-Dest: [0mstyle
+
+[1;32m Sec-Fetch-Mode: [0mno-cors
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/style.css
+location i/|||/cgi/style.css
+location i/template|||/cgi/style.css
+location i/test2|||/cgi/style.css
+path_res: Users/ojamil/web_serve/test/cgi/style.css
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/test_get.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/test_get.php
+location i/|||/cgi/test_get.php
+location i/template|||/cgi/test_get.php
+location i/test2|||/cgi/test_get.php
+path_res: Users/ojamil/web_serve/test/cgi/test_get.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/style.css
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/css,*/*;q=0.1
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi/test_get.php
+
+[1;32m Sec-Fetch-Dest: [0mstyle
+
+[1;32m Sec-Fetch-Mode: [0mno-cors
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/style.css
+location i/|||/cgi/style.css
+location i/template|||/cgi/style.css
+location i/test2|||/cgi/style.css
+path_res: Users/ojamil/web_serve/test/cgi/style.css
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi/test_get.php
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/
+location i/|||/
+location ---+++---/|||
+path_res: Users/ojamil/web_serve/test/
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi-bin
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi-bin
+location i/|||/cgi-bin
+location i/template|||/cgi-bin
+location i/test2|||/cgi-bin
+path_res: Users/ojamil/web_serve/test/cgi-bin
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi
+location i/|||/cgi
+location i/template|||/cgi
+location i/test2|||/cgi
+path_res: Users/ojamil/web_serve/test/cgi
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/start_session.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/start_session.php
+location i/|||/cgi/start_session.php
+location i/template|||/cgi/start_session.php
+location i/test2|||/cgi/start_session.php
+path_res: Users/ojamil/web_serve/test/cgi/start_session.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/close_session.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/close_session.php
+location i/|||/cgi/close_session.php
+location i/template|||/cgi/close_session.php
+location i/test2|||/cgi/close_session.php
+path_res: Users/ojamil/web_serve/test/cgi/close_session.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/data
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/data
+location i/|||/data
+location i/template|||/data
+location i/test2|||/data
+path_res: Users/ojamil/web_serve/test/data
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi
+location i/|||/cgi
+location i/template|||/cgi
+location i/test2|||/cgi
+path_res: Users/ojamil/web_serve/test/cgi
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi
+location i/|||/cgi
+location i/template|||/cgi
+location i/test2|||/cgi
+path_res: Users/ojamil/web_serve/test/cgi
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi
+location i/|||/cgi
+location i/template|||/cgi
+location i/test2|||/cgi
+path_res: Users/ojamil/web_serve/test/cgi
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi
+location i/|||/cgi
+location i/template|||/cgi
+location i/test2|||/cgi
+path_res: Users/ojamil/web_serve/test/cgi
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/close_session.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/close_session.php
+location i/|||/cgi/close_session.php
+location i/template|||/cgi/close_session.php
+location i/test2|||/cgi/close_session.php
+path_res: Users/ojamil/web_serve/test/cgi/close_session.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/get_cookie.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/get_cookie.php
+location i/|||/cgi/get_cookie.php
+location i/template|||/cgi/get_cookie.php
+location i/test2|||/cgi/get_cookie.php
+path_res: Users/ojamil/web_serve/test/cgi/get_cookie.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/style.css
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/css,*/*;q=0.1
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi/get_cookie.php
+
+[1;32m Sec-Fetch-Dest: [0mstyle
+
+[1;32m Sec-Fetch-Mode: [0mno-cors
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/style.css
+location i/|||/cgi/style.css
+location i/template|||/cgi/style.css
+location i/test2|||/cgi/style.css
+path_res: Users/ojamil/web_serve/test/cgi/style.css
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/get_session.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/get_session.php
+location i/|||/cgi/get_session.php
+location i/template|||/cgi/get_session.php
+location i/test2|||/cgi/get_session.php
+path_res: Users/ojamil/web_serve/test/cgi/get_session.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/set_cookie.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/set_cookie.php
+location i/|||/cgi/set_cookie.php
+location i/template|||/cgi/set_cookie.php
+location i/test2|||/cgi/set_cookie.php
+path_res: Users/ojamil/web_serve/test/cgi/set_cookie.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/set_session.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/set_session.php
+location i/|||/cgi/set_session.php
+location i/template|||/cgi/set_session.php
+location i/test2|||/cgi/set_session.php
+path_res: Users/ojamil/web_serve/test/cgi/set_session.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/start_session.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/start_session.php
+location i/|||/cgi/start_session.php
+location i/template|||/cgi/start_session.php
+location i/test2|||/cgi/start_session.php
+path_res: Users/ojamil/web_serve/test/cgi/start_session.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/test.py
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/test.py
+location i/|||/cgi/test.py
+location i/template|||/cgi/test.py
+location i/test2|||/cgi/test.py
+path_res: Users/ojamil/web_serve/test/cgi/test.py
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Cache-Control: [0mmax-age=0
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0mnone
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi
+location i/|||/cgi
+location i/template|||/cgi
+location i/test2|||/cgi
+path_res: Users/ojamil/web_serve/test/cgi
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi
+location i/|||/cgi
+location i/template|||/cgi
+location i/test2|||/cgi
+path_res: Users/ojamil/web_serve/test/cgi
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/get_cookie.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/get_cookie.php
+location i/|||/cgi/get_cookie.php
+location i/template|||/cgi/get_cookie.php
+location i/test2|||/cgi/get_cookie.php
+path_res: Users/ojamil/web_serve/test/cgi/get_cookie.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/style.css
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/css,*/*;q=0.1
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi/get_cookie.php
+
+[1;32m Sec-Fetch-Dest: [0mstyle
+
+[1;32m Sec-Fetch-Mode: [0mno-cors
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/style.css
+location i/|||/cgi/style.css
+location i/template|||/cgi/style.css
+location i/test2|||/cgi/style.css
+path_res: Users/ojamil/web_serve/test/cgi/style.css
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/close_session.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/close_session.php
+location i/|||/cgi/close_session.php
+location i/template|||/cgi/close_session.php
+location i/test2|||/cgi/close_session.php
+path_res: Users/ojamil/web_serve/test/cgi/close_session.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/get_session.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/get_session.php
+location i/|||/cgi/get_session.php
+location i/template|||/cgi/get_session.php
+location i/test2|||/cgi/get_session.php
+path_res: Users/ojamil/web_serve/test/cgi/get_session.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0mnone
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/
+location i/|||/
+location ---+++---/|||
+path_res: Users/ojamil/web_serve/test/
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi
+location i/|||/cgi
+location i/template|||/cgi
+location i/test2|||/cgi
+path_res: Users/ojamil/web_serve/test/cgi
+root:Users/ojamil/web_serve/test
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/get_cookie.php
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi
+
+[1;32m Sec-Fetch-Dest: [0mdocument
+
+[1;32m Sec-Fetch-Mode: [0mnavigate
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m Sec-Fetch-User: [0m?1
+
+[1;32m Upgrade-Insecure-Requests: [0m1
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/get_cookie.php
+location i/|||/cgi/get_cookie.php
+location i/template|||/cgi/get_cookie.php
+location i/test2|||/cgi/get_cookie.php
+path_res: Users/ojamil/web_serve/test/cgi/get_cookie.php
+root:Users/ojamil/web_serve/test
+result: errorbody: 
+header: 
+
+body: 
+header: 
+****************** path/version/method ******************
+[1;32m method:  [0mGET
+[1;32m path:    [0m/cgi/style.css
+[1;32m version: [0mHTTP/1.1
+[1;32m host:    [0m127.0.0.1
+[1;32m port:    [0m4000
+
+
+****************** headers ******************
+[1;32m Accept: [0mtext/css,*/*;q=0.1
+
+[1;32m Accept-Encoding: [0mgzip, deflate, br
+
+[1;32m Accept-Language: [0men-US,en;q=0.9
+
+[1;32m Connection: [0mkeep-alive
+
+[1;32m Host: [0m127.0.0.1:4000
+
+[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi/get_cookie.php
+
+[1;32m Sec-Fetch-Dest: [0mstyle
+
+[1;32m Sec-Fetch-Mode: [0mno-cors
+
+[1;32m Sec-Fetch-Site: [0msame-origin
+
+[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+
+[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+
+[1;32m sec-ch-ua-mobile: [0m?0
+
+[1;32m sec-ch-ua-platform: [0m"macOS"
+
+
+
+****************** query_params ******************
+
+
+
+****************** body ******************
+
+location i/test|||/cgi/style.css
+location i/|||/cgi/style.css
+location i/template|||/cgi/style.css
+location i/test2|||/cgi/style.css
+path_res: Users/ojamil/web_serve/test/cgi/style.css
+root:Users/ojamil/web_serve/test

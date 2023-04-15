@@ -4,46 +4,6 @@
 Cgi::Cgi() {};
 Cgi::~Cgi() {};
 
-void Cgi::initial_env_file(){
-    this->env_map["SERVER_SOFTWARE"]="";
-    this->env_map["SERVER_NAME"]="";
-    this->env_map["SERVER_PROTOCOL"]="";
-    this->env_map["SERVER_PORT"]="";
-    this->env_map["REQUEST_METHOD"]="";
-    this->env_map["PATH_INFO"]="";
-    this->env_map["GATEWAY_INTERFACE"]="";
-    this->env_map["PATH_TRANSLATED"]="";
-    this->env_map["SCRIPT_NAME"]="";
-    this->env_map["QUERY_STRING"]="";
-    this->env_map["REMOTE_HOST"]="";
-    this->env_map["REMOTE_ADDR"]="";
-    this->env_map["CONTENT_LENGTH"]="";
-    this->env_map["REDIRECT_STATUS"] = "";
-    this->env_map["CONTENT_TYPE"] = "";
-    this->env_map["PATH_TRANSLATED"] = "";
-    this->env_map["AUTH_TYPE"] = "";
-    this->env_map["REMOTE_USER"] = "";
-    ////////////////////////////
-    this->env_map["SERVER_PROTOCOL"] = "";
-    this->env_map["HTTP_ACCEPT"] = "";
-    this->env_map["HTTP_COOKIE"] = "";
-    this->env_map["HTTP_ACCEPT_LANGUAGE"] = "";
-    this->env_map["HTTP_REFERER"] = "";
-    this->env_map["HTTP_USER_AGENT"] = "";
-    this->env_map["HTTP_ACCEPT_ENCODING"] = "";
-    this->env_map["HTTP_ACCEPT_CHARSET"] = "";
-    this->env_map["DOCUMENT_ROOT"] = "";
-    this->env_map["REQUEST_URI"] = "";
-    this->env_map["UPLOAD_PATH"] = "";
-}
-Cgi::Cgi(Request req, std::string file)
-{
-    (void)req;
-    (void)file;
-    // this->initial_env_file();
-    // this->_envMap(req, file);
-    // this->body = req.body;
-}
 void Cgi::_envMap(Request req, std::string file)
 {
     this->env_map["QUERY_STRING"]=req.query_params;
@@ -72,4 +32,118 @@ void Cgi::_envMap(Request req, std::string file)
     this->env_map["DOCUMENT_ROOT"] = req.root;
     this->env_map["REQUEST_URI"] = req.path + req.query_params != "" ? "?" + req.query_params : "";
     this->env_map["UPLOAD_PATH"] = req._server.__attributes["upload_dir"][0] !="" ? req._server.__attributes["upload_dir"][0] : "";
+}
+
+int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
+{
+    std::string result = "";
+	cgiInput = _getInput(file);
+    cgiInput = req.body;
+    _envMap(req, file);
+    setEnv();
+    char *av[3];
+    av[0] = (char*)cgi_filePath.c_str();
+    av[1] = (char*)file.c_str();
+    av[2] = NULL;
+    FILE *fIn = tmpfile();
+    FILE *fOut = tmpfile();
+    int fdIn = fileno(fIn);
+    int fdOut = fileno(fOut);
+    write(fdIn, cgiInput.c_str(), cgiInput.size());
+    lseek(fdIn, 0, SEEK_SET);
+    pid_t pid = fork();
+    if (pid == 0)
+    {
+        dup2(fdIn, STDIN_FILENO);
+        dup2(fdOut, STDOUT_FILENO);
+        execve(av[0], av, _env);
+        write(fdOut, "error 500", 5);
+    }
+    else
+    {
+        waitpid(pid, NULL, 0);
+        lseek(fdOut, 0, SEEK_SET);
+        char buf[1024];
+        int n;
+        while ((n = read(fdOut, buf, 1024)) > 0)
+            result += std::string(buf, n);
+        std::cout << "result: " << result << std::endl;
+    }
+    fclose(fIn);
+    fclose(fOut);
+
+    for (int i = 0; i < allocSize; i++)
+        delete[] _env[i];
+    // delete[] _env;
+    // for (int i = 0; i <3 ; i++)
+    //     delete[] av[i];
+    return 0;
+}
+
+std::string Cgi::_getInput(std::string file)
+{
+  std::string body = "";
+  char c;
+  std::ifstream ifs;
+  ifs.open(file);
+  if (!ifs)
+  {
+    std::cout << "file open error\n";
+  }
+  else
+  {
+    while (ifs.get(c))
+      body += c;
+  }
+  ifs.close();
+  return body;
+}
+
+void Cgi::setEnv()
+{
+    allocSize = env_map.size() + 1;
+    _env = new char *[allocSize];
+    std::map<std::string, std::string>::iterator itMap = env_map.begin();
+    int iEnv = 0;
+    while (itMap != env_map.end())
+    {
+        std::string temp = itMap->first + "=" + itMap->second;
+        _env[iEnv] = new char[temp.size() + 1];
+        for (unsigned long i = 0; i < temp.size(); i++)
+            _env[iEnv][i] = temp[i];
+        _env[iEnv][temp.size()] = 0;
+        iEnv++;
+        itMap++;       
+    }
+    _env[iEnv] = NULL;
+ }
+
+
+ void Cgi::setCgiRespoHeaders(std::vector <std::string> &v)
+ {
+    if (v.size() >= 2)
+        _cgiRespoHeader = v[0] + '\n' + v[1];
+ }
+
+std::string Cgi::getCgiRespoHeader()
+{
+    return _cgiRespoHeader;
+}
+
+
+void Cgi::setCgiRespoBody(std::vector <std::string> &v)
+{
+    std::string temp;
+    for(unsigned long i = 2; i < v.size(); i++)
+    {
+        temp += v[i];
+        if (i != v.size() - 1)
+            temp += '\n';
+    }
+    _cgiRespoBody = temp;
+}
+
+std::string Cgi::getCgiRespoBody()
+{
+    return _cgiRespoBody;
 }
