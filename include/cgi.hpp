@@ -20,13 +20,13 @@ class Cgi
 private:
 
 int  allocSize;
-char **_env;
+// char **_env;
 // std::string     body;
 std::string     path;
 std::string cgiInput;
 std::map <std::string,std::string> env_map;
 
-void _envMap (Request req, std::string file);
+void _envMap (Request req, std::string cgi_filePath,std::string file);
 void initial_env_file();
 std::string _getInput(std::string file);
 void setEnv();
@@ -40,6 +40,7 @@ public:
     Cgi();
     Cgi(Request req, std::string file);
     ~Cgi();
+    char **_env;
     std::string     results;
     int execute(Request req, std::string cgi_filePath, std::string file);
 };

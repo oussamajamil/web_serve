@@ -1,5 +1,30 @@
 H > 1
 H > 
+GET / HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/cgi/test_post.php
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
+
+
+location i/test|||/
+location i/|||/
+location ---+++---/|||
+H > 1
+H > 
 GET /style.css HTTP/1.1
 Host: 127.0.0.1:4000
 Connection: keep-alive
@@ -13,14 +38,167 @@ Sec-Fetch-Mode: no-cors
 Sec-Fetch-Dest: style
 Referer: http://127.0.0.1:4000/
 Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
-Cookie: PHPSESSID=b6837783175256030bba34444fe4c85a
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
 
 
 location i/test|||/style.css
 location i/|||/style.css
 location i/template|||/style.css
 location i/test2|||/style.css
+H > 1
+H > 
+GET /images/header.jpg HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+sec-ch-ua-platform: "macOS"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
+
+
+location i/test|||/images/header.jpg
+location i/|||/images/header.jpg
+location i/template|||/images/header.jpg
+location i/test2|||/images/header.jpg
+H > 1
+H > 
+GET / HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/cgi/test_post.php
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
+
+
+location i/test|||/
+location i/|||/
+location ---+++---/|||
+H > 1
+H > 
+GET /style.css HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+sec-ch-ua-platform: "macOS"
+Accept: text/css,*/*;q=0.1
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: style
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
+
+
+location i/test|||/style.css
+location i/|||/style.css
+location i/template|||/style.css
+location i/test2|||/style.css
+H > 1
+H > 
+GET /images/header.jpg HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+sec-ch-ua-platform: "macOS"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
+
+
+location i/test|||/images/header.jpg
+location i/|||/images/header.jpg
+location i/template|||/images/header.jpg
+location i/test2|||/images/header.jpg
+H > 1
+H > 
+GET /cgi/test_get.php?fgname=sd&lgname=sdsd HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: cookie=sssss; PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
+
+
+location i/test|||/cgi/test_get.php
+location i/|||/cgi/test_get.php
+location i/template|||/cgi/test_get.php
+location i/test2|||/cgi/test_get.php
+body: <body>
+<link rel="stylesheet" href="./style.css">
+    <div class="container">
+        <a href="/"><h1>WebServ</h1></a>
+        <p>CGI Get Test</p>
+Hello sdsd sd !</div>
+</section>
+</body>
+</html>
+header: X-Powered-By: PHP/7.4.10
+Content-type: text/html; charset=UTF-8
+H > 1
+H > 
+GET /cgi/style.css HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+sec-ch-ua-platform: "macOS"
+Accept: text/css,*/*;q=0.1
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: style
+Referer: http://127.0.0.1:4000/cgi/test_get.php?fgname=sd&lgname=sdsd
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: cookie=sssss; PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
+
+
+location i/test|||/cgi/style.css
+location i/|||/cgi/style.css
+location i/template|||/cgi/style.css
+location i/test2|||/cgi/style.css
 H > 1
 H > 
 POST /cgi/test_post.php HTTP/1.1
@@ -42,57 +220,24 @@ Sec-Fetch-User: ?1
 Sec-Fetch-Dest: document
 Referer: http://127.0.0.1:4000/
 Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
-Cookie: cookie=rgfdvbvfdvc; PHPSESSID=b6837783175256030bba34444fe4c85a
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: cookie=sssss; PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
 
 
 location i/test|||/cgi/test_post.php
 location i/|||/cgi/test_post.php
 location i/template|||/cgi/test_post.php
 location i/test2|||/cgi/test_post.php
-here 1 ===> 
-here 2 ===> 
-here 2.5 ===> 
-here 3 ===> 
-here 4 ===> 
-req.body.size() : 21
-req.body.c_str() : fpname=fdsf&page=fdsf
-8
-c ===> f
-c ===> p
-c ===> n
-c ===> a
-c ===> m
-c ===> e
-c ===> =
-c ===> f
-c ===> d
-c ===> s
-c ===> f
-c ===> &
-c ===> p
-c ===> a
-c ===> g
-c ===> e
-c ===> =
-c ===> f
-c ===> d
-c ===> s
-c ===> f
-ret ===> 0
----------------------------------------------------------------
----------------------------------------------------------------
 body: <body>
 <link rel="stylesheet" href="./style.css">
     <div class="container">
         <a href="/"><h1>WebServ</h1></a>
         <p>CGI Post Test</p>
-Hello  You Are  Years Old!</div>
+Hello sdsd You Are sdsd Years Old!</div>
 </section>
 </body>
 </html>
-header: Status: 404 Not Found
-X-Powered-By: PHP/7.4.10
+header: X-Powered-By: PHP/7.4.10
 Content-type: text/html; charset=UTF-8
 H > 1
 H > 
@@ -109,20 +254,140 @@ Sec-Fetch-Mode: no-cors
 Sec-Fetch-Dest: style
 Referer: http://127.0.0.1:4000/cgi/test_post.php
 Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
-Cookie: cookie=rgfdvbvfdvc; PHPSESSID=b6837783175256030bba34444fe4c85a
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: cookie=sssss; PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
 
 
 location i/test|||/cgi/style.css
 location i/|||/cgi/style.css
 location i/template|||/cgi/style.css
 location i/test2|||/cgi/style.css
-head :: 
+H > 1
+H > 
+GET /cgi/set_cookie.php?cookie=sdd HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: cookie=sssss; PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
 
-H > 0
-head :: 
 
-H > 0
-head :: 
+location i/test|||/cgi/set_cookie.php
+location i/|||/cgi/set_cookie.php
+location i/template|||/cgi/set_cookie.php
+location i/test2|||/cgi/set_cookie.php
+body: <body>
+<link rel="stylesheet" href="./style.css">
+    <div class="container">
+        <a href="/"><h1>WebServ</h1></a>
+        <p>CGI Cookies Test</p>
+Your Cookie: sdd</div>
+</section>
+</body>
+</html>
+header: X-Powered-By: PHP/7.4.10
+Set-Cookie: cookie=sdd
+Content-type: text/html; charset=UTF-8
+H > 1
+H > 
+GET /cgi/style.css HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+sec-ch-ua-platform: "macOS"
+Accept: text/css,*/*;q=0.1
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: style
+Referer: http://127.0.0.1:4000/cgi/set_cookie.php?cookie=sdd
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: cookie=sdd; PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
 
-H > 0
+
+location i/test|||/cgi/style.css
+location i/|||/cgi/style.css
+location i/template|||/cgi/style.css
+location i/test2|||/cgi/style.css
+H > 1
+H > 
+POST /cgi/set_session.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Content-Length: 19
+Cache-Control: max-age=0
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+Origin: http://127.0.0.1:4000
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: cookie=sdd; PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
+
+
+location i/test|||/cgi/set_session.php
+location i/|||/cgi/set_session.php
+location i/template|||/cgi/set_session.php
+location i/test2|||/cgi/set_session.php
+body: 
+<body>
+<link rel="stylesheet" href="./style.css">
+    <div class="container">
+        <a href="/"><h1>WebServ</h1></a>
+        <p>CGI Session Test</p>
+sdsd=sdsd is now set!</div>
+</section>
+</body>
+</html>
+
+
+header: X-Powered-By: PHP/7.4.10
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Content-type: text/html; charset=UTF-8
+H > 1
+H > 
+GET /cgi/style.css HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+sec-ch-ua-platform: "macOS"
+Accept: text/css,*/*;q=0.1
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: style
+Referer: http://127.0.0.1:4000/cgi/set_session.php
+Accept-Encoding: gzip, deflate, br
+Accept-Language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6
+Cookie: cookie=sdd; PHPSESSID=b12b0c8c3813a0ae863ce9a2b0a82ba7
+
+
+location i/test|||/cgi/style.css
+location i/|||/cgi/style.css
+location i/template|||/cgi/style.css
+location i/test2|||/cgi/style.css
