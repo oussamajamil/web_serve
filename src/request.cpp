@@ -80,7 +80,8 @@ Request::Request(Transfer *__r)
 	this->is_autoindex = false;
 	this->redirect_path = "";
 	this->parseRequest(__r->__head, __r->__body);
-	this->_connection = this->headers["Connection"];
+	if (this->headers.find("Connection") != this->headers.end())
+		this->_connection = this->headers["Connection"];
 	if (this->method != "GET" && this->method != "POST" && this->method != "DELETE")
 	{
 		this->status_code = NOT_IMPLEMENTED;
@@ -99,9 +100,8 @@ Request::Request(Transfer *__r)
 			return;
 		}
 	}
-	if (this->body.size() > 0)
+	if (this->body.size() > 0 && this->_server.__attributes.find("client_body_max_size") != this->_server.__attributes.end())
 	{
-
 		std::string body_size = trim(this->_server.__attributes["client_body_max_size"][0], " ");
 		if (body_size[body_size.length() - 1] == 'G')
 		{
@@ -262,33 +262,35 @@ Request::Request(Transfer *__r)
 	if (this->method == "POST")
 	{
 		std::string boundary = "--";
-
-		boundary += this->headers["Content-Type"].substr(this->headers["Content-Type"].find("boundary=") + 9);
-		this->body_boundary = split(this->body, boundary);
-
-		for (unsigned long i = 0; i < this->body_boundary.size() - 1; i++)
+		if (this->headers["Content-Type"].find("boundary=") != std::string::npos)
 		{
-			std::string name = this->body_boundary[i].substr(this->body_boundary[i].find("name=\"") + 6);
-			name = name.substr(0, name.find("\""));
-			std::string value = this->body_boundary[i].substr(this->body_boundary[i].find("\r\n\r\n") + 4);
+			boundary += this->headers["Content-Type"].substr(this->headers["Content-Type"].find("boundary=") + 9);
+			this->body_boundary = split(this->body, boundary);
 
-			if (this->body_boundary[i].find("filename=\"") != std::string::npos)
+			for (unsigned long i = 0; i < this->body_boundary.size() - 1; i++)
 			{
-				value = value.substr(0, value.find_last_of("\r\n"));
-				std::string filename = this->body_boundary[i].substr(this->body_boundary[i].find("filename=\"") + 10);
-				filename = filename.substr(0, filename.find("\""));
-				std::string file = this->_server.__attributes["upload_dir"][0] + "/" + filename;
-				if (!file_exists(this->_server.__attributes["upload_dir"][0]))
-					mkdir(this->_server.__attributes["upload_dir"][0].c_str(), 0777);
-				std::ofstream out(file.c_str());
+				std::string name = this->body_boundary[i].substr(this->body_boundary[i].find("name=\"") + 6);
+				name = name.substr(0, name.find("\""));
+				std::string value = this->body_boundary[i].substr(this->body_boundary[i].find("\r\n\r\n") + 4);
 
-				out << value;
-				out.close();
-			}
-			else
-			{
-				value = value.substr(0, value.find("\r\n"));
-				this->body_form_data[name] = value;
+				if (this->body_boundary[i].find("filename=\"") != std::string::npos)
+				{
+					value = value.substr(0, value.find_last_of("\r\n"));
+					std::string filename = this->body_boundary[i].substr(this->body_boundary[i].find("filename=\"") + 10);
+					filename = filename.substr(0, filename.find("\""));
+					std::string file = this->_server.__attributes["upload_dir"][0] + "/" + filename;
+					if (!file_exists(this->_server.__attributes["upload_dir"][0]))
+						mkdir(this->_server.__attributes["upload_dir"][0].c_str(), 0777);
+					std::ofstream out(file.c_str());
+
+					out << value;
+					out.close();
+				}
+				else
+				{
+					value = value.substr(0, value.find("\r\n"));
+					this->body_form_data[name] = value;
+				}
 			}
 		}
 	}
