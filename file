@@ -1,9 +1,32 @@
 H > 1
 H > 
-POST /cgi/set_session.php HTTP/1.1
+GET /style.css HTTP/1.1
 Host: 127.0.0.1:4000
 Connection: keep-alive
-Content-Length: 19
+sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+sec-ch-ua-platform: "macOS"
+Accept: text/css,*/*;q=0.1
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: style
+Referer: http://127.0.0.1:4000/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Cookie: PHPSESSID=b6837783175256030bba34444fe4c85a
+
+
+location i/test|||/style.css
+location i/|||/style.css
+location i/template|||/style.css
+location i/test2|||/style.css
+H > 1
+H > 
+POST /cgi/test_post.php HTTP/1.1
+Host: 127.0.0.1:4000
+Connection: keep-alive
+Content-Length: 21
 Cache-Control: max-age=0
 sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
 sec-ch-ua-mobile: ?0
@@ -20,94 +43,56 @@ Sec-Fetch-Dest: document
 Referer: http://127.0.0.1:4000/
 Accept-Encoding: gzip, deflate, br
 Accept-Language: en-US,en;q=0.9
-Cookie: cookie=sdxcadsscdsax; PHPSESSID=b6837783175256030bba34444fe4c85a
+Cookie: cookie=rgfdvbvfdvc; PHPSESSID=b6837783175256030bba34444fe4c85a
 
 
-****************** request ******************
-****************** path/version/method ******************
-[1;32m method:  [0mPOST
-[1;32m path:    [0m/cgi/set_session.php
-[1;32m version: [0mHTTP/1.1
-[1;32m host:    [0m127.0.0.1
-[1;32m port:    [0m4000
-
-
-****************** headers ******************
-[1;32m Accept: [0mtext/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-
-[1;32m Accept-Encoding: [0mgzip, deflate, br
-
-[1;32m Accept-Language: [0men-US,en;q=0.9
-
-[1;32m Cache-Control: [0mmax-age=0
-
-[1;32m Connection: [0mkeep-alive
-
-[1;32m Content-Length: [0m19
-
-[1;32m Content-Type: [0mapplication/x-www-form-urlencoded
-
-[1;32m Cookie: [0mcookie=sdxcadsscdsax; PHPSESSID=b6837783175256030bba34444fe4c85a
-
-[1;32m Host: [0m127.0.0.1:4000
-
-[1;32m Origin: [0mhttp://127.0.0.1:4000
-
-[1;32m Referer: [0mhttp://127.0.0.1:4000/
-
-[1;32m Sec-Fetch-Dest: [0mdocument
-
-[1;32m Sec-Fetch-Mode: [0mnavigate
-
-[1;32m Sec-Fetch-Site: [0msame-origin
-
-[1;32m Sec-Fetch-User: [0m?1
-
-[1;32m Upgrade-Insecure-Requests: [0m1
-
-[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-
-[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
-
-[1;32m sec-ch-ua-mobile: [0m?0
-
-[1;32m sec-ch-ua-platform: [0m"macOS"
-
-
-
-****************** query_params ******************
-
-
-
-****************** body ******************
-key=test&value=test
-location i/test|||/cgi/set_session.php
-location i/|||/cgi/set_session.php
-location i/template|||/cgi/set_session.php
-location i/test2|||/cgi/set_session.php
-path_res: Users/ojamil/Desktop/web_serve/assets/cgi/set_session.php
-root:Users/ojamil/Desktop/web_serve/assets
-execute request bodykey=test&value=test
-buff -------: 
+location i/test|||/cgi/test_post.php
+location i/|||/cgi/test_post.php
+location i/template|||/cgi/test_post.php
+location i/test2|||/cgi/test_post.php
+here 1 ===> 
+here 2 ===> 
+here 2.5 ===> 
+here 3 ===> 
+here 4 ===> 
+req.body.size() : 21
+req.body.c_str() : fpname=fdsf&page=fdsf
+8
+c ===> f
+c ===> p
+c ===> n
+c ===> a
+c ===> m
+c ===> e
+c ===> =
+c ===> f
+c ===> d
+c ===> s
+c ===> f
+c ===> &
+c ===> p
+c ===> a
+c ===> g
+c ===> e
+c ===> =
+c ===> f
+c ===> d
+c ===> s
+c ===> f
+ret ===> 0
 ---------------------------------------------------------------
 ---------------------------------------------------------------
-body: 
-<body>
+body: <body>
 <link rel="stylesheet" href="./style.css">
     <div class="container">
         <a href="/"><h1>WebServ</h1></a>
-        <p>CGI Session Test</p>
-= is now set!</div>
+        <p>CGI Post Test</p>
+Hello  You Are  Years Old!</div>
 </section>
 </body>
 </html>
-
-
 header: Status: 404 Not Found
 X-Powered-By: PHP/7.4.10
-Expires: Thu, 19 Nov 1981 08:52:00 GMT
-Cache-Control: no-store, no-cache, must-revalidate
-Pragma: no-cache
 Content-type: text/html; charset=UTF-8
 H > 1
 H > 
@@ -122,61 +107,22 @@ Accept: text/css,*/*;q=0.1
 Sec-Fetch-Site: same-origin
 Sec-Fetch-Mode: no-cors
 Sec-Fetch-Dest: style
-Referer: http://127.0.0.1:4000/cgi/set_session.php
+Referer: http://127.0.0.1:4000/cgi/test_post.php
 Accept-Encoding: gzip, deflate, br
 Accept-Language: en-US,en;q=0.9
-Cookie: cookie=sdxcadsscdsax; PHPSESSID=b6837783175256030bba34444fe4c85a
+Cookie: cookie=rgfdvbvfdvc; PHPSESSID=b6837783175256030bba34444fe4c85a
 
-
-****************** request ******************
-****************** path/version/method ******************
-[1;32m method:  [0mGET
-[1;32m path:    [0m/cgi/style.css
-[1;32m version: [0mHTTP/1.1
-[1;32m host:    [0m127.0.0.1
-[1;32m port:    [0m4000
-
-
-****************** headers ******************
-[1;32m Accept: [0mtext/css,*/*;q=0.1
-
-[1;32m Accept-Encoding: [0mgzip, deflate, br
-
-[1;32m Accept-Language: [0men-US,en;q=0.9
-
-[1;32m Connection: [0mkeep-alive
-
-[1;32m Cookie: [0mcookie=sdxcadsscdsax; PHPSESSID=b6837783175256030bba34444fe4c85a
-
-[1;32m Host: [0m127.0.0.1:4000
-
-[1;32m Referer: [0mhttp://127.0.0.1:4000/cgi/set_session.php
-
-[1;32m Sec-Fetch-Dest: [0mstyle
-
-[1;32m Sec-Fetch-Mode: [0mno-cors
-
-[1;32m Sec-Fetch-Site: [0msame-origin
-
-[1;32m User-Agent: [0mMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
-
-[1;32m sec-ch-ua: [0m"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"
-
-[1;32m sec-ch-ua-mobile: [0m?0
-
-[1;32m sec-ch-ua-platform: [0m"macOS"
-
-
-
-****************** query_params ******************
-
-
-
-****************** body ******************
 
 location i/test|||/cgi/style.css
 location i/|||/cgi/style.css
 location i/template|||/cgi/style.css
 location i/test2|||/cgi/style.css
-path_res: Users/ojamil/Desktop/web_serve/assets/cgi/style.css
-root:Users/ojamil/Desktop/web_serve/assets
+head :: 
+
+H > 0
+head :: 
+
+H > 0
+head :: 
+
+H > 0
