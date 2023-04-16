@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_launch.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhamdani <mhamdani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/15 14:27:31 by mhamdani         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:01:52 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ void Server_launch::__listen_socket(socket_info &socket_add)
 /* --------------------------------- accept --------------------------------- */
 void Server_launch::__accept(int &__ident)
 {
-	struct sockaddr_in	addr;
-	socklen_t	len = sizeof(addr);
+	struct sockaddr_in addr;
+	socklen_t len = sizeof(addr);
 
 	bzero(&addr, sizeof(addr));
 	int __client = accept(__ident, (struct sockaddr *)&addr, &len);
@@ -265,12 +265,12 @@ void Server_launch::__run()
 				// std::cout << "__ident  ~>   " << __ident << std::endl;
 				// if (__handler)
 				// {
-					// std::cout << "~~~~~~~~~~      __input_handler	  ~~~~~~~~~~~" << std::endl;
-					__input_handler(__ident, __data, static_cast<Transfer *>(__out_events[i].udata));		
+				// std::cout << "~~~~~~~~~~      __input_handler	  ~~~~~~~~~~~" << std::endl;
+				__input_handler(__ident, __data, static_cast<Transfer *>(__out_events[i].udata));
 				// }
 				// else
 				// {
-					// std::cout << "~~~~~~~~~~      accept	  ~~~~~~~~~~~" << std::endl;
+				// std::cout << "~~~~~~~~~~      accept	  ~~~~~~~~~~~" << std::endl;
 				// }
 			}
 			else if (__out_events[i].filter == EVFILT_WRITE)
@@ -279,18 +279,16 @@ void Server_launch::__run()
 				// send
 				// if (__handler)
 				// {
-					// std::cout << "~~~~~~~~~~      __output_handler	  ~~~~~~~~~~~" << std::endl;
-					__output_handler(__ident, __data, static_cast<Transfer *>(__out_events[i].udata));
-					// std::cout << "~~~~~~~~~~      END	  ~~~~~~~~~~~" << std::endl;
+				// std::cout << "~~~~~~~~~~      __output_handler	  ~~~~~~~~~~~" << std::endl;
+				__output_handler(__ident, __data, static_cast<Transfer *>(__out_events[i].udata));
+				// std::cout << "~~~~~~~~~~      END	  ~~~~~~~~~~~" << std::endl;
 				// }
-					
+
 				// exit(600);
-				
 			}
 		}
 	}
 }
-
 
 void Server_launch::__output_handler(int __client, int __data, Transfer *__r)
 {
@@ -307,7 +305,7 @@ void Server_launch::__output_handler(int __client, int __data, Transfer *__r)
 
 		EV_SET(&event, __client, EVFILT_WRITE, EV_DELETE, 0, 0, NULL);
 		kevent(__kq, &event, 1, NULL, 0, 0);
-		
+
 		if (__r->__close)
 		{
 			__read_handler.erase(__client);
@@ -341,15 +339,15 @@ void Server_launch::__output_handler(int __client, int __data, Transfer *__r)
 //     return stream.str();
 // };
 
-
 void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
 {
 	__r->__request_read(__client, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
-	std::cout << "H > " << __r->__read_done  << std::endl;
+	std::cout << "H > " << __r->__read_done << std::endl;
 	if (__r->__read_done)
 	{
-		std::cout << "H > " << std::endl << __r->__head  << std::endl;
+		std::cout << "H > " << std::endl
+							<< __r->__head << std::endl;
 		// std::cout << "B > " << std::endl << __r->__body.substr(0, 5000)  << std::endl;
 
 		/* -------------------------------- RESPONSE -------------------------------- */
@@ -364,7 +362,7 @@ void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
 		// exit(1);
 		// std::cout << "SEGMM > " << std::endl;
 		// std::cout << "```````````````````" << std::endl ;
-		
+
 		// memset(&__r->__res_buff, '\0', );
 		__r->__res_buff = __response.response_message;
 		__r->__res_buff_len = __response.response_message.length();
@@ -374,7 +372,7 @@ void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
 		EV_SET(&event, __client, EVFILT_READ, EV_DELETE, 0, 0, NULL);
 		kevent(__kq, &event, 1, NULL, 0, 0);
 
-		// add write event		
+		// add write event
 		EV_SET(&event, __client, EVFILT_WRITE, EV_ADD, 0, 0, __r);
 		kevent(__kq, &event, 1, NULL, 0, 0);
 	}

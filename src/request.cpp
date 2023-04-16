@@ -157,7 +157,7 @@ Request::Request(Transfer *__r)
 	}
 	if (this->_location.__attributes["root"].size() > 0)
 	{
-		this->path_res += trim(this->_location.__attributes["root"][0], "/")+ "/"+ trim(this->path, "/");
+		this->path_res += trim(this->_location.__attributes["root"][0], "/") + "/" + trim(this->path, "/");
 		this->root = trim(this->_location.__attributes["root"][0], "/");
 	}
 
@@ -166,7 +166,7 @@ Request::Request(Transfer *__r)
 
 		if (file_exists(this->path_res))
 		{
-			
+
 			if (remove(this->path_res.c_str()) != 0)
 			{
 				this->status_code = INTERNAL_SERVER_ERROR;
@@ -193,7 +193,7 @@ Request::Request(Transfer *__r)
 		this->is_directory_file.second = this->path_res;
 		if (file_exists(this->path_res + "/index.html") && !is_directory(this->path_res + "/index.html"))
 		{
-			
+
 			this->is_directory_file.first = false;
 			this->is_directory_file.second = this->path_res + "/index.html";
 		}
@@ -229,11 +229,10 @@ Request::Request(Transfer *__r)
 			}
 			else
 			{
-					this->status_code = NOT_FOUND;
-					return;
+				this->status_code = NOT_FOUND;
+				return;
 			}
 		}
-		
 	}
 	else
 	{
@@ -263,16 +262,16 @@ Request::Request(Transfer *__r)
 	if (this->method == "POST")
 	{
 		std::string boundary = "--";
-	
+
 		boundary += this->headers["Content-Type"].substr(this->headers["Content-Type"].find("boundary=") + 9);
 		this->body_boundary = split(this->body, boundary);
 
-		for (unsigned long i = 0; i < this->body_boundary.size()-1; i++)
+		for (unsigned long i = 0; i < this->body_boundary.size() - 1; i++)
 		{
 			std::string name = this->body_boundary[i].substr(this->body_boundary[i].find("name=\"") + 6);
 			name = name.substr(0, name.find("\""));
 			std::string value = this->body_boundary[i].substr(this->body_boundary[i].find("\r\n\r\n") + 4);
-			
+
 			if (this->body_boundary[i].find("filename=\"") != std::string::npos)
 			{
 				value = value.substr(0, value.find_last_of("\r\n"));
@@ -282,7 +281,7 @@ Request::Request(Transfer *__r)
 				if (!file_exists(this->_server.__attributes["upload_dir"][0]))
 					mkdir(this->_server.__attributes["upload_dir"][0].c_str(), 0777);
 				std::ofstream out(file.c_str());
-				
+
 				out << value;
 				out.close();
 			}
@@ -303,7 +302,6 @@ Request::Request(Transfer *__r)
 	}
 	else
 		this->status_code = OK;
-
 }
 void Request::checkLocation()
 {
@@ -312,15 +310,15 @@ void Request::checkLocation()
 	std::vector<Location> locations = this->_server.__locations;
 	for (unsigned long i = 0; i < locations.size(); i++)
 	{
-		std::cout << "location i"<< locations[i].__path<< "|||"<<this->path << std::endl;
+		std::cout << "location i" << locations[i].__path << "|||" << this->path << std::endl;
 		if (locations[i].__path == this->path)
 		{
 
 			this->_location = locations[i];
-			std::cout << "location ---+++---"<< locations[i].__path<< "|||"<< std::endl;
+			std::cout << "location ---+++---" << locations[i].__path << "|||" << std::endl;
 			return;
 		}
-		else if (this->path.find(locations[i].__path) == 0)
+		else if (this->path && this->path.find(locations[i].__path) == 0)
 		{
 			if (match < locations[i].__path.size())
 			{
@@ -347,7 +345,7 @@ void Request::clear()
 	this->body_form_data.clear();
 	this->error_page_map.clear();
 	this->is_directory_file.first = false;
-	this->is_directory_file.second="";
+	this->is_directory_file.second = "";
 	this->redirect_path = "";
 	this->root = "";
 	this->_connection = "";

@@ -1,37 +1,43 @@
 #include "../include/cgi.hpp"
 
-
-Cgi::Cgi() {};
-Cgi::~Cgi() {};
+Cgi::Cgi(){};
+Cgi::~Cgi(){};
 
 void Cgi::_envMap(Request req, std::string cgi_filePath, std::string file)
 {
     this->env_map["SCRIPT_FILENAME"] = file;
     if (req.method == "GET")
-	    this->env_map["REQUEST_METHOD"] ="GET";
+        this->env_map["REQUEST_METHOD"] = "GET";
     else
-         this->env_map["REQUEST_METHOD"] ="POST";
-	this->env_map["CONTENT_LENGTH"] =req.headers.find("Content-Length")->second!="" ? req.headers.find("Content-Length")->second : "";
-	this->env_map["CONTENT_TYPE"] = req.headers.find("Content-Type")->second != "" ? req.headers.find("Content-Type")->second : "";
-	this->env_map["REDIRECT_STATUS"] = "200";
-    this->env_map["QUERY_STRING"]=req.query_params;
-    this->env_map["REQUEST_URI"] = req.path;
-    this->env_map["PATH_INFO"] = req.path;
-    this->env_map["HTTP_COOKIE"] = req.headers.find("Cookie")->second!="" ? req.headers.find("Cookie")->second : "";
-	this->env_map["GATEWAY_INTERFACE"] = "CGI/1.1";
-    this->env_map["PATH_TRANSLATED"]=req.is_directory_file.second.substr(req.root.length());
-    this->env_map["HTTP_ACCEPT"] = req.headers.find("Accept")->second!="" ? req.headers.find("Accept")->second : "";
-    this->env_map["UPLOAD_PATH"] = req._server.__attributes["upload_dir"][0] !="" ? req._server.__attributes["upload_dir"][0] : "";
-    this->env_map["HTTP_ACCEPT_LANGUAGE"] = req.headers.find("Accept-Language")->second!="" ? req.headers.find("Accept-Language")->second : "";
-    this->env_map["HTTP_REFERER"] = req.headers.find("Referer")->second!= "" ? req.headers.find("Referer")->second : "";
-    this->env_map["SERVER_PORT"]=req.port+"";
+        this->env_map["REQUEST_METHOD"] = "POST";
+    if (req.headers.find("Content-Length") != req.headers.end())
+        this->env_map["CONTENT_LENGTH"] = req.headers.find("Content-Length")->second != "" ? req.headers.find("Content-Length")->second : "";
+    if (req.headers.find("Content-Type") != req.headers.end())
+        this->env_map["CONTENT_TYPE"] = req.headers.find("Content-Type")->second != "" ? req.headers.find("Content-Type")->second : "";
+    this->env_map["REDIRECT_STATUS"] = "200";
+    if (req.query_params != "")
+        this->env_map["QUERY_STRING"] = req.query_params;
+    if (req.path != "")
+    {
+        this->env_map["REQUEST_URI"] = req.path;
+        this->env_map["PATH_INFO"] = req.path;
+    }
+    if (req.headers.find("Cookie") != req.headers.end())
+        this->env_map["HTTP_COOKIE"] = req.headers.find("Cookie")->second != "" ? req.headers.find("Cookie")->second : "";
+    this->env_map["GATEWAY_INTERFACE"] = "CGI/1.1";
+    this->env_map["PATH_TRANSLATED"] = req.is_directory_file.second.substr(req.root.length());
+    this->env_map["HTTP_ACCEPT"] = req.headers.find("Accept")->second != "" ? req.headers.find("Accept")->second : "";
+    this->env_map["UPLOAD_PATH"] = req._server.__attributes["upload_dir"][0] != "" ? req._server.__attributes["upload_dir"][0] : "";
+    this->env_map["HTTP_ACCEPT_LANGUAGE"] = req.headers.find("Accept-Language")->second != "" ? req.headers.find("Accept-Language")->second : "";
+    this->env_map["HTTP_REFERER"] = req.headers.find("Referer")->second != "" ? req.headers.find("Referer")->second : "";
+    this->env_map["SERVER_PORT"] = req.port + "";
     this->env_map["AUTH_TYPE"] = "Basic";
     this->env_map["SERVER_SOFTWARE"] = "webserv/1.0";
-    this->env_map["REMOTE_HOST"]=req.host;
-    this->env_map["SERVER_NAME"]= "";
+    this->env_map["REMOTE_HOST"] = req.host;
+    this->env_map["SERVER_NAME"] = "";
     this->env_map["SERVER_PROTOCOL"] = req.version;
-    this->env_map["HTTP_USER_AGENT"] = req.headers.find("User-Agent")->second !="" ? req.headers.find("User-Agent")->second : "";
-    this->env_map["HTTP_ACCEPT_ENCODING"] = req.headers.find("Accept-Encoding")->second !="" ? req.headers.find("Accept-Encoding")->second : "";
+    this->env_map["HTTP_USER_AGENT"] = req.headers.find("User-Agent")->second != "" ? req.headers.find("User-Agent")->second : "";
+    this->env_map["HTTP_ACCEPT_ENCODING"] = req.headers.find("Accept-Encoding")->second != "" ? req.headers.find("Accept-Encoding")->second : "";
     this->env_map["DOCUMENT_ROOT"] = req.root;
     this->env_map["HTTP_ACCEPT_CHARSET"] = "";
 }
@@ -39,14 +45,14 @@ void Cgi::_envMap(Request req, std::string cgi_filePath, std::string file)
 int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
 {
     std::string result = "";
-    _envMap(req,cgi_filePath, file);
+    _envMap(req, cgi_filePath, file);
     setEnv();
     char *av[3];
-    av[0] = (char*)cgi_filePath.c_str();
-    av[1] = (char*)file.c_str();
+    av[0] = (char *)cgi_filePath.c_str();
+    av[1] = (char *)file.c_str();
     av[2] = NULL;
-    int	stdin_save = dup(STDIN_FILENO);
-	int	stdout_save = dup(STDOUT_FILENO);
+    int stdin_save = dup(STDIN_FILENO);
+    int stdout_save = dup(STDOUT_FILENO);
     FILE *fIn = tmpfile();
     FILE *fOut = tmpfile();
     int fdIn = fileno(fIn);
@@ -72,7 +78,7 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
         this->results = result;
     }
     dup2(stdin_save, STDIN_FILENO);
-	dup2(stdout_save, STDOUT_FILENO);
+    dup2(stdout_save, STDOUT_FILENO);
     fclose(fIn);
     fclose(fOut);
     close(fdIn);
@@ -88,21 +94,21 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
 
 std::string Cgi::_getInput(std::string file)
 {
-  std::string body = "";
-  char c;
-  std::ifstream ifs;
-  ifs.open(file);
-  if (!ifs)
-  {
-    std::cout << "file open error\n";
-  }
-  else
-  {
-    while (ifs.get(c))
-      body += c;
-  }
-  ifs.close();
-  return body;
+    std::string body = "";
+    char c;
+    std::ifstream ifs;
+    ifs.open(file);
+    if (!ifs)
+    {
+        std::cout << "file open error\n";
+    }
+    else
+    {
+        while (ifs.get(c))
+            body += c;
+    }
+    ifs.close();
+    return body;
 }
 
 void Cgi::setEnv()
@@ -119,7 +125,7 @@ void Cgi::setEnv()
             _env[iEnv][i] = temp[i];
         _env[iEnv][temp.size()] = 0;
         iEnv++;
-        itMap++;       
+        itMap++;
     }
     _env[iEnv] = NULL;
- }
+}
