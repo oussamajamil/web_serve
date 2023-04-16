@@ -7,7 +7,10 @@ Cgi::~Cgi() {};
 void Cgi::_envMap(Request req, std::string cgi_filePath, std::string file)
 {
     this->env_map["SCRIPT_FILENAME"] = file;
-	this->env_map["REQUEST_METHOD"] = req.method;
+    if (req.method == "GET")
+	    this->env_map["REQUEST_METHOD"] ="GET";
+    else
+         this->env_map["REQUEST_METHOD"] ="POST";
 	this->env_map["CONTENT_LENGTH"] =req.headers.find("Content-Length")->second!="" ? req.headers.find("Content-Length")->second : "";
 	this->env_map["CONTENT_TYPE"] = req.headers.find("Content-Type")->second != "" ? req.headers.find("Content-Type")->second : "";
 	this->env_map["REDIRECT_STATUS"] = "200";
