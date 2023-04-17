@@ -12,14 +12,18 @@ int main(int ac, char **av)
 		std::string __config = __config_file(ac, av);
 
 		servers.__parse(__config);
+		if (servers.__servers.size())
+		{
+			servers.__set_locations();
 
-		servers.__set_locations();
+			Server_launch __launcher(&servers.__servers);
 
-		Server_launch __launcher(&servers.__servers);
-
-		__launcher.__launch();
-		__launcher.__run();
-		__servers_display(servers);
+			__launcher.__launch();
+			__launcher.__run();
+			__servers_display(servers);
+		}
+		else
+			std::cout << "empty file" << std::endl;
 	}
 
 	catch (const std::exception &e)

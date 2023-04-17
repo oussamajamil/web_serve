@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_launch.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/16 21:01:52 by oussama          ###   ########.fr       */
+/*   Updated: 2023/04/16 23:07:26 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void Server_launch::__bind_socket(socket_info &socket_add)
 	if (bind(socket_add.__socket_fd, (struct sockaddr *)&server_address, sizeof(server_address)) < 0)
 	{
 		std::cerr << "Error: bind" << std::endl;
-		exit(1);
+		// exit(1);
 	}
 }
 
@@ -343,12 +343,12 @@ void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
 {
 	__r->__request_read(__client, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
-	std::cout << "H > " << __r->__read_done << std::endl;
+	// std::cout << "H > " << __r->__read_done << std::endl;
 	if (__r->__read_done)
 	{
-		std::cout << "H > " << std::endl
-							<< __r->__head << std::endl;
-		// std::cout << "B > " << std::endl << __r->__body.substr(0, 5000)  << std::endl;
+	// 	std::cout << "H > " << std::endl
+	// 						<< __r->__head << std::endl;
+	// 	std::cout << "B > " << std::endl << __r->__body.substr(0, 5000)  << std::endl;
 
 		/* -------------------------------- RESPONSE -------------------------------- */
 		// std::cout << "SEGFAULT (1) " << std::endl;

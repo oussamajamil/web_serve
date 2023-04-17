@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/12 23:46:15 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/16 22:57:30 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void Transfer::__response_send(int __client, int __data)
 	// std::cout << "s__res_buff :: " << __res_buff[__length_s_] << std::endl;
 	if ( __data > 0)
 	{
-		
 		__s = send(__client, (void *)(&__res_buff[__length_s_]), __res_buff_len - __length_s_, 0);
 		// __s = send(__client, (void *)(&__res_buff[__length_s_]), BUFFER * 2, 0);
 		// std::cout << "s__s :: " << __s << std::endl;
@@ -133,9 +132,11 @@ void Transfer::__read_(int __client, int &__data)
 		if (__length == __request.length())
             __request.resize(__length * 2);
 		if (__data > 0)
-		{	
+		{
 			// if ((int)(__request.size() - __length) <= __data)
 			__r = recv(__client, (void *)(__request.data()), __request.length() - __length, 0);
+			// std::cout << "__r :: " << __r << std::endl;
+			// std::cout << "_@@@@ :: " << __request << std::endl;exit(0);
 			// else if (__data > 0)
 			// 	__r = recv(__client, (void *)(__request.data()), __data, 0);
 			// std::cout << "r__r :: " << __r << std::endl;
@@ -164,7 +165,7 @@ void Transfer::__read_(int __client, int &__data)
 					__length -= crlf + 4;
 					if (__chunks)
 					{
-						int	__l = stoi(__body.substr(0, __body.find("\r\n")));
+						int	__l = stoi(__body.substr(0, __body.find("\r\n")), 0, 16);
 						__body.erase(0, __body.find("\r\n") + 2);
 						__body.erase(0, 2);
 						__sub_chunck = __l - __body.length();
@@ -172,23 +173,26 @@ void Transfer::__read_(int __client, int &__data)
 							__rest = __l;
 						// __length_chunck += __sub_chunck;
 					}
-				}	
+				}
 			}
 			else if (__chunks)
 			{
+				// std::cout << "__RR :: " << __rest << std::endl;
+				// std::cout << "__BB :: " << __body << std::endl;
+				
 				if (__rest)
-				{
-					__request.insert(0, __body.substr(__rest + 2));
+				{					__request.insert(0, __body.substr(__rest + 2));
 					__body.erase(__rest, __body.length() - __rest);
 				}
+
 				__read_chunkes();
 			}
 			else
-			{	
+			{
 				__body.append(__request.c_str(), __r);
 			}
 			// std::cout << "__length :: " << __length << std::endl<< std::endl;
-			if (__content_length == __length)
+			if (!__chunks && __content_length == __length)
 			{
 				__read_done = true;
 				return;
@@ -197,7 +201,7 @@ void Transfer::__read_(int __client, int &__data)
 			__request.resize(__s);
 			__data -= __r;
 		}
-		std::cout << "head :: " << __head << std::endl<< std::endl;
+		// std::cout << "head :: " << __head << std::endl<< std::endl;
 	// }while(__data > 0);
 }
 
@@ -214,7 +218,7 @@ void Transfer::__read_chunkes()
 		}
 		if (__request.length() > 0)
 		{
-			__l = stoi(__request.substr(0, __request.find("\r\n")));
+			__l = stoi(__request.substr(0, __request.find("\r\n")), 0, 16);
 			__request.erase(0, __request.find("\r\n") + 2);;
 			__request.erase(0, 2);
 			if (__request.length() > (size_t)(__l + 2))
@@ -256,7 +260,7 @@ void Transfer::__parse_info()
 		__chunks = true;
 	}
 	else
-	{	
+	{
 		/* ----------------------------- Content-Length ----------------------------- */
 		__holder = __search_str("Content-Length: ");
 		if (__holder != NPOS)
@@ -264,10 +268,10 @@ void Transfer::__parse_info()
 		else
 		{
 			__read_done = true;
-			__content_length = 0;	
+			__content_length = 0;
 		}
 	}
-	
+
 	/* ------------------------------- keep-alive ------------------------------- */
 	__holder = __search_str("Connection: ");
 	if (__holder != NPOS && __holder == "keep-alive")

@@ -5,11 +5,13 @@ Cgi::~Cgi(){};
 
 void Cgi::_envMap(Request req, std::string cgi_filePath, std::string file)
 {
+    (void)cgi_filePath;
     this->env_map["SCRIPT_FILENAME"] = file;
-    if (req.method == "GET")
-        this->env_map["REQUEST_METHOD"] = "GET";
-    else
-        this->env_map["REQUEST_METHOD"] = "POST";
+    // if (req.method == "GET")
+    //     this->env_map["REQUEST_METHOD"] = "GET";
+    // else
+    if (req.method !="")
+         this->env_map["REQUEST_METHOD"] = req.method;
     if (req.headers.find("Content-Length") != req.headers.end())
         this->env_map["CONTENT_LENGTH"] = req.headers.find("Content-Length")->second != "" ? req.headers.find("Content-Length")->second : "";
     if (req.headers.find("Content-Type") != req.headers.end())
@@ -65,7 +67,8 @@ int Cgi::execute(Request req, std::string cgi_filePath, std::string file)
     FILE *fOut = tmpfile();
     int fdIn = fileno(fIn);
     int fdOut = fileno(fOut);
-    write(fdIn, req.body.c_str(), std::atoi(req.headers["Content-Length"].c_str()));
+    if (req.headers.find("Content-Length") != req.headers.end())
+        write(fdIn, req.body.c_str(), std::atoi(req.headers["Content-Length"].c_str()));
     lseek(fdIn, 0, SEEK_SET);
     pid_t pid = fork();
     if (pid == 0)

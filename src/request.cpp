@@ -320,7 +320,7 @@ void Request::checkLocation()
 			std::cout << "location ---+++---" << locations[i].__path << "|||" << std::endl;
 			return;
 		}
-		else if (this->path && this->path.find(locations[i].__path) == 0)
+		else if (this->path != "" && this->path.find(locations[i].__path) == 0)
 		{
 			if (match < locations[i].__path.size())
 			{

@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mhamdani <mhamdani@student.42.fr>          +#+  +:+       +#+         #
+#    By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 16:38:20 by obelkhad          #+#    #+#              #
-#    Updated: 2023/04/15 14:10:51 by mhamdani         ###   ########.fr        #
+#    Updated: 2023/04/16 21:01:14 by obelkhad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++ -std=c++98
 
-# CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 SRC	=  main.cpp src/server.cpp\
 				src/server_launch.cpp\
@@ -43,7 +43,7 @@ $(NAME): $(OBJ)
 clean:
 	rm -f $(OBJ)
 
-fclean: clean 
+fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
