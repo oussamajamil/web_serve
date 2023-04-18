@@ -230,7 +230,8 @@ Response::Response(Request req)
     }
     if (req.status_code != OK)
     {
-        if (req._location.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
+        if (req._location.__attributes.find("error_page") != req._location.__attributes.end() &&
+            req._location.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
         {
             for (unsigned int i = 0; i < req._location.__attributes.find("error_page")->second.size(); i = i + 2)
             {
@@ -241,7 +242,8 @@ Response::Response(Request req)
                 }
             }
         }
-        if (req._server.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
+        if (req._server.__attributes.find("error_page") != req._server.__attributes.end() &&
+            req._server.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
         {
             for (unsigned int i = 0; i < req._server.__attributes.find("error_page")->second.size(); i = i + 2)
             {
@@ -256,6 +258,7 @@ Response::Response(Request req)
             this->file_error = "";
         this->body = error_page(req.status_code, this->file_error);
         this->response_message = generate_response(&req);
+        this->file_error = "";
         return;
     }
     else
@@ -328,7 +331,9 @@ Response::Response(Request req)
                 }
                 else
                 {
-                    if (req._location.__attributes.find("error_page")->second.size() > 0)
+                    if (req._location.__attributes.find("error_page") != req._location.__attributes.end() &&
+                        req._location.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
+
                         for (unsigned int i = 0; i < req._location.__attributes.find("error_page")->second.size(); i = i + 2)
                         {
                             if (req._location.__attributes["error_page"][i] == std::to_string(403))
@@ -337,7 +342,8 @@ Response::Response(Request req)
                                 break;
                             }
                         }
-                    else if (req._server.__attributes.find("error_page")->second.size() > 0)
+                    if (req._server.__attributes.find("error_page") != req._server.__attributes.end() &&
+                        req._server.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
                         for (unsigned int i = 0; i < req._server.__attributes.find("error_page")->second.size(); i = i + 2)
                         {
                             if (req._server.__attributes["error_page"][i] == std::to_string(403))
@@ -346,11 +352,11 @@ Response::Response(Request req)
                                 break;
                             }
                         }
-                    else
+                    else if (this->file_error == "")
                         this->file_error = "";
-
                     this->body = error_page(403, this->file_error);
                     this->response_message = generate_response(&req);
+                    this->file_error = "";
                     return;
                 }
             }
