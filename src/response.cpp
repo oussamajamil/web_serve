@@ -148,7 +148,6 @@ std::string Response::generate_response(Request *req)
         response += req->redirect_path;
     else if (this->body != "")
         response.append(this->body);
-    // std::cout << response;
     return response;
 }
 
@@ -185,16 +184,13 @@ std::string Response::get_file(std::string path)
     return pbuf.str();
 }
 
-std::string Response::error_page(int status_code, std::map<int, std::string> error, std::string root)
+std::string Response::error_page(int status_code, std::string file)
 {
     std::string res;
-    if (error.find(status_code) != error.end())
+    if (file != "" && file_exists(file))
     {
-        if (file_exists(root + error[status_code]))
-        {
-            this->path = root + error[status_code];
-            res = get_file(this->path);
-        }
+        this->path = file;
+        res = get_file(this->path);
     }
     else
     {
@@ -225,16 +221,40 @@ std::string Response::default_post_page(std::map<std::string, std::string> body_
 Response::Response(Request req)
 {
     handle_content_type();
+
     this->response_message.clear();
     if (req.redirect_path != "")
     {
         this->response_message = generate_response(&req);
-
         return;
     }
     if (req.status_code != OK)
     {
-        this->body = error_page(req.status_code, req.error_page_map, req.root);
+        if (req._location.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
+        {
+            for (unsigned int i = 0; i < req._location.__attributes.find("error_page")->second.size(); i = i + 2)
+            {
+                if (req._location.__attributes["error_page"][i] == std::to_string(req.status_code))
+                {
+                    this->file_error = req._location.__attributes["error_page"][i + 1];
+                    break;
+                }
+            }
+        }
+        if (req._server.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
+        {
+            for (unsigned int i = 0; i < req._server.__attributes.find("error_page")->second.size(); i = i + 2)
+            {
+                if (req._server.__attributes["error_page"][i] == std::to_string(req.status_code))
+                {
+                    this->file_error = req._server.__attributes["error_page"][i + 1];
+                    break;
+                }
+            }
+        }
+        if (this->file_error == "")
+            this->file_error = "";
+        this->body = error_page(req.status_code, this->file_error);
         this->response_message = generate_response(&req);
         return;
     }
@@ -251,33 +271,45 @@ Response::Response(Request req)
 
             std::string extension = get_file_extencion(req.is_directory_file.second);
             std::vector<std::string> vec_cgi;
-
             vec_cgi = req._location.__attributes.find("cgi")->second;
             for (unsigned int i = 0; i < vec_cgi.size(); i = i + 2)
             {
-                if (vec_cgi[i] == extension)
+                if (req._location.__attributes.find("cgi") != req._location.__attributes.end())
                 {
-                    std::string path = vec_cgi[i + 1];
-                    cgi.execute(req, path, req.is_directory_file.second);
-                    std::vector<std::string> vec = split(cgi.results, "\r\n\r\n");
-                    this->body = vec[1];
-                    this->header = vec[0];
-                    std::vector<std::string> vec_header = split(this->header, "\r\n");
-                    for (unsigned int i = 0; i < vec_header.size(); i++)
+                    vec_cgi = req._location.__attributes.find("cgi")->second;
+                    for (unsigned int i = 0; i < vec_cgi.size(); i = i + 2)
                     {
-                        std::string _cookie;
-                        if (vec_header[i].find("Content-Type") != std::string::npos)
+                        if (vec_cgi[i] == extension)
                         {
-                            req.headers["Content-Type"] = vec_header[i].substr(vec_header[i].find(":") + 1);
-                        }
-                        if (vec_header[i].find("Set-Cookie") != std::string::npos)
-                        {
-                            req.headers["Set-Cookie"] += vec_header[i];
+                            std::string path = vec_cgi[i + 1];
+                            cgi.execute(req, path, req.is_directory_file.second);
+                            std::vector<std::string> vec = split(cgi.results, "\r\n\r\n");
+                            if (extension == "py" && vec.size() == 1)
+                            {
+                                this->body = vec[0];
+                            }
+                            else if (vec.size() >= 2)
+                            {
+                                this->body = vec[1];
+                                this->header = vec[0];
+                                std::vector<std::string> vec_header = split(this->header, "\r\n");
+                                for (unsigned int i = 0; i < vec_header.size(); i++)
+                                {
+                                    std::string _cookie;
+                                    if (vec_header[i].find("Content-Type") != std::string::npos)
+                                    {
+                                        req.headers["Content-Type"] = vec_header[i].substr(vec_header[i].find(":") + 1);
+                                    }
+                                    if (vec_header[i].find("Set-Cookie") != std::string::npos)
+                                    {
+                                        req.headers["Set-Cookie"] += vec_header[i];
+                                    }
+                                }
+                            }
+                            this->response_message = generate_response(&req);
+                            return;
                         }
                     }
-
-                    this->response_message = generate_response(&req);
-                    return;
                 }
             }
             this->body = default_post_page(req.body_form_data);
@@ -296,7 +328,28 @@ Response::Response(Request req)
                 }
                 else
                 {
-                    this->body = error_page(403, req.error_page_map, req.root);
+                    if (req._location.__attributes.find("error_page")->second.size() > 0)
+                        for (unsigned int i = 0; i < req._location.__attributes.find("error_page")->second.size(); i = i + 2)
+                        {
+                            if (req._location.__attributes["error_page"][i] == std::to_string(403))
+                            {
+                                this->file_error = req._location.__attributes["error_page"][i + 1];
+                                break;
+                            }
+                        }
+                    else if (req._server.__attributes.find("error_page")->second.size() > 0)
+                        for (unsigned int i = 0; i < req._server.__attributes.find("error_page")->second.size(); i = i + 2)
+                        {
+                            if (req._server.__attributes["error_page"][i] == std::to_string(403))
+                            {
+                                this->file_error = req._server.__attributes["error_page"][i + 1];
+                                break;
+                            }
+                        }
+                    else
+                        this->file_error = "";
+
+                    this->body = error_page(403, this->file_error);
                     this->response_message = generate_response(&req);
                     return;
                 }
@@ -315,12 +368,12 @@ Response::Response(Request req)
                         {
                             std::string path = vec_cgi[i + 1];
                             cgi.execute(req, path, req.is_directory_file.second);
-                            std::cout << "cgi |||||" <<std::endl; 
                             std::vector<std::string> vec = split(cgi.results, "\r\n\r\n");
-                             if(extension ==  "py" &&  vec.size() == 1){
+                            if (extension == "py" && vec.size() == 1)
+                            {
                                 this->body = vec[0];
-                             }
-                            else if (vec.size()>=2)
+                            }
+                            else if (vec.size() >= 2)
                             {
                                 this->body = vec[1];
                                 this->header = vec[0];
@@ -332,7 +385,7 @@ Response::Response(Request req)
                                     {
                                         req.headers["Content-Type"] = vec_header[i].substr(vec_header[i].find(":") + 1);
                                     }
-                                    if(vec_header[i].find("Set-Cookie") != std::string::npos)
+                                    if (vec_header[i].find("Set-Cookie") != std::string::npos)
                                     {
                                         req.headers["Set-Cookie"] += vec_header[i];
                                     }

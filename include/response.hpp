@@ -21,6 +21,7 @@ private:
     ;
     std::map<std::string, std::string> content_type;
     std::string path;
+    std::string file_error;
 
 public:
     Response();
@@ -30,7 +31,7 @@ public:
     Response(Request request);
     std::string default_error_page(int status_code);
     std::string get_message(int status_code);
-    std::string error_page(int status_code, std::map<int, std::string> error, std::string root);
+    std::string error_page(int status_code, std::string file);
     std::string get_file(std::string path);
     std::string generate_response(Request *request);
     void handle_content_type();
