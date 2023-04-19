@@ -7,11 +7,8 @@ void Cgi::_envMap(Request req, std::string cgi_filePath, std::string file)
 {
     (void)cgi_filePath;
     this->env_map["SCRIPT_FILENAME"] = file;
-    // if (req.method == "GET")
-    //     this->env_map["REQUEST_METHOD"] = "GET";
-    // else
-    if (req.method !="")
-         this->env_map["REQUEST_METHOD"] = req.method;
+    if (req.method != "")
+        this->env_map["REQUEST_METHOD"] = req.method;
     if (req.headers.find("Content-Length") != req.headers.end())
         this->env_map["CONTENT_LENGTH"] = req.headers.find("Content-Length")->second != "" ? req.headers.find("Content-Length")->second : "";
     if (req.headers.find("Content-Type") != req.headers.end())
@@ -28,15 +25,15 @@ void Cgi::_envMap(Request req, std::string cgi_filePath, std::string file)
         this->env_map["HTTP_COOKIE"] = req.headers.find("Cookie")->second != "" ? req.headers.find("Cookie")->second : "";
     this->env_map["GATEWAY_INTERFACE"] = "CGI/1.1";
     if (req.is_directory_file.second != "")
-    this->env_map["PATH_TRANSLATED"] = req.is_directory_file.second.substr(req.root.length());
+        this->env_map["PATH_TRANSLATED"] = req.is_directory_file.second.substr(req.root.length());
     if (req.headers.find("Accept") != req.headers.end())
         this->env_map["HTTP_ACCEPT"] = req.headers.find("Accept")->second != "" ? req.headers.find("Accept")->second : "";
     if (req._server.__attributes.find("upload_dir") != req._server.__attributes.end())
-     this->env_map["UPLOAD_PATH"] = req._server.__attributes["upload_dir"][0] != "" ? req._server.__attributes["upload_dir"][0] : "";
+        this->env_map["UPLOAD_PATH"] = req._server.__attributes["upload_dir"][0] != "" ? req._server.__attributes["upload_dir"][0] : "";
     if (req.headers.find("Accept-Language") != req.headers.end())
         this->env_map["HTTP_ACCEPT_LANGUAGE"] = req.headers.find("Accept-Language")->second != "" ? req.headers.find("Accept-Language")->second : "";
     if (req.headers.find("Referer") != req.headers.end())
-    this->env_map["HTTP_REFERER"] = req.headers.find("Referer")->second != "" ? req.headers.find("Referer")->second : "";
+        this->env_map["HTTP_REFERER"] = req.headers.find("Referer")->second != "" ? req.headers.find("Referer")->second : "";
 
     this->env_map["SERVER_PORT"] = req.port + "";
     this->env_map["AUTH_TYPE"] = "Basic";
@@ -45,9 +42,9 @@ void Cgi::_envMap(Request req, std::string cgi_filePath, std::string file)
     this->env_map["SERVER_NAME"] = "";
     this->env_map["SERVER_PROTOCOL"] = req.version;
     if (req.headers.find("User-Agent") != req.headers.end())
-    this->env_map["HTTP_USER_AGENT"] = req.headers.find("User-Agent")->second != "" ? req.headers.find("User-Agent")->second : "";
+        this->env_map["HTTP_USER_AGENT"] = req.headers.find("User-Agent")->second != "" ? req.headers.find("User-Agent")->second : "";
     if (req.headers.find("Accept-Encoding") != req.headers.end())
-    this->env_map["HTTP_ACCEPT_ENCODING"] = req.headers.find("Accept-Encoding")->second != "" ? req.headers.find("Accept-Encoding")->second : "";
+        this->env_map["HTTP_ACCEPT_ENCODING"] = req.headers.find("Accept-Encoding")->second != "" ? req.headers.find("Accept-Encoding")->second : "";
     this->env_map["DOCUMENT_ROOT"] = req.root;
     this->env_map["HTTP_ACCEPT_CHARSET"] = "";
 }
