@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:17:04 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/10 01:39:28 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/19 00:04:42 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ public:
 	void						__create_socket(socket_info &);
 	void						__set_socket(socket_info &);
 	void						__fcntl(socket_info &);
-	void						__bind_socket(socket_info &);
+	int							__bind_socket(socket_info &);
 	void						__listen_socket(socket_info &);
 	void						__accept(int&);
 	void						__kernel_event_queue();

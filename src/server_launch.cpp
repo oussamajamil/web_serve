@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/16 23:07:26 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/19 01:30:26 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ Server_launch::~Server_launch()
 /* ------------------------------- Extraction ------------------------------- */
 void Server_launch::__extraction(std::string &host_port, socket_info &__i)
 {
-	// todo: extrair port and ip@ + check if they are valide
-
 	size_t __p;
 	if ((__p = host_port.find(':')) != std::string::npos)
 	{
@@ -102,20 +100,15 @@ void Server_launch::__fcntl(socket_info &socket_add)
 /* ---------------------------------- bind ---------------------------------- */
 /* ---------------------------------- bind ---------------------------------- */
 /* ---------------------------------- bind ---------------------------------- */
-void Server_launch::__bind_socket(socket_info &socket_add)
+int Server_launch::__bind_socket(socket_info &socket_add)
 {
 	struct sockaddr_in server_address;
 
-	// bzero(&server_address, sizeof(server_address));
 	server_address.sin_family = AF_INET;
 	server_address.sin_addr.s_addr = inet_addr(socket_add.__address.c_str());
 	server_address.sin_port = htons(socket_add.__port);
 
-	if (bind(socket_add.__socket_fd, (struct sockaddr *)&server_address, sizeof(server_address)) < 0)
-	{
-		std::cerr << "Error: bind" << std::endl;
-		// exit(1);
-	}
+	return (bind(socket_add.__socket_fd, (struct sockaddr *)&server_address, sizeof(server_address)));
 }
 
 /* --------------------------------- listen --------------------------------- */
@@ -147,7 +140,6 @@ void Server_launch::__accept(int &__ident)
 		std::cerr << "Error: accept" << std::endl;
 		exit(1);
 	}
-	// __read_handler[__client].__init_requst();
 	__read_handler[__client].__ident = __ident;
 	__read_handler[__client].__scoket = __client;
 	__read_handler[__client].__addr = addr;
@@ -194,6 +186,8 @@ int Server_launch::__host_exist(socket_info &__info)
 	return __it->first;
 }
 
+//TODO : time out
+
 /* -------------------------------- Lunching -------------------------------- */
 /* -------------------------------- Lunching -------------------------------- */
 /* -------------------------------- Lunching -------------------------------- */
@@ -201,6 +195,7 @@ int Server_launch::__host_exist(socket_info &__info)
 void Server_launch::__launch()
 {
 	std::vector<std::string> *__host_port;
+	size_t __b = 0;
 	int __fd;
 
 	for (size_t i = 0; i < __server_list->size(); ++i)
@@ -214,11 +209,10 @@ void Server_launch::__launch()
 			if (__fd == -1)
 			{
 				__create_socket(__info);
-				// std::cout << "sock = " << __info.__socket_fd << std::endl;
-				// std::cout << "host = " << __info.__host << std::endl;
 				__set_socket(__info);
 				__fcntl(__info);
-				__bind_socket(__info);
+				if (__bind_socket(__info) < 0)
+					__b++;
 				__listen_socket(__info);
 				__info.__servers.push_back(&(*__server_list)[i]);
 				__globle_sockets[__info.__socket_fd] = __info;
@@ -226,6 +220,11 @@ void Server_launch::__launch()
 			else
 				__globle_sockets[__fd].__servers.push_back(&(*__server_list)[i]);
 		}
+	}
+	if (__b == __globle_sockets.size())
+	{
+		std::cerr << "Error: bind" << std::endl;
+		exit(1);
 	}
 	__kernel_event_queue();
 }
@@ -238,6 +237,7 @@ void Server_launch::__run()
 {
 	int __event_number = 0;
 
+
 	__out_events.resize(EVENTS_NUBMBER);
 	while (true)
 	{
@@ -246,13 +246,10 @@ void Server_launch::__run()
 			std::cerr << "Error: kevent out" << std::endl;
 			exit(1);
 		}
-		// std::cout << "__event_number  ->" << __event_number << std::endl;
 		for (int i = 0; i < __event_number; ++i)
 		{
 			int __ident = static_cast<int>(__out_events[i].ident);
-			// std::cout << "[i]~> " << i << std::endl;
 			int __data = static_cast<int>(__out_events[i].data);
-			// void *__handler = __out_events[i].udata;
 
 			if (__out_events[i].filter == EVFILT_READ)
 			{
@@ -261,30 +258,15 @@ void Server_launch::__run()
 					__accept(__ident);
 					continue;
 				}
-				// std::cout << "~~~~~~~~~~      _READ	  ~~~~~~~~~~~" << std::endl;
-				// std::cout << "__ident  ~>   " << __ident << std::endl;
-				// if (__handler)
-				// {
-				// std::cout << "~~~~~~~~~~      __input_handler	  ~~~~~~~~~~~" << std::endl;
-				__input_handler(__ident, __data, static_cast<Transfer *>(__out_events[i].udata));
-				// }
-				// else
-				// {
-				// std::cout << "~~~~~~~~~~      accept	  ~~~~~~~~~~~" << std::endl;
-				// }
+				if (__out_events[i].udata)
+				{
+					if (__read_handler.find(__ident) != __read_handler.end())
+						__input_handler(__ident, __data, static_cast<Transfer *>(__out_events[i].udata));
+				}
 			}
 			else if (__out_events[i].filter == EVFILT_WRITE)
 			{
-				// std::cout << "~~~~~~~~~~      _WRITE	  ~~~~~~~~~~~" << std::endl;
-				// send
-				// if (__handler)
-				// {
-				// std::cout << "~~~~~~~~~~      __output_handler	  ~~~~~~~~~~~" << std::endl;
 				__output_handler(__ident, __data, static_cast<Transfer *>(__out_events[i].udata));
-				// std::cout << "~~~~~~~~~~      END	  ~~~~~~~~~~~" << std::endl;
-				// }
-
-				// exit(600);
 			}
 		}
 	}
@@ -292,15 +274,11 @@ void Server_launch::__run()
 
 void Server_launch::__output_handler(int __client, int __data, Transfer *__r)
 {
-	// std::cout <<  "[] = " << __r->__response_send_done << std::endl;
+	int __x = 0;
 	if (__r->__response_send_done == false)
-		__r->__response_send(__client, __data);
+		__x = __r->__response_send(__client, __data);
 	else
 	{
-		// std::cout <<  "[L] = " << __r->__length_s_ << std::endl;
-		// std::cout <<  "[BFL] = " << __r->__res_buff_len << std::endl;
-		// std::cout <<  "[L] = " << __r->__length_s_ << std::endl;
-		// std::cout <<  "[BFL] = " << __r->__res_buff_len << std::endl;
 		struct kevent event;
 
 		EV_SET(&event, __client, EVFILT_WRITE, EV_DELETE, 0, 0, NULL);
@@ -313,59 +291,30 @@ void Server_launch::__output_handler(int __client, int __data, Transfer *__r)
 		}
 		else
 		{
-			// exit(1);
-			// std::cout << "alive " << std::endl;
 			__r->__init_requst();
 			EV_SET(&event, __client, EVFILT_READ, EV_ADD | EV_CLEAR, 0, 0, __r);
 			kevent(__kq, &event, 1, NULL, 0, 0);
 		}
 	}
+	if (__x < 0)
+	{
+		close(__client);
+		__read_handler.erase(__client);
+	}
 }
-
-// // TODO:
-// std::string open_to_serve(std::ifstream& file) {
-//     if (!file.is_open()) {
-//         return "";
-//     }
-
-//     // Read the file into a stringstream
-//     std::stringstream stream;
-//     stream << file.rdbuf();
-
-//     // Close the file
-//     file.close();
-
-//     // Return the contents of the stringstream as a string
-//     return stream.str();
-// };
 
 void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
 {
 	__r->__request_read(__client, __data);
 	__r->__server = __server_set(__r->__ident, __r->__host);
-	// std::cout << "H > " << __r->__read_done << std::endl;
 	if (__r->__read_done)
 	{
-	// 	std::cout << "H > " << std::endl
-	// 						<< __r->__head << std::endl;
-	// 	std::cout << "B > " << std::endl << __r->__body.substr(0, 5000)  << std::endl;
-
 		/* -------------------------------- RESPONSE -------------------------------- */
-		// std::cout << "SEGFAULT (1) " << std::endl;
 		Request __request(__r);
-		// std::cout << "SEGFAULT (2) " << std::endl;
 		Response __response(__request);
-		// std::cout << "SEGFAULT (3) " << std::endl;
-
-		// std::cout << "R > " << std::endl << __response.response_message << std::endl;
-		// std::cout << "==========================================" << std::endl<< std::endl;
-		// exit(1);
-		// std::cout << "SEGMM > " << std::endl;
-		// std::cout << "```````````````````" << std::endl ;
-
-		// memset(&__r->__res_buff, '\0', );
 		__r->__res_buff = __response.response_message;
 		__r->__res_buff_len = __response.response_message.length();
+
 		/* ---------------------------------- EVENT --------------------------------- */
 		struct kevent event;
 		// delete event
