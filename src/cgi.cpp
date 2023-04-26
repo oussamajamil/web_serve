@@ -129,7 +129,7 @@ void Cgi::setEnv()
     {
         std::string temp = itMap->first + "=" + itMap->second;
         _env[iEnv] = new char[temp.size() + 1];
-        for (unsigned long i = 0; i < temp.size(); i++)
+        for (int i = 0; i < (int)temp.size(); i++)
             _env[iEnv][i] = temp[i];
         _env[iEnv][temp.size()] = 0;
         iEnv++;

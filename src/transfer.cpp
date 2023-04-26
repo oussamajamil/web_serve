@@ -3,30 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   transfer.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/19 01:44:16 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:15:03 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/transfer.hpp"
 
-
-Transfer::Transfer() : 
-__request_read_done(false),
-__close(true),
-__chunks(false),
-__read_done(false),
-__head_read_done(false),
-__requet_read_done(false),
-__response_send_done(false),
-__content_length(0),
-__length(0),
-__length_s_(0),
-__rest(0),
-__sub_chunck(0),
-__res_buff_len(0)
+Transfer::Transfer() : __request_read_done(false),
+											 __close(true),
+											 __chunks(false),
+											 __read_done(false),
+											 __head_read_done(false),
+											 __requet_read_done(false),
+											 __response_send_done(false),
+											 __content_length(0),
+											 __length(0),
+											 __length_s_(0),
+											 __rest(0),
+											 __sub_chunck(0),
+											 __res_buff_len(0)
 {
 	__request.clear();
 	__request.resize(BUFFER);
@@ -35,7 +33,8 @@ __res_buff_len(0)
 }
 
 Transfer::~Transfer()
-{}
+{
+}
 
 void Transfer::__init_requst()
 {
@@ -68,6 +67,7 @@ void Transfer::__request_read(int __client, int __data)
 
 int Transfer::__response_send(int __client, int __data)
 {
+	(void)__data;
 	int __s = 0;
 
 	__s = send(__client, (void *)(__res_buff.data() + __length_s_), __res_buff_len - __length_s_, 0);
@@ -85,12 +85,12 @@ int Transfer::__response_send(int __client, int __data)
 
 void Transfer::__read_(int __client, int &__data)
 {
-	int				__r;
-	size_t			__p;
-	size_t			__l = 0;
-	std::string		__num;
-	size_t  		__old_pos = __length;
-	std::string		__hold;
+	int __r;
+	size_t __p;
+	size_t __l = 0;
+	std::string __num;
+	size_t __old_pos = __length;
+	std::string __hold;
 
 	if (__length == __request.length())
 		__request.resize(__length * 2);
@@ -98,13 +98,13 @@ void Transfer::__read_(int __client, int &__data)
 
 	if (__r == -1)
 		return;
-	
+
 	__length += __r;
 	__request.resize(__r);
-	size_t	__s = __length;
+	size_t __s = __length;
 	if (__head_read_done == false)
 	{
-		size_t  		crlf;
+		size_t crlf;
 
 		__head.append(__request.c_str(), __r);
 		crlf = __crlf(__request, __old_pos);
@@ -127,7 +127,7 @@ void Transfer::__read_(int __client, int &__data)
 		{
 			__hold = __request.substr(0, __sub_chunck);
 			__body.append(__request.substr(0, __sub_chunck));
-			if(__sub_chunck > __hold.length())
+			if (__sub_chunck > __hold.length())
 			{
 				__request.erase(0, __sub_chunck);
 				__sub_chunck -= __hold.length();
@@ -139,7 +139,6 @@ void Transfer::__read_(int __client, int &__data)
 			}
 		}
 		__read_chunkes(__p, __l, __num, __hold);
-
 	}
 	else
 	{
@@ -172,12 +171,12 @@ void Transfer::__read_chunkes(size_t &__p, size_t &__l, std::string &__num, std:
 		__body.append(__request.substr(0, __l));
 		__request.erase(0, __l + 2);
 	}
-	if(__l > __hold.length())
+	if (__l > __hold.length())
 		__sub_chunck = __l - __hold.length();
 }
 std::string Transfer::__search_str(std::string __str)
 {
-	size_t		pos;
+	size_t pos;
 
 	pos = __head.find(__str);
 	if (pos != std::string::npos)
@@ -190,7 +189,7 @@ std::string Transfer::__search_str(std::string __str)
 
 void Transfer::__parse_info()
 {
-	std::string	__holder;
+	std::string __holder;
 
 	/* ---------------------------- Transfer Encoding --------------------------- */
 	__holder = __search_str("Transfer-Encoding: ");
@@ -218,7 +217,7 @@ void Transfer::__parse_info()
 
 	/* --------------------------------- Server --------------------------------- */
 	__holder = __search_str("Host: ");
-	
+
 	if (__holder == NPOS)
 	{
 		std::cout << "error: bad requset HOST missing!" << std::endl;
