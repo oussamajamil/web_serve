@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_launch.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/26 16:21:03 by oussama          ###   ########.fr       */
+/*   Updated: 2023/04/27 10:12:38 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,17 +265,17 @@ void Server_launch::__run()
 			}
 			else if (__out_events[i].filter == EVFILT_WRITE)
 			{
-				__output_handler(__ident, __data, static_cast<Transfer *>(__out_events[i].udata));
+				__output_handler(__ident, static_cast<Transfer *>(__out_events[i].udata));
 			}
 		}
 	}
 }
 
-void Server_launch::__output_handler(int __client, int __data, Transfer *__r)
+void Server_launch::__output_handler(int __client, Transfer *__r)
 {
 	int __x = 0;
 	if (__r->__response_send_done == false)
-		__x = __r->__response_send(__client, __data);
+		__x = __r->__response_send(__client);
 	else
 	{
 		struct kevent event;

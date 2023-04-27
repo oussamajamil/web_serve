@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:17:04 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/19 00:04:42 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:12:29 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ public:
 	void						__kernel_event_queue();
 	void						__extraction(std::string &, socket_info &);
 	void						__input_handler(int __ident, int __data, Transfer *__r);
-	void						__output_handler(int __ident, int __data, Transfer *__r);
+	void						__output_handler(int __ident, Transfer *__r);
 };

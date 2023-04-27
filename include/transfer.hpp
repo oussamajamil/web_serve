@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:50:19 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/19 01:29:51 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:41:06 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ public:
 	bool							__head_read_done;
 	bool							__requet_read_done;
 	bool							__response_send_done;
+	bool							__keep;
 
 	int								__ident;
 	int								__scoket;
@@ -57,7 +58,7 @@ public:
 
 	void							__init_requst();
 	void							__request_read(int, int);
-	int								__response_send(int , int);
+	int								__response_send(int);
 	void							__read_(int, int &);
 	void							__read_body(int, int &);
 	void							__read_chunkes(size_t &, size_t &, std::string &, std::string &);

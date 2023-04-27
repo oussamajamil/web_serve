@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/27 10:11:15 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:38:27 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ __read_done(false),
 __head_read_done(false),
 __requet_read_done(false),
 __response_send_done(false),
+__keep(false),
 __content_length(0),
 __length(0),
 __length_s_(0),
@@ -45,6 +46,7 @@ void Transfer::__init_requst()
 	__read_done = false;
 	__head_read_done = false;
 	__response_send_done = false;
+	__keep = false;
 	__content_length = 0;
 	__res_buff_len = 0;
 	__length = 0;
@@ -214,7 +216,9 @@ void Transfer::__parse_info()
 
 	/* ------------------------------- keep-alive ------------------------------- */
 	__holder = __search_str("Connection: ");
-	if (__holder != NPOS && __holder == "keep-alive")
+	if (__holder == NPOS)
+		__keep = true;
+	else if (__holder == "keep-alive")
 		__close = false;
 
 	/* --------------------------------- Server --------------------------------- */
