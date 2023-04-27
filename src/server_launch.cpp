@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_launch.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/19 01:30:26 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:21:03 by oussama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ int Server_launch::__host_exist(socket_info &__info)
 	return __it->first;
 }
 
-//TODO : time out
+// TODO : time out
 
 /* -------------------------------- Lunching -------------------------------- */
 /* -------------------------------- Lunching -------------------------------- */
@@ -236,7 +236,6 @@ void Server_launch::__launch()
 void Server_launch::__run()
 {
 	int __event_number = 0;
-
 
 	__out_events.resize(EVENTS_NUBMBER);
 	while (true)

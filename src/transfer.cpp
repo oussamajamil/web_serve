@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/27 09:49:42 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:11:15 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void Transfer::__request_read(int __client, int __data)
 	}
 }
 
-int Transfer::__response_send(int __client, int __data)
+int Transfer::__response_send(int __client)
 {
 	int __s = 0;
 
@@ -74,7 +74,6 @@ int Transfer::__response_send(int __client, int __data)
 	if (__s == -1)
 		return -1;
 	__length_s_ += __s;
-	__data -= __s;
 	if (__length_s_ == __res_buff_len)
 	{
 		__response_send_done = true;
@@ -99,13 +98,13 @@ void Transfer::__read_(int __client, int &__data)
 
 	if (__r == -1)
 		return;
-	
+
 	__length += __r;
 	__request.resize(__r);
-	size_t	__s = __length;
+	size_t __s = __length;
 	if (__head_read_done == false)
 	{
-		size_t  		crlf;
+		size_t crlf;
 
 		__head.append(__request.c_str(), __r);
 		crlf = __crlf(__request, __old_pos);
@@ -142,7 +141,6 @@ void Transfer::__read_(int __client, int &__data)
 			}
 		}
 		__read_chunkes(__p, __l, __num, __hold);
-
 	}
 	else
 	{
@@ -180,7 +178,7 @@ void Transfer::__read_chunkes(size_t &__p, size_t &__l, std::string &__num, std:
 }
 std::string Transfer::__search_str(std::string __str)
 {
-	size_t		pos;
+	size_t pos;
 
 	pos = __head.find(__str);
 	if (pos != std::string::npos)
@@ -193,7 +191,7 @@ std::string Transfer::__search_str(std::string __str)
 
 void Transfer::__parse_info()
 {
-	std::string	__holder;
+	std::string __holder;
 
 	/* ---------------------------- Transfer Encoding --------------------------- */
 	__holder = __search_str("Transfer-Encoding: ");
@@ -221,7 +219,7 @@ void Transfer::__parse_info()
 
 	/* --------------------------------- Server --------------------------------- */
 	__holder = __search_str("Host: ");
-	
+
 	if (__holder == NPOS)
 	{
 		std::cout << "error: bad requset HOST missing!" << std::endl;

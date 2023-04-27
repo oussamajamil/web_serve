@@ -233,7 +233,7 @@ Response::Response(Request req)
         if (req._location.__attributes.find("error_page") != req._location.__attributes.end() &&
             req._location.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
         {
-            for (unsigned int i = 0; i < req._location.__attributes.find("error_page")->second.size(); i = i + 2)
+            for (int i = 0; i < (int)req._location.__attributes.find("error_page")->second.size(); i = i + 2)
             {
                 if (req._location.__attributes["error_page"][i] == std::to_string(req.status_code))
                 {
@@ -245,7 +245,7 @@ Response::Response(Request req)
         if (req._server.__attributes.find("error_page") != req._server.__attributes.end() &&
             req._server.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
         {
-            for (unsigned int i = 0; i < req._server.__attributes.find("error_page")->second.size(); i = i + 2)
+            for (int i = 0; i < (int)req._server.__attributes.find("error_page")->second.size(); i = i + 2)
             {
                 if (req._server.__attributes["error_page"][i] == std::to_string(req.status_code))
                 {
@@ -276,13 +276,13 @@ Response::Response(Request req)
             std::vector<std::string> vec_cgi;
             if (req._location.__attributes.find("cgi") != req._location.__attributes.end())
             {
-               vec_cgi = req._location.__attributes.find("cgi")->second;
-                for (unsigned int i = 0; i < vec_cgi.size(); i = i + 2)
+                vec_cgi = req._location.__attributes.find("cgi")->second;
+                for (int i = 0; i < (int)vec_cgi.size(); i = i + 2)
                 {
                     if (req._location.__attributes.find("cgi") != req._location.__attributes.end())
                     {
                         vec_cgi = req._location.__attributes.find("cgi")->second;
-                        for (unsigned int i = 0; i < vec_cgi.size(); i = i + 2)
+                        for (int i = 0; i < (int)vec_cgi.size(); i = i + 2)
                         {
                             if (vec_cgi[i] == extension)
                             {
@@ -307,7 +307,7 @@ Response::Response(Request req)
                                         this->body = vec[1];
                                         this->header = vec[0];
                                         std::vector<std::string> vec_header = split(this->header, "\r\n");
-                                        for (unsigned int i = 0; i < vec_header.size(); i++)
+                                        for (int i = 0; i < (int)vec_header.size(); i++)
                                         {
                                             std::string _cookie;
                                             if (vec_header[i].find("Content-Type") != std::string::npos)
@@ -347,7 +347,7 @@ Response::Response(Request req)
                     if (req._location.__attributes.find("error_page") != req._location.__attributes.end() &&
                         req._location.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
 
-                        for (unsigned int i = 0; i < req._location.__attributes.find("error_page")->second.size(); i = i + 2)
+                        for (int i = 0; i < (int)req._location.__attributes.find("error_page")->second.size(); i = i + 2)
                         {
                             if (req._location.__attributes["error_page"][i] == std::to_string(403))
                             {
@@ -357,7 +357,7 @@ Response::Response(Request req)
                         }
                     if (req._server.__attributes.find("error_page") != req._server.__attributes.end() &&
                         req._server.__attributes.find("error_page")->second.size() > 0 && this->file_error == "")
-                        for (unsigned int i = 0; i < req._server.__attributes.find("error_page")->second.size(); i = i + 2)
+                        for (int i = 0; i < (int)req._server.__attributes.find("error_page")->second.size(); i = i + 2)
                         {
                             if (req._server.__attributes["error_page"][i] == std::to_string(403))
                             {
@@ -381,7 +381,7 @@ Response::Response(Request req)
                 if (req._location.__attributes.find("cgi") != req._location.__attributes.end())
                 {
                     vec_cgi = req._location.__attributes.find("cgi")->second;
-                    for (unsigned int i = 0; i < vec_cgi.size(); i = i + 2)
+                    for (int i = 0; i < (int)vec_cgi.size(); i = i + 2)
                     {
                         if (vec_cgi[i] == extension)
                         {
@@ -404,7 +404,7 @@ Response::Response(Request req)
                                 this->body = vec[1];
                                 this->header = vec[0];
                                 std::vector<std::string> vec_header = split(this->header, "\r\n");
-                                for (unsigned int i = 0; i < vec_header.size(); i++)
+                                for (int i = 0; i < (int)vec_header.size(); i++)
                                 {
                                     std::string _cookie;
                                     if (vec_header[i].find("Content-Type") != std::string::npos)

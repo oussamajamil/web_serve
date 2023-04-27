@@ -46,30 +46,30 @@ void Request::parseRequest(std::string header, std::string body)
 		this->query_params = url_params[1];
 	}
 
-	// std::cout << "****************** path/version/method ******************" << std::endl;
-	// std::cout << "\033[1;32m method:  \033[0m"
-	// 					<< this->method << std::endl;
-	// std::cout << "\033[1;32m path:    \033[0m"
-	// 					<< this->path << std::endl;
-	// std::cout << "\033[1;32m version: \033[0m"
-	// 					<< this->version << std::endl;
-	// std::cout << "\033[1;32m host:    \033[0m"
-	// 					<< this->host << std::endl;
-	// std::cout << "\033[1;32m port:    \033[0m"
-	// 					<< this->port << std::endl;
-	// std::cout << "\n\n****************** headers ******************" << std::endl;
-	// std::map<std::string, std::string>::iterator it;
-	// for (it = this->headers.begin(); it != this->headers.end(); it++)
-	// {
-	// 	std::cout << "\033[1;32m " << it->first << ": \033[0m" << it->second << std::endl;
-	// 	std::cout << std::endl;
-	// }
+	std::cout << "****************** path/version/method ******************" << std::endl;
+	std::cout << "\033[1;32m method:  \033[0m"
+						<< this->method << std::endl;
+	std::cout << "\033[1;32m path:    \033[0m"
+						<< this->path << std::endl;
+	std::cout << "\033[1;32m version: \033[0m"
+						<< this->version << std::endl;
+	std::cout << "\033[1;32m host:    \033[0m"
+						<< this->host << std::endl;
+	std::cout << "\033[1;32m port:    \033[0m"
+						<< this->port << std::endl;
+	std::cout << "\n\n****************** headers ******************" << std::endl;
+	std::map<std::string, std::string>::iterator it;
+	for (it = this->headers.begin(); it != this->headers.end(); it++)
+	{
+		std::cout << "\033[1;32m " << it->first << ": \033[0m" << it->second << std::endl;
+		std::cout << std::endl;
+	}
 
-	// std::cout << "\n\n****************** query_params ******************" << std::endl;
-	// std::cout << this->query_params << std::endl;
+	std::cout << "\n\n****************** query_params ******************" << std::endl;
+	std::cout << this->query_params << std::endl;
 
-	// std::cout << "\n\n****************** body ******************" << std::endl;
-	// std::cout << this->body << std::endl;
+	std::cout << "\n\n****************** body ******************" << std::endl;
+	std::cout << this->body << std::endl;
 }
 
 Request::Request(Transfer *__r)
@@ -143,13 +143,13 @@ Request::Request(Transfer *__r)
 	}
 	if (this->_location.__attributes["methods"].size() > 0)
 	{
-		unsigned long i;
-		for (i = 0; i < this->_location.__attributes["methods"].size(); i++)
+		int i;
+		for (i = 0; i < (int)this->_location.__attributes["methods"].size(); i++)
 		{
 			if (this->_location.__attributes["methods"][i] == this->method)
 				break;
 		}
-		if (i == this->_location.__attributes["methods"].size())
+		if (i == (int)this->_location.__attributes["methods"].size())
 		{
 			this->status_code = METHOD_NOT_ALLOWED;
 			return;
@@ -201,7 +201,7 @@ Request::Request(Transfer *__r)
 		{
 			if (this->_location.__attributes["index"].size() > 0)
 			{
-				for (unsigned long i = 0; i < this->_location.__attributes["index"].size(); i++)
+				for (int i = 0; i < (int)this->_location.__attributes["index"].size(); i++)
 				{
 					std::string index = this->_location.__attributes["index"][i];
 					std::string index_path = this->is_directory_file.second + index;
@@ -215,7 +215,7 @@ Request::Request(Transfer *__r)
 			}
 			else if (this->_server.__attributes["index"].size() > 0)
 			{
-				for (unsigned long i = 0; i < this->_server.__attributes["index"].size(); i++)
+				for (int i = 0; i < (int)this->_server.__attributes["index"].size(); i++)
 				{
 					std::string index = this->_server.__attributes["index"][i];
 					std::string index_path = this->is_directory_file.second + index;
@@ -262,17 +262,18 @@ Request::Request(Transfer *__r)
 	if (this->method == "POST")
 	{
 		std::string boundary = "--";
-
 		boundary += this->headers["Content-Type"].substr(this->headers["Content-Type"].find("boundary=") + 9);
+
 		this->body_boundary = split(this->body, boundary);
 
-		for (unsigned long i = 0; i < this->body_boundary.size() - 1; i++)
+		for (int i = 0; i < (int)this->body_boundary.size() - 1; i++)
 		{
 			std::string name = this->body_boundary[i].substr(this->body_boundary[i].find("name=\"") + 6);
+			std::cout << "i am here" << std::endl;
 			name = name.substr(0, name.find("\""));
-			std::string value = this->body_boundary[i].substr(this->body_boundary[i].find("\r\n\r\n") + 4);
 
-			if (this->body_boundary[i].find("filename=\"") != std::string::npos)
+			std::string value = this->body_boundary[i].substr(this->body_boundary[i].find("\r\n\r\n") + 4);
+			if (this->body_boundary[i].find("filename=\"") != std::string::npos && value != "")
 			{
 				value = value.substr(0, value.find_last_of("\r\n"));
 				std::string filename = this->body_boundary[i].substr(this->body_boundary[i].find("filename=\"") + 10);
@@ -285,7 +286,7 @@ Request::Request(Transfer *__r)
 				out << value;
 				out.close();
 			}
-			else
+			else if (value != "")
 			{
 				value = value.substr(0, value.find("\r\n"));
 				this->body_form_data[name] = value;
@@ -295,7 +296,7 @@ Request::Request(Transfer *__r)
 
 	if (this->status_code != 0)
 	{
-		for (unsigned long i = 0; i < this->_location.__attributes["error_page"].size(); i = i + 2)
+		for (int i = 0; i < (int)this->_location.__attributes["error_page"].size(); i = i + 2)
 		{
 			this->error_page_map[std::atoi(this->_location.__attributes["error_page"][i].c_str())] = this->_location.__attributes["error_page"][i + 1];
 		}
@@ -308,7 +309,7 @@ void Request::checkLocation()
 	unsigned long match = 0;
 	int indexLocation = -1;
 	std::vector<Location> locations = this->_server.__locations;
-	for (unsigned long i = 0; i < locations.size(); i++)
+	for (int i = 0; i < (int)locations.size(); i++)
 	{
 		if (locations[i].__path == this->path)
 		{
