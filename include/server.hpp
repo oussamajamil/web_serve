@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:29:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/27 15:01:55 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/27 18:06:40 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,9 @@ public:
 
 	/*Default configuration flags*/
 	bool __listen_default;
-	bool __autoindex_default;
-	bool __index_default;
-	bool __root_default;
-	bool __client_body_max_size_default;
 	bool __server_name_default;
-	bool __methods_default;
-	bool __upload_dir_default;
-	bool __error_page_default;
-	bool __cgi_default;
-	bool __redirect_default;
+
+	int __l;
 
 	Server();
 	~Server();
