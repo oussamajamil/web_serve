@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/19 01:44:16 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/27 09:49:42 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void Transfer::__read_(int __client, int &__data)
 		__request.resize(__length * 2);
 	__r = recv(__client, (void *)(__request.data()), __request.length() - __length, 0);
 
+
 	if (__r == -1)
 		return;
 	
@@ -112,8 +113,10 @@ void Transfer::__read_(int __client, int &__data)
 		{
 			__head_read_done = true;
 			__head = __request.substr(0, crlf + 4);
-			__request.erase(0, crlf + 4);
 			__parse_info();
+			if (!__chunks)
+				__body = __request.substr(crlf + 4);
+			__request.erase(0, crlf + 4);
 			__length -= crlf + 4;
 			if (__chunks)
 			{
