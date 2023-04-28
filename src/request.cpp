@@ -166,10 +166,13 @@ Request::Request(Transfer *__r)
 		this->path_res += trim(this->_location.__attributes["root"][0], "/") + "/" + trim(this->path, "/");
 		this->path_res = "/" + this->path_res;
 		this->root = trim(this->_location.__attributes["root"][0], "/");
+		std::cout << "root" << this->root << std::endl;
+		std::cout << "path" << this->path_res << std::endl;
 	}
 
 	if (this->method == "DELETE")
 	{
+		std::cout << "DELETE" << this-> root << std::endl;
 		std::cout << "DELETE" << this->path_res << std::endl;
 		if (file_exists(this->path_res))
 		{
