@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:26:56 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/27 18:06:20 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/28 08:26:45 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ Server::Server() :
 __curly_location(false),
 __curly_server(false),
 __listen_default(true), 
-__server_name_default(true),
-__l(0)
+__server_name_default(true)
 {
 	/*i feel like i need to put somthing here i don't know yet XD*/
 	std::vector<std::string>	__default;
@@ -91,6 +90,8 @@ Web::Web()
 	__handlers["upload_dir"] = &Web::__upload_dir;
 	__handlers["methods"] = &Web::__methods;
 	__handlers["client_body_max_size"] = &Web::__client_body_max_size;
+	_l = 0;
+	_s = 0;
 }
 
 /* ---------------------------------- PARSE --------------------------------- */
@@ -140,7 +141,7 @@ void Web::__server(Server &__server, Location &__location)
 {
 	(void)__location;
 	std::string __line;
-
+	_s++;
 	__server.__curly_server = true;
 	if (__line_splited.size() == 1)
 	{
@@ -165,7 +166,7 @@ void Web::__server(Server &__server, Location &__location)
 void Web::__location(Server &__server, Location &__location)
 {
 	std::string __line;
-	__server.__l++;
+	_l++;
 	if (__line_splited.size() == 2)
 	{
 		__location.__path = __line_splited[1];
