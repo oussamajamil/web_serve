@@ -9,3 +9,4 @@ std::string trim(std::string content, std::string sparator);
 bool file_exists(std::string filename);
 bool is_directory(std::string filename);
 #endif
+

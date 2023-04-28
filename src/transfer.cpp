@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:05:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/27 10:38:27 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/28 19:45:36 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,30 @@ Transfer::~Transfer()
 
 void Transfer::__init_requst()
 {
+	__ident = 0;
+	__scoket = 0;
 	__request_read_done = false;
-	__close = false;
+	__close = true;
 	__chunks = false;
 	__read_done = false;
 	__head_read_done = false;
+	__requet_read_done = false;
 	__response_send_done = false;
 	__keep = false;
 	__content_length = 0;
-	__res_buff_len = 0;
 	__length = 0;
 	__length_s_ = 0;
 	__rest = 0;
 	__sub_chunck = 0;
+	__res_buff_len = 0;
 	__res_buff.clear();
 	__request.clear();
 	__request.resize(BUFFER);
 	__head.clear();
 	__body.clear();
+	__host.clear();
+	__server = NULL;
+	bzero(&__addr, sizeof(struct sockaddr_in));
 }
 
 void Transfer::__request_read(int __client, int __data)

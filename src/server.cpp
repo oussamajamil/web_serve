@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:26:56 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/28 08:26:45 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:19:35 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ __curly_server(false),
 __listen_default(true), 
 __server_name_default(true)
 {
-	/*i feel like i need to put somthing here i don't know yet XD*/
 	std::vector<std::string>	__default;
 
 	/*LISTEN DEFAULT*/
@@ -64,19 +63,13 @@ __server_name_default(true)
 }
 
 Server::~Server()
-{
-	/*probably i'll need to free some containers*/
-	// __attributes.clear();
-}
+{}
 
 Web::~Web()
-{
-	/*probably i'll need to free some containers*/
-}
+{}
 
 Web::Web()
 {
-	/*i feel like i need to put somthing here i don't know yet XD*/
 	__handlers["server"] = &Web::__server;
 	__handlers["listen"] = &Web::__listen;
 	__handlers["location"] = &Web::__location;
@@ -167,6 +160,11 @@ void Web::__location(Server &__server, Location &__location)
 {
 	std::string __line;
 	_l++;
+	if (__line_splited[1] == "{")
+	{
+		std::cerr << "\033[1;31m" << "error: location missisng path!" << "\033[0m" << std::endl;
+		exit(1);
+	}
 	if (__line_splited.size() == 2)
 	{
 		__location.__path = __line_splited[1];
@@ -194,18 +192,17 @@ void Web::__set_locations()
 	std::vector<Server>::iterator							__it = __servers.begin();
 	std::string												__h;
 	std::pair<std::string, std::vector<std::string> >		__val;
+
 	while (__it != __servers.end())
 	{
-		__m_p													*__m;		
+		std::map<std::string, std::vector<std::string> >		*__m;		
 		__m_iterator											__att;
-		// __m_iterator											__att_l;
 		std::vector<Location>::iterator							__loc;
 
 		__loc = __it->__locations.begin();
 		while (__loc != __it->__locations.end())
 		{
 			__att = __it->__attributes.begin();
-			// __att_l = __loc->__attributes.begin();
 			__m = &(__loc->__attributes);
 			while (__att != __it->__attributes.end())
 			{
@@ -216,15 +213,11 @@ void Web::__set_locations()
 					__val.first = __h;
 					__val.second = __att->second;
 					__m->insert(__val);
-					// __m[__h] = __att->second;
 				}
-
 				++__att;	
 			}
 			++__loc;
 		}
-		
-
 		++__it;
 	}
 }

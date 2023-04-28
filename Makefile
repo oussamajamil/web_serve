@@ -6,7 +6,7 @@
 #    By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 16:38:20 by obelkhad          #+#    #+#              #
-#    Updated: 2023/04/16 21:01:14 by obelkhad         ###   ########.fr        #
+#    Updated: 2023/04/28 18:37:31 by obelkhad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ SRC	=  main.cpp src/server.cpp\
 				utils/utl_string.cpp\
 				utils/utl_helper.cpp\
 				utils/utl_server.cpp\
+				utils/utils.cpp\
 				\
-				utils.cpp\
 				src/request.cpp\
 				src/response.cpp\
 				cerr/errors.cpp

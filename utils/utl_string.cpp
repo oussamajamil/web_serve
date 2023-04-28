@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:49:57 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/27 15:48:55 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:20:42 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ std::vector<std::string> __split_attrubites(std::string str, const std::string d
 
 	while ((pos = str.find_first_of(delims)) != std::string::npos)
 	{
-		
 		if (!str.substr(0, pos).empty())
 			tokens.push_back(str.substr(0, pos));
 		if (str[pos] == '{')

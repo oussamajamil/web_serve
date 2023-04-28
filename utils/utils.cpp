@@ -1,4 +1,4 @@
-#include "./utils.hpp"
+#include "../include/util.hpp"
 #include <unistd.h>
 #include <sys/stat.h>
 std::vector<std::string> split(std::string content, std::string sparator)

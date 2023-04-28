@@ -6,6 +6,7 @@
 int main(int ac, char **av)
 {
 	// parse config file;
+
 	Web servers;
 	try
 	{
@@ -24,16 +25,12 @@ int main(int ac, char **av)
 			__servers_display(servers);
 		}
 		else
-			std::cout << "empty file" << std::endl;
+			std::cout << "not server detected!" << std::endl;
 	}
 
 	catch (const std::exception &e)
 	{
 		std::cout << "ERROR: " << e.what() << std::endl;
-		// std::cerr << "\033[1;31m" << e.what() << "\033[0m" << std::endl;
-		// std::cerr << "\033[1;31m"
-		// 					<< "error: bad synatx"
-		// 					<< "\033[0m" << std::endl;
 	}
 
 	return 0;
