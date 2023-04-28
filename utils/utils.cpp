@@ -44,6 +44,8 @@ std::string trim(std::string content, std::string sparator)
 
 bool file_exists(std::string fileName)
 {
+    // std::cout << "file" << fileName << std::endl;
+    // exit(10);
     const char *filename = fileName.c_str();
     if (access(filename, F_OK) != -1 && access(filename, R_OK) != -1)
         return true;
