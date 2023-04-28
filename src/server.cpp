@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:26:56 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/27 15:37:08 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/27 18:06:20 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,8 @@ Server::Server() :
 __curly_location(false),
 __curly_server(false),
 __listen_default(true), 
-__autoindex_default(true),
-__index_default(true),
-__root_default(true), 
-__client_body_max_size_default(true),
 __server_name_default(true),
-__methods_default(true),
-__upload_dir_default(false),
-__error_page_default(false),
-__cgi_default(false),
-__redirect_default(false)
+__l(0)
 {
 	/*i feel like i need to put somthing here i don't know yet XD*/
 	std::vector<std::string>	__default;
@@ -54,11 +46,6 @@ __redirect_default(false)
 	/*INDEX DEFAULT*/
 	__default.push_back(std::string(INDEX));
 	__attributes["index"] = __default;
-	__default.clear();
-
-	/*ROOT DEFAULT*/
-	__default.push_back(std::string(ROOT));
-	__attributes["root"] = __default;
 	__default.clear();
 
 	/*CLIENT_BODY_MAX_SIZE DEFAULT*/
@@ -178,7 +165,7 @@ void Web::__server(Server &__server, Location &__location)
 void Web::__location(Server &__server, Location &__location)
 {
 	std::string __line;
-
+	__server.__l++;
 	if (__line_splited.size() == 2)
 	{
 		__location.__path = __line_splited[1];

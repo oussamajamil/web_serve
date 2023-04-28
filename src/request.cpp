@@ -99,10 +99,15 @@ Request::Request(Transfer *__r)
 			return;
 		}
 	}
+
+	this->_server = *(__r->__server);
+	this->checkLocation();
 	if (this->body.size() > 0)
 	{
-		std::string body_size = trim(this->_server.__attributes["client_body_max_size"][0], " ");
-		std::cout << "|||||" << body_size << "||||" << std::endl;
+
+		std::string body_size;
+
+		body_size = this->_location.__attributes["client_body_max_size"][0];
 		if (body_size[body_size.length() - 1] == 'G')
 		{
 			if (this->body.size() > size_t(std::atoi(body_size.c_str()) * 1024 * 1024 * 1024))
@@ -121,7 +126,7 @@ Request::Request(Transfer *__r)
 		}
 		else if (body_size[body_size.length() - 1] == 'B')
 		{
-			if (this->body.size() > size_t(std::atoi(body_size.c_str())))
+			if (this->body.size() > (size_t)(std::atoi(body_size.c_str())))
 				this->status_code = REQUEST_ENTITY_TOO_LARGE;
 			return;
 		}
@@ -133,8 +138,6 @@ Request::Request(Transfer *__r)
 		}
 		body_size = "";
 	}
-	this->_server = *(__r->__server);
-	this->checkLocation();
 	if (this->_location.__attributes["redirect"].size() > 0)
 	{
 		this->status_code = std::stoi(this->_location.__attributes["redirect"][0]);

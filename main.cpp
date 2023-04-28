@@ -12,6 +12,7 @@ int main(int ac, char **av)
 		std::string __config = __config_file(ac, av);
 
 		servers.__parse(__config);
+		// __servers_display(servers);exit(11);
 		if (servers.__servers.size())
 		{
 			servers.__set_locations();
