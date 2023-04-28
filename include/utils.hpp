@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oussama <oussama@student.42.fr>            +#+  +:+       +#+        */
+/*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:50:00 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/20 10:42:49 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/28 08:29:43 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,4 @@ void __servers_display(Web &web);
 /* utl_helper.cpp  */
 void 	__address_prot_form(std::string &address);
 size_t __crlf(std::string &str, size_t pos);
+void is_repeat(int __s, int __n, int &__x, std::string __str);

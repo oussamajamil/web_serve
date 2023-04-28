@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:12:30 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/27 18:03:39 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/28 08:44:53 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ void Web::__methods(Server &__server, Location &__location)
 	static	int					__l;
 	static	int					__s;
 	static	int					__lsize;
+	static	int					__ssize;
 	std::vector<std::string>	__values;
 
 	/*initial action*/
@@ -181,25 +182,22 @@ void Web::__methods(Server &__server, Location &__location)
 	/*CHECK LOCATION*/
 	if (__server.__curly_location)
 	{
-		if (__lsize < __server.__l)
+		if (__lsize < _l)
 			__l = 0;
-		__lsize = __server.__l;
-		if(__values.size() > 3 || __l)
-		{
-			std::cerr << "\033[1;31m" << "error: method attributes" << "\033[0m" << std::endl;
-			exit(1);
-		}
-		__l = 1;
+		__lsize = _l;
+		is_repeat(__values.size(), 3, __l, "error: autoindex");
 		__location.__attributes["methods"] = __values;
 	}
 	else
 	{
-		if(__values.size() > 3 || __s)
+		if (__ssize < _s)
 		{
-			std::cerr << "\033[1;31m" << "error: method attributes" << "\033[0m" << std::endl;
-			exit(1);
+			__l = 0;
+			__s = 0;
 		}
-		__s = 1;
+		__ssize = _s;
+		is_repeat(__values.size(), 3, __s, "error: autoindex");
+
 		/*add valuses*/
 		__server.__attributes["methods"] = __values;
 	}
@@ -250,7 +248,7 @@ void Web::__root(Server &__server, Location &__location)
 	static	int					__l;
 	static	int					__s;
 	static	int					__lsize;
-	__m_iterator				root;
+	static	int					__ssize;
 	std::vector<std::string>	__values;
 
 	/*initial action*/
@@ -262,28 +260,23 @@ void Web::__root(Server &__server, Location &__location)
 	/*CHECK LOCATION*/
 	if (__server.__curly_location)
 	{
-		if (__lsize < __server.__l)
+		if (__lsize < _l)
 			__l = 0;
-		__lsize = __server.__l;
-		if(__values.size() > 1 || __l)
-		{
-			std::cerr << "\033[1;31m" << "error: root attributes" << "\033[0m" << std::endl;
-			exit(1);
-		}
-		__l = 1;
+		__lsize = _l;
+		is_repeat(__values.size(), 1, __l, "error: root");
 		__location.__attributes["root"] = __values;
 	}
 	else
 	{
-		if(__values.size() > 1 || __s)
+		if (__ssize < _s)
 		{
-			std::cerr << "\033[1;31m" << "error: root attributes" << "\033[0m" << std::endl;
-			exit(1);
+			__l = 0;
+			__s = 0;
 		}
-		__s = 1;
+		__ssize = _s;
+		is_repeat(__values.size(), 1, __s, "error: root");
+		
 		__server.__attributes["root"] = __values;
-
-	
 	}
 }
 
@@ -296,6 +289,7 @@ void Web::__index(Server &__server, Location &__location)
 	static	int					__l;
 	static	int					__s;
 	static	int					__lsize;
+	static	int					__ssize;
 	std::vector<std::string>	__values;
 
 	/*initial action*/
@@ -307,103 +301,24 @@ void Web::__index(Server &__server, Location &__location)
 	/*CHECK LOCATION*/
 	if (__server.__curly_location)
 	{
-		if (__lsize < __server.__l)
+		if (__lsize < _l)
 			__l = 0;
-		__lsize = __server.__l;
-		if(__values.size() > 1 || __l)
-		{
-			std::cerr << "\033[1;31m" << "error: index attributes" << "\033[0m" << std::endl;
-			exit(1);
-		}
-		__l = 1;
+		__lsize = _l;
+		is_repeat(__values.size(), 1, __l, "error: index");
 		__location.__attributes["index"] = __values;
 	}
 	else
 	{
-		if(__values.size() > 1 || __s)
+		if (__ssize < _s)
 		{
-			std::cerr << "\033[1;31m" << "error: index attributes" << "\033[0m" << std::endl;
-			exit(1);
+			__l = 0;
+			__s = 0;
 		}
-		__s = 1;
+		__ssize = _s;
+		is_repeat(__values.size(), 1, __s, "error: index");
 
 		/*add valuses*/
 		__server.__attributes["index"] = __values;
-	}
-}
-
-/* ------------------------------- REDIRECTION ------------------------------ */
-/* ------------------------------- REDIRECTION ------------------------------ */
-/* ------------------------------- REDIRECTION ------------------------------ */
-/* ------------------------------- REDIRECTION ------------------------------ */
-void Web::__redirect(Server &__server, Location &__location)
-{
-	std::vector<std::string>	__values;
-
-	/*initial action*/
-	__initial_action(__server);
-
-
-	/*extract values*/
-	__values = __parse_args();
-
-
-	/*check syntax*/
-	if (!__server.__curly_location)
-		__bad_syntax();
-
-	/*add valuses*/
-	__location.__attributes["redirect"].insert(__location.__attributes["redirect"].end(), __values.begin(), __values.end());
-}
-
-/* -------------------------------- AUTOINDEX ------------------------------- */
-/* -------------------------------- AUTOINDEX ------------------------------- */
-/* -------------------------------- AUTOINDEX ------------------------------- */
-/* -------------------------------- AUTOINDEX ------------------------------- */
-void Web::__autoindex(Server &__server, Location &__location)
-{
-	static	int					__l;
-	static	int					__s;
-	static	int					__lsize;
-	__m_iterator				autoindex;
-	std::vector<std::string>	__values;
-
-	/*initial action*/
-	__initial_action(__server);
-
-	/*extract values*/
-	__values = __parse_args();
-	
-	if(__values[0] != "on" && __values[0] != "off")
-	{
-		std::cerr << "\033[1;31m" << "error: wrong autoindex attribute" << "\033[0m" << std::endl;
-		exit(1);
-	}
-	/*CHECK LOCATION*/
-	if (__server.__curly_location)
-	{
-		if (__lsize < __server.__l)
-			__l = 0;
-		__lsize = __server.__l;
-		if(__values.size() > 1 || __l)
-		{
-			std::cerr << "\033[1;31m" << "error: autoindex attributes" << "\033[0m" << std::endl;
-			exit(1);
-		}
-		__l = 1;
-		__location.__attributes["autoindex"] = __values;
-	}
-	else
-	{
-		if(__values.size() > 1 || __s)
-		{
-			std::cerr << "\033[1;31m" << "error: autoindex attributes" << "\033[0m" << std::endl;
-			exit(1);
-		}
-		__s = 1;
-
-		/*add valuses*/
-		__server.__attributes["autoindex"] = __values;
 	}
 }
 
@@ -448,6 +363,91 @@ void Web::__error_page(Server &__server, Location &__location)
 	}
 }
 
+/* ------------------------------- REDIRECTION ------------------------------ */
+/* ------------------------------- REDIRECTION ------------------------------ */
+/* ------------------------------- REDIRECTION ------------------------------ */
+/* ------------------------------- REDIRECTION ------------------------------ */
+void Web::__redirect(Server &__server, Location &__location)
+{
+	static	int					__l;
+	static	int					__lsize;
+	std::vector<std::string>	__values;
+
+	/*initial action*/
+	__initial_action(__server);
+
+
+	/*extract values*/
+	__values = __parse_args();
+
+	if (__values.size() != 2)
+	{
+		std::cerr << "\033[1;31m" << "Error : redirect attribute" << "\033[0m" << std::endl;
+		exit(1);	
+	}
+
+	/*check syntax*/
+	if (!__server.__curly_location)
+		__bad_syntax();
+
+	/*add valuses*/
+	if (__lsize < _l)
+			__l = 0;
+		__lsize = _l;
+	is_repeat(__values.size(), 2, __l, "error: redirect");
+	__location.__attributes["redirect"] = __values;
+	
+	// __location.__attributes["redirect"].insert(__location.__attributes["redirect"].end(), __values.begin(), __values.end());
+}
+
+/* -------------------------------- AUTOINDEX ------------------------------- */
+/* -------------------------------- AUTOINDEX ------------------------------- */
+/* -------------------------------- AUTOINDEX ------------------------------- */
+/* -------------------------------- AUTOINDEX ------------------------------- */
+void Web::__autoindex(Server &__server, Location &__location)
+{
+	static	int					__l;
+	static	int					__s;
+	static	int					__lsize;
+	static	int					__ssize;
+	std::vector<std::string>	__values;
+
+	/*initial action*/
+	__initial_action(__server);
+
+	/*extract values*/
+	__values = __parse_args();
+	
+	if(__values[0] != "on" && __values[0] != "off")
+	{
+		std::cerr << "\033[1;31m" << "error: wrong autoindex attribute" << "\033[0m" << std::endl;
+		exit(1);
+	}
+	/*CHECK LOCATION*/
+	if (__server.__curly_location)
+	{
+		if (__lsize < _l)
+			__l = 0;
+		__lsize = _l;
+		is_repeat(__values.size(), 1, __l, "error: autoindex");
+		__location.__attributes["autoindex"] = __values;
+	}
+	else
+	{
+		if (__ssize < _s)
+		{
+			__l = 0;
+			__s = 0;
+		}
+		__ssize = _s;
+		is_repeat(__values.size(), 1, __s, "error: autoindex");
+
+		/*add valuses*/
+		__server.__attributes["autoindex"] = __values;
+	}
+}
+
+
 /* ------------------------------- UPLOAD DIR ------------------------------- */
 /* ------------------------------- UPLOAD DIR ------------------------------- */
 /* ------------------------------- UPLOAD DIR ------------------------------- */
@@ -457,7 +457,7 @@ void Web::__upload_dir(Server &__server, Location &__location)
 	static	int					__l;
 	static	int					__s;
 	static	int					__lsize;
-	__m_iterator				upload_dir;
+	static	int					__ssize;
 	std::vector<std::string>	__values;
 
 	/*initial action*/
@@ -469,25 +469,22 @@ void Web::__upload_dir(Server &__server, Location &__location)
 	/*CHECK LOCATION*/
 	if (__server.__curly_location)
 	{
-		if (__lsize < __server.__l)
+		if (__lsize < _l)
 			__l = 0;
-		__lsize = __server.__l;
-		if(__values.size() > 1 || __l)
-		{
-			std::cerr << "\033[1;31m" << "error: upload_dir attributes" << "\033[0m" << std::endl;
-			exit(1);
-		}
-		__l = 1;
+		__lsize = _l;
+		is_repeat(__values.size(), 1, __l, "error: upload_dir");
+	
 		__location.__attributes["upload_dir"] = __values;
 	}
 	else
 	{
-		if(__values.size() > 1 || __s)
+		if (__ssize < _s)
 		{
-			std::cerr << "\033[1;31m" << "error: upload_dir attributes" << "\033[0m" << std::endl;
-			exit(1);
+			__l = 0;
+			__s = 0;
 		}
-		__s = 1;
+		__ssize = _s;
+		is_repeat(__values.size(), 1, __s, "error: upload_dir");
 		__server.__attributes["upload_dir"] = __values;
 	}
 }
@@ -502,7 +499,7 @@ void Web::__client_body_max_size(Server &__server, Location &__location)
 	static	int					__s;
 	static	int					__l;
 	static	int					__lsize;
-	__m_iterator				client_body_max_size;
+	static	int					__ssize;
 	std::vector<std::string>	__values;
 
 	/*initial action*/
@@ -519,27 +516,22 @@ void Web::__client_body_max_size(Server &__server, Location &__location)
 	/*CHECK LOCATION*/
 	if (__server.__curly_location)
 	{
-		if (__lsize < __server.__l)
+		if (__lsize < _l)
 			__l = 0;
-		__lsize = __server.__l;
-		if(__values.size() > 1 || __l)
-		{
-			std::cerr << "\033[1;31m" << "error: client_body_max_size attributes" << "\033[0m" << std::endl;
-			exit(1);
-		}
-		__l = 1;
+		__lsize = _l;
+		is_repeat(__values.size(), 1, __l, "error: client_body_max_size");
 		__location.__attributes["client_body_max_size"] = __values;
 	}
 	else
 	{
-		if(__values.size() > 1 || __s)
+		if (__ssize < _s)
 		{
-			std::cerr << "\033[1;31m" << "error: client_body_max_size attributes" << "\033[0m" << std::endl;
-			exit(1);
+			__l = 0;
+			__s = 0;
 		}
-		__s = 1;
-		client_body_max_size = __server.__attributes.find("client_body_max_size");
-
+		__ssize = _s;
+		is_repeat(__values.size(), 1, __s, "error: client_body_max_size");
+		
 		/*add valuses*/
 		__server.__attributes["client_body_max_size"] = __values;
 

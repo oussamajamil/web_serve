@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:44 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/27 10:12:38 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/28 08:49:38 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ void Server_launch::__run()
 		if ((__event_number = kevent(__kq, NULL, 0, __out_events.data(), EVENTS_NUBMBER, 0)) < 0)
 		{
 			std::cerr << "Error: kevent out" << std::endl;
-			exit(1);
+			// exit(1);
 		}
 		for (int i = 0; i < __event_number; ++i)
 		{
@@ -308,6 +308,8 @@ void Server_launch::__input_handler(int __client, int __data, Transfer *__r)
 	__r->__server = __server_set(__r->__ident, __r->__host);
 	if (__r->__read_done)
 	{
+		// std::cout << __r->__head <<std::endl;
+		// std::cout << __r->__body <<std::endl; exit(10);
 		/* -------------------------------- RESPONSE -------------------------------- */
 		Request __request(__r);
 		Response __response(__request);

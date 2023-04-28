@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:29:55 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/04/27 18:06:40 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/28 08:05:26 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ public:
 	bool __listen_default;
 	bool __server_name_default;
 
-	int __l;
 
 	Server();
 	~Server();
@@ -61,6 +60,9 @@ private:
 	typedef std::map<std::string, std::vector<std::string> >::iterator			__m_iterator;
 	std::vector<std::string> 													__line_splited;
 	std::ifstream																__file;
+
+	int																			_l;
+	int																			_s;
 
 	void __server(Server &__server, Location &__location);
 	void __listen(Server &__server, Location &__location);

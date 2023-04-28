@@ -6,7 +6,7 @@
 /*   By: obelkhad <obelkhad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:18:53 by obelkhad          #+#    #+#             */
-/*   Updated: 2023/03/20 11:00:50 by obelkhad         ###   ########.fr       */
+/*   Updated: 2023/04/28 08:29:54 by obelkhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,14 @@ size_t __crlf(std::string &str, size_t pos)
     if (_ret != std::string::npos)
         return (_ret);
     return (std::string::npos);
+}
+
+void is_repeat(int __s, int __n, int &__x, std::string __str)
+{
+	if(__s > __n || __x)
+	{
+		std::cerr << "\033[1;31m" << __str << "\033[0m" << std::endl;
+		exit(1);
+	}
+	__x = 1;
 }

@@ -23,27 +23,30 @@ void Request::parseRequest(std::string header, std::string body)
 	// std::cout << "****************** body ******************" << std::endl;
 	// std::cout << "\033[1;32m body: \033[0m" << this->body << std::endl;
 	std::vector<std::string> header_lines = split(header, "\r\n");
-	std::vector<std::string> first_line = split(header_lines[0], " ");
-	this->method = first_line[0];
-	this->path = first_line[1];
-	this->version = first_line[2];
+	if (header_lines.size())
+	{
+		std::vector<std::string> first_line = split(header_lines[0], " ");
+		this->method = first_line[0];
+		this->path = first_line[1];
+		this->version = first_line[2];
 
-	for (unsigned long i = 1; i < header_lines.size(); i++)
-	{
-		std::vector<std::string> header_line = split(header_lines[i], ": ");
-		if (header_line[0] == "Host")
+		for (unsigned long i = 1; i < header_lines.size(); i++)
 		{
-			std::vector<std::string> host_port = split(header_line[1], ":");
-			this->host = host_port[0];
-			this->port = host_port[1];
+			std::vector<std::string> header_line = split(header_lines[i], ": ");
+			if (header_line[0] == "Host")
+			{
+				std::vector<std::string> host_port = split(header_line[1], ":");
+				this->host = host_port[0];
+				this->port = host_port[1];
+			}
+			this->headers[header_line[0]] = header_line[1];
 		}
-		this->headers[header_line[0]] = header_line[1];
-	}
-	std::vector<std::string> url_params = split(this->path, "?");
-	if (url_params.size() > 1)
-	{
-		this->path = url_params[0];
-		this->query_params = url_params[1];
+		std::vector<std::string> url_params = split(this->path, "?");
+		if (url_params.size() > 1)
+		{
+			this->path = url_params[0];
+			this->query_params = url_params[1];
+		}
 	}
 
 	std::cout << "****************** path/version/method ******************" << std::endl;
